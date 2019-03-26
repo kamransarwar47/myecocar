@@ -92,7 +92,7 @@
         $.HSCore.helpers.HSRating.init();
         $.HSCore.helpers.HSFocusState.init();
         $.HSCore.helpers.HSNotEmptyState.init();
-        $.HSCore.components.HSDatepicker.init('#datepickerFrom');
+        $.HSCore.components.HSDatepicker.init('#datepickerFrom, #datepickerTo, #datepickerDefault, #datepickerDepartureResearch');
         $.HSCore.components.HSSlider.init('#regularSlider, #regularSlider2, #regularSlider3, #rangeSlider, #rangeSlider2, #rangeSlider3, #stepSlider, #stepSlider2, #stepSlider3');
         $.HSCore.components.HSMaskedInput.init('[data-mask]');
         $.HSCore.components.HSCountQty.init('.js-quantity');
@@ -264,7 +264,9 @@
 </script>
 <script>
     function initAutocomplete() {
-        var autocomplete = new google.maps.places.Autocomplete(
-            document.getElementById('meeting-point-dropdown'), {types: ['geocode']});
+        var search_departure_city = new google.maps.places.Autocomplete(
+            document.getElementById('search_departure_city'), {types: ['geocode']});
+        var search_arrival_city = new google.maps.places.Autocomplete(
+            document.getElementById('search_arrival_city'), {types: ['geocode']});
     }
 </script>

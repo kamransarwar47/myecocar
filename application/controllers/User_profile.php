@@ -24,6 +24,8 @@ class User_profile extends CI_Controller {
 			$data['title'] = 'Profile';
 			$user_data = $this->common_model->get('users', ['user_id' => $this->session->userdata('User_LoginId')]);
 			$data['user_data'] = $user_data;
+			$route_data = $this->common_model->get('route', ['user_id' => $this->session->userdata('User_LoginId')]);
+			$data['route_data'] = $route_data;
 			$data['content'] = $this->load->view('page-profile', $data, true);
 			$this->load->view('templates/template', $data);
         } else {
@@ -32,7 +34,7 @@ class User_profile extends CI_Controller {
 			$data['second_name'] = $this->input->post('second_name');
 			$data['gender'] = $this->input->post('reg_gender');
 			$data['mobile'] = $this->input->post('mobile');
-			$data['date_of_birth'] = date('Y-m-d H:i:s', strtotime($this->input->post('date_of_birth')));
+			$data['date_of_birth'] = date('Y-m-d', strtotime($this->input->post('date_of_birth')));
 			$data['email'] = $this->input->post('reg_email');
 			$this->common_model->update('users', $data, ['user_id' => $this->session->userdata('User_LoginId')]);
 			set_message('You Have Update your profile Successfully', 'success');

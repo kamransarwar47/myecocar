@@ -15,7 +15,7 @@
          * @var Object _baseConfig
          */
         _baseConfig: {
-            dateFormat: 'dd.mm.yy',
+            dateFormat: 'dd-mm-yy',
             dayNamesMin: [
                 'Sun',
                 'Mon',
@@ -77,7 +77,6 @@
                 if (rangeBoolean == 1) {
                     var dateFrom = $this.datepicker({
                         dateFormat: config['dateFormat'],
-                        defaultDate: '+1d',
                         dayNamesMin: config['dayNamesMin'],
                         numberOfMonths: 1,
                         minDate: new Date(),
@@ -91,10 +90,10 @@
 
                     var dateTo = $('#' + to).datepicker({
                         dateFormat: config['dateFormat'],
-                        defaultDate: '+1d',
                         dayNamesMin: config['dayNamesMin'],
                         numberOfMonths: 1,
                         showOtherMonths: true,
+                        minDate: new Date(),
                         prevText: config['prevText'],
                         nextText: config['nextText'],
                         beforeShow: $self.datepickerCustomClass
@@ -106,6 +105,7 @@
                         dateFormat: config['dateFormat'],
                         dayNamesMin: config['dayNamesMin'],
                         showOtherMonths: true,
+                        minDate: new Date(),
                         prevText: config['prevText'],
                         nextText: config['nextText'],
                         beforeShow: $self.datepickerCustomClass
