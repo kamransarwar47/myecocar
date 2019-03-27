@@ -79,11 +79,6 @@
         $.HSCore.components.HSMarkupCopy.init('.js-copy');
     });
 </script>
-
-
-<!-- JS Custom -->
-<script src="assets/js/custom.js"></script>
-
 <!-- JS Plugins Init. -->
 <script>
     $(document).on('ready', function () {
@@ -92,7 +87,7 @@
         $.HSCore.helpers.HSRating.init();
         $.HSCore.helpers.HSFocusState.init();
         $.HSCore.helpers.HSNotEmptyState.init();
-        $.HSCore.components.HSDatepicker.init('#datepickerFrom, #datepickerTo, #datepickerDefault, #datepickerDepartureResearch');
+        $.HSCore.components.HSDatepicker.init('#datepickerFrom, #datepickerDefault, #datepickerDepartureResearch');
         $.HSCore.components.HSSlider.init('#regularSlider, #regularSlider2, #regularSlider3, #rangeSlider, #rangeSlider2, #rangeSlider3, #stepSlider, #stepSlider2, #stepSlider3');
         $.HSCore.components.HSMaskedInput.init('[data-mask]');
         $.HSCore.components.HSCountQty.init('.js-quantity');
@@ -263,10 +258,52 @@
     });
 </script>
 <script>
+    // search page form
+    var search_departure_city, search_arrival_city;
+
     function initAutocomplete() {
-        var search_departure_city = new google.maps.places.Autocomplete(
-            document.getElementById('search_departure_city'), {types: ['geocode']});
-        var search_arrival_city = new google.maps.places.Autocomplete(
-            document.getElementById('search_arrival_city'), {types: ['geocode']});
+        search_departure_city = new google.maps.places.Autocomplete(
+            document.getElementById('search_departure_city'), {types: ['(cities)']});
+        search_departure_city.setFields('address_components');
+        search_departure_city.addListener('place_changed', fillInAddressDeparture);
+
+        search_arrival_city = new google.maps.places.Autocomplete(
+            document.getElementById('search_arrival_city'), {types: ['(cities)']});
+        search_arrival_city.setFields('address_components');
+        search_arrival_city.addListener('place_changed', fillInAddressArrival);
+    }
+
+    function fillInAddressDeparture() {
+        // Get the place details from the autocomplete object.
+        var place = search_departure_city.getPlace();
+        // Get each component of the address from the place details,
+        // and then fill-in the corresponding field on the form.
+        for (var i = 0; i < place.address_components.length; i++) {
+            var addressType = place.address_components[i].types[0];
+            var val = place.address_components[i]['long_name'];
+            if (addressType == 'locality') {
+                document.getElementById('search_d_city').value = val;
+            }
+            if (addressType == 'country') {
+                document.getElementById('search_d_country').value = val;
+            }
+        }
+    }
+
+    function fillInAddressArrival() {
+        // Get the place details from the autocomplete object.
+        var place = search_arrival_city.getPlace();
+        // Get each component of the address from the place details,
+        // and then fill-in the corresponding field on the form.
+        for (var i = 0; i < place.address_components.length; i++) {
+            var addressType = place.address_components[i].types[0];
+            var val = place.address_components[i]['long_name'];
+            if (addressType == 'locality') {
+                document.getElementById('search_a_city').value = val;
+            }
+            if (addressType == 'country') {
+                document.getElementById('search_a_country').value = val;
+            }
+        }
     }
 </script>

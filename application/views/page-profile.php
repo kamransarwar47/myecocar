@@ -6,12 +6,8 @@
                 <a class="u-link-v5 g-color-main g-color-primary--hover" href="#">Accueil</a>
                 <i class="fa fa-angle-right g-ml-7"></i>
             </li>
-            <li class="list-inline-item g-mr-7">
-                <a class="u-link-v5 g-color-main g-color-primary--hover" href="#">Pages</a>
-                <i class="fa fa-angle-right g-ml-7"></i>
-            </li>
             <li class="list-inline-item g-color-primary">
-                <span>profil</span>
+                <span>Tableau de bord</span>
             </li>
         </ul>
     </div>
@@ -227,7 +223,7 @@
                                             <tr>
                                                 <td>
                                                     <?php
-                                                    echo date('d-m-Y', strtotime($route['datepickerFrom'])). ' - '. date('H:i', strtotime($route['depart_time_input']));
+                                                    echo date('d-m-Y', strtotime($route['datepickerFrom'])) . ' - ' . date('H:i', strtotime($route['depart_time_input']));
                                                     ?>
                                                 </td>
                                                 <td><?php echo $route['origin_input']; ?></td>
@@ -261,94 +257,35 @@
                                 <table class="table">
                                     <thead>
                                     <tr>
-                                        <th>Date</th>
+                                        <th>Date / heure</th>
                                         <th>Départ</th>
                                         <th class="hidden-sm">Arrivée</th>
-                                        <th>Réserver le</th>
-                                        <th>Etat</th>
+                                        <th>Places réservées</th>
                                         <th>Prix</th>
-                                        <th>Actions</th>
+                                        <th>Statut approuvé</th>
                                     </tr>
                                     </thead>
 
                                     <tbody>
-                                    <tr>
-                                        <td>12h00 27/01/2019</td>
-                                        <td>19 Place De La République Belfort France</td>
-                                        <td class="hidden-sm">Place Charles De Gaulle Brive-la-Gaillarde France</td>
-                                        <td>21h54 30/12/2018</td>
-                                        <td>
-                                            <span class="u-label g-bg-green g-rounded-20 g-px-10"><i
-                                                        class="fa fa-question-circle"></i></span>
-                                        </td>
-                                        <td>
-                                            25
-                                        </td>
-                                        <td>
-                                            <a class="g-color-gray-dark-v5 g-text-underline--none--hover g-pa-5"
-                                               href="#!" data-toggle="tooltip" data-placement="top"
-                                               data-original-title="Edit">
-                                                <i class="icon-pencil g-font-size-18 g-mr-7"></i>
-                                            </a>
-                                            <a class="g-color-gray-dark-v5 g-text-underline--none--hover g-pa-5"
-                                               href="#!" data-toggle="tooltip" data-placement="top"
-                                               data-original-title="Delete">
-                                                <i class="icon-trash g-font-size-18 g-mr-7"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>12h00 27/01/2019</td>
-                                        <td>19 Place De La République Belfort France</td>
-                                        <td class="hidden-sm">Place Charles De Gaulle Brive-la-Gaillarde France</td>
-                                        <td>21h54 30/12/2018</td>
-                                        <td>
-                                            <span class="u-label g-bg-green g-rounded-20 g-px-10"><i
-                                                        class="fa fa-question-circle"></i></span>
-                                        </td>
-                                        <td>
-                                            25
-                                        </td>
-                                        <td>
-                                            <a class="g-color-gray-dark-v5 g-text-underline--none--hover g-pa-5"
-                                               href="#!" data-toggle="tooltip" data-placement="top"
-                                               data-original-title="Edit">
-                                                <i class="icon-pencil g-font-size-18 g-mr-7"></i>
-                                            </a>
-                                            <a class="g-color-gray-dark-v5 g-text-underline--none--hover g-pa-5"
-                                               href="#!" data-toggle="tooltip" data-placement="top"
-                                               data-original-title="Delete">
-                                                <i class="icon-trash g-font-size-18 g-mr-7"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>12h00 27/01/2019</td>
-                                        <td>19 Place De La République Belfort France</td>
-                                        <td class="hidden-sm">Place Charles De Gaulle Brive-la-Gaillarde France</td>
-                                        <td>21h54 30/12/2018</td>
-                                        <td>
-                                            <span class="u-label g-bg-green g-rounded-20 g-px-10"><i
-                                                        class="fa fa-question-circle"></i></span>
-                                        </td>
-                                        <td>
-                                            25
-                                        </td>
-                                        <td>
-                                            <a class="g-color-gray-dark-v5 g-text-underline--none--hover g-pa-5"
-                                               href="#!" data-toggle="tooltip" data-placement="top"
-                                               data-original-title="Edit">
-                                                <i class="icon-pencil g-font-size-18 g-mr-7"></i>
-                                            </a>
-                                            <a class="g-color-gray-dark-v5 g-text-underline--none--hover g-pa-5"
-                                               href="#!" data-toggle="tooltip" data-placement="top"
-                                               data-original-title="Delete">
-                                                <i class="icon-trash g-font-size-18 g-mr-7"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-
+                                    <?php
+                                    if (isset($booking_data) && $booking_data->num_rows() > 0) {
+                                        $booking_data = $booking_data->result_array();
+                                        foreach ($booking_data as $booking) {
+                                            ?>
+                                            <tr>
+                                                <td><?php echo date('d/m/Y', strtotime($booking['date'])); ?><?php echo date('H:i', strtotime($booking['time'])); ?></td>
+                                                <td><?php echo $booking['start']; ?></td>
+                                                <td class="hidden-sm"><?php echo $booking['end']; ?></td>
+                                                <td><?php echo $booking['places']; ?></td>
+                                                <td><?php echo $booking['total_amount']; ?></td>
+                                                <td>
+                                                    <span class="u-label <?php echo ($booking['booking_status'] == 'pending') ? 'g-bg-blue' : 'g-bg-green'; ?> g-rounded-20 g-px-10"><?php echo $booking['booking_status']; ?></span>
+                                                </td>
+                                            </tr>
+                                            <?php
+                                        }
+                                    }
+                                    ?>
                                     </tbody>
                                 </table>
                             </div>

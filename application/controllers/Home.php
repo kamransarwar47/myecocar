@@ -8,6 +8,8 @@ class Home extends CI_Controller {
 	 */
 	public function index()
 	{
+	    $data['header_link_active'] = 'home';
+	    $data['title'] = 'Home';
 		$data['content'] = $this->load->view('home', '', true);
 		$this->load->view('templates/template', $data);
 	}

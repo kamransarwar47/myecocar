@@ -28,8 +28,9 @@ class Propose_route extends CI_Controller
         $this->form_validation->set_rules('travel_charges', 'entrer le montant', 'trim|required');
 
         if ($this->form_validation->run() == false) {
-            $data['title']   = 'PROPOSER UNE ROUTE';
-            $data['content'] = $this->load->view('page-propose-route', '', true);
+            $data['title']              = 'PROPOSER UNE ROUTE';
+            $data['header_link_active'] = 'propose_route';
+            $data['content']            = $this->load->view('page-propose-route', '', true);
             $this->load->view('templates/template', $data);
         } else {
             $data['user_id']            = $this->session->userdata('User_LoginId');

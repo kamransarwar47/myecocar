@@ -52,6 +52,10 @@
                         <?php if ($this->session->userdata('User_LoginId')) { ?>
                             <li class="list-inline-item g-mx-4">
                                 <a class="g-color-white g-color-primary--hover g-text-underline--none--hover"
+                                   href="<?php echo base_url('user_profile'); ?>"><?php _l('dashboard'); ?></a>
+                            </li> |
+                            <li class="list-inline-item g-mx-4">
+                                <a class="g-color-white g-color-primary--hover g-text-underline--none--hover"
                                    href="<?php echo base_url('login/logout'); ?>"><?php _l('logout'); ?></a>
                             </li>
                         <?php } else { ?>
@@ -99,24 +103,23 @@
                 <!-- Navigation -->
                 <div class="collapse navbar-collapse align-items-center flex-sm-row g-pt-10 g-pt-5--lg" id="navBar">
                     <ul class="navbar-nav text-uppercase g-font-weight-600 ml-auto">
-                        <li class="nav-item g-mx-20--lg">
+                        <li class="nav-item g-mx-20--lg <?php echo (isset($header_link_active) && $header_link_active == 'home') ? 'active' : ''; ?>">
                             <a href="<?php echo base_url(); ?>" class="nav-link px-0"><?php _l('header_home'); ?>
 
                             </a>
                         </li>
-                        <li class="nav-item g-mx-20--lg active">
+                        <li class="nav-item g-mx-20--lg <?php echo (isset($header_link_active) && $header_link_active == 'propose_route') ? 'active' : ''; ?>">
                             <a href="<?php echo base_url('propose_route'); ?>"
                                class="nav-link px-0"><?php _l('header_route'); ?>
-                                <span class="sr-only"><?php _l('current'); ?></span>
                             </a>
                         </li>
-                        <li class="nav-item g-mx-20--lg">
+                        <li class="nav-item g-mx-20--lg <?php echo (isset($header_link_active) && $header_link_active == 'search_route') ? 'active' : ''; ?>">
                             <a href="<?php echo base_url('research_trip'); ?>"
                                class="nav-link px-0"><?php _l('header_search'); ?>
 
                             </a>
                         </li>
-                        <li class="nav-item g-mx-20--lg">
+                        <li class="nav-item g-mx-20--lg <?php echo (isset($header_link_active) && $header_link_active == 'about_page') ? 'active' : ''; ?>">
                             <a href="<?php echo base_url('about'); ?>"
                                class="nav-link px-0"><?php _l('header_who_we_are'); ?>
                             </a>

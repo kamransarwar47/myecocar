@@ -19,6 +19,7 @@ $lang['header_search'] = "Search";
 
 // Home page
 $lang['logout'] = "logout";
+$lang['dashboard'] = "Dashboard";
 $lang['arrival'] = "Arrival...";
 $lang['departure'] = "Departure...";
 $lang['submit'] = "Submit";

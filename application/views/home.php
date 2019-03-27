@@ -23,21 +23,26 @@
 
           <div class="col-md-6 col-lg-4 g-mb-100">
             <!-- Join Form -->
-            <form class="rounded g-px-30 g-py-40">
+            <form class="rounded g-px-30 g-py-40" autocomplete="off" method="get" action="<?php echo base_url('research_trip'); ?>">
               <div class="text-center">
                 <h2 class="h3 g-font-weight-600 g-mb-35"></h2>
               </div>
 
-              <input class="form-control rounded g-px-20 g-py-12 mb-3" type="text" placeholder="<?php _l('Departure'); ?>">
-              <input class="form-control rounded g-px-20 g-py-12 mb-3" type="email" placeholder="<?php _l('arrival'); ?>">
+              <input class="form-control rounded g-px-20 g-py-12 mb-3" type="text" placeholder="Ville de départ?" id="search_departure_city" name="dc">
+              <input class="form-control rounded g-px-20 g-py-12 mb-3" type="text" placeholder="Ville d'arrivée?" id="search_arrival_city" name="ac">
               <div class="form-group g-mb-30">
                <div class="input-group g-brd-primary--focus">
-                <input id="datepickerDefault" class="form-control form-control-md u-datepicker-v1 g-brd-right-none rounded" type="text">
+                <input id="datepickerDefault" class="form-control form-control-md u-datepicker-v1 g-brd-right-none rounded" placeholder="Date de départ?" type="text" name="dt">
                 <div class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-dark-v5 rounded-0">
                   <i class="icon-calendar"></i>
                 </div>
               </div>
              </div>
+
+                <input type="hidden" id="search_d_city" name="sdcty">
+                <input type="hidden" id="search_d_country" name="sdcnt">
+                <input type="hidden" id="search_a_city" name="sacty">
+                <input type="hidden" id="search_a_country" name="sacnt">
 
               <div class="g-mb-35">
                 <button class="btn btn-block u-btn-primary g-font-weight-500 g-font-size-12 text-uppercase g-px-25 g-py-13" type="submit"><?php _l('submit'); ?></button>
