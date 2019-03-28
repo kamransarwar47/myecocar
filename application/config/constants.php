@@ -33,6 +33,16 @@ defined('DIR_WRITE_MODE')  OR define('DIR_WRITE_MODE', 0755);
 
 /*
 |--------------------------------------------------------------------------
+| DEFINE CONSTANT
+|--------------------------------------------------------------------------
+|
+|
+*/
+defined('ENVOYERSMSPRO_LOGIN')  OR define('ENVOYERSMSPRO_LOGIN', '0622734040');
+defined('ENVOYERSMSPRO_PASSWORD')  OR define('ENVOYERSMSPRO_PASSWORD', 'Myecocar2014');
+
+/*
+|--------------------------------------------------------------------------
 | File Stream Modes
 |--------------------------------------------------------------------------
 |
