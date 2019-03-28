@@ -46,5 +46,5 @@
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/custom.css">
   <!-- Jquery -->
   <script src="<?php echo base_url(); ?>assets/vendor/jquery/jquery.min.js"></script>
-  
+
 </head>

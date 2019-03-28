@@ -46,12 +46,15 @@ class Research_trip extends CI_Controller
             $data['content']            = $this->load->view('page-trip-details', $data, true);
             $this->load->view('templates/template', $data);
         } else {
-            $data['user_id']        = $this->session->userdata('User_LoginId');
-            $data['travel_charges'] = $this->input->post('travel_charges');
-            $this->common_model->insert('route', $data);
+            $data['route_id']         = $this->input->get('id');
+            $data['user_id']          = $this->session->userdata('User_LoginId');
+            $data['places_booked']    = $this->input->post('places_booked');
+            $data['booking_datetime'] = date("Y-m-d H:i:s", time());
+            $data['total_amount']     = ($this->input->post('amount_per_seat') * $this->input->post('places_booked'));
+            $this->common_model->insert('bookings', $data);
 
             set_message('You Have Accepted Offer Successfully', 'success');
-            redirect('propose_route');
+            redirect('research_trip/trip_details?id=' . $this->input->get('id'));
         }
     }
 }

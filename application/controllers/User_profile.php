@@ -95,5 +95,33 @@ class User_profile extends CI_Controller
         redirect('user_profile');
     }
 
+    // approve booking
+    public function approve_boooking()
+    {
+        if ($this->input->is_ajax_request()) {
+            $result = $this->common_model->update('bookings', ['booking_status' => 'approved'], ['booking_id' => $this->input->post('booking_id')]);
+            if ($result) {
+                echo 'TRUE';
+            } else {
+                echo 'FALSE';
+            }
+        } else {
+            exit('No direct script access allowed');
+        }
+    }
 
+    // collect payment
+    public function collect_payment()
+    {
+        if ($this->input->is_ajax_request()) {
+            $result = $this->common_model->update('bookings', ['amount_status' => 'collected'], ['booking_id' => $this->input->post('booking_id')]);
+            if ($result) {
+                echo 'TRUE';
+            } else {
+                echo 'FALSE';
+            }
+        } else {
+            exit('No direct script access allowed');
+        }
+    }
 }

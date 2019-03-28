@@ -182,7 +182,7 @@
                                 </div>
 
                                 <div class="col-md-4">
-                                    <select class="form-control  rounded-0" id="fuel-type" name="fuel_type">
+                                    <select class="form-control" id="fuel-type" name="fuel_type">
                                         <option value="">Carburant</option>
                                         <option value="Disiel">Disiel</option>
                                         <option value="Essence">Essence</option>
@@ -190,7 +190,7 @@
                                 </div>
 
                                 <div class="col-md-4">
-                                    <select class="form-control rounded-0" id="free-spaces" name="free_spaces">
+                                    <select class="form-control" id="free-spaces" name="free_spaces">
                                         <option value="">Places libres</option>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
@@ -204,7 +204,7 @@
                             <div class="form-group row g-mb-25">
 
                                 <div class="col-md-4">
-                                    <select class="form-control rounded-0" id="baggages" name="baggages">
+                                    <select class="form-control" id="baggages" name="baggages">
                                         <option value="">Bagages</option>
                                         <option value="petite taille">petite taille</option>
                                         <option value="moyenne taille">moyenne taille</option>
@@ -213,7 +213,7 @@
                                 </div>
 
                                 <div class="col-md-4">
-                                    <select class="form-control rounded-0" id="max-detour" name="max_detour">
+                                    <select class="form-control" id="max-detour" name="max_detour">
                                         <option value="">Détour maximum</option>
                                         <option value="aucun détour">aucun détour</option>
                                         <option value="15 minutes">15 minutes</option>
@@ -223,7 +223,7 @@
                                 </div>
 
                                 <div class="col-md-4">
-                                    <select class="form-control rounded-0" id="sch-flex" name="sch_flex">
+                                    <select class="form-control" id="sch-flex" name="sch_flex">
                                         <option value="">Flexibilité Horaire</option>
                                         <option value="Pile a l'heure">Pile a l'heure</option>
                                         <option value="15 minutes">15 minutes</option>
@@ -235,7 +235,7 @@
 
                             <div class="form-group row g-mb-25">
                                 <div class="col-md-4">
-                                    <select class="form-control rounded-0" id="acceptance" name="acceptance">
+                                    <select class="form-control" id="acceptance" name="acceptance">
                                         <option value="">Acceptation</option>
                                         <option value="moins de 1h">moins de 1h</option>
                                         <option value="moins de 3h">moins de 3h</option>

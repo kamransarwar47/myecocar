@@ -14,7 +14,6 @@
 </section>
 <!-- End Breadcrumb -->
 
-
 <section class="g-mb-100">
     <div class="container">
         <div class="row">
@@ -231,7 +230,7 @@
                                                 <td class="hidden-sm"><?php echo $route['destination_input']; ?></td>
                                                 <td><?php echo $route['free_spaces']; ?></td>
                                                 <td>
-                                                    <span class="u-label g-bg-cyan g-rounded-20 g-px-10"><?php echo $route['travel_charges']; ?></span>
+                                                    <span class="u-label g-bg-cyan g-rounded-20 g-px-10">&euro; <?php echo $route['travel_charges']; ?></span>
                                                 </td>
                                                 <td data-toggle="collapse" data-target="#accordion_<?php echo $n; ?>"
                                                     class="clickable"><span
@@ -259,10 +258,44 @@
                                                                     ?>
                                                                     <tr>
                                                                         <td><?php echo date('d-m-Y - H:i', strtotime($book['booking_datetime'])); ?></td>
-                                                                        <td><i class="icon-finance-067 u-line-icon-pro"></i> <?php echo ucwords($book['first_name'] . ' ' . $book['second_name']); ?><br><i class="icon-phone u-line-icon-pro"></i> <?php echo $book['mobile']; ?><br><i class="icon-communication-062 u-line-icon-pro"></i> <?php echo $book['email']; ?></td>
-                                                                        <td><?php echo $book['places_booked']; ?><br><strong>Approval Status:</strong><br><?php echo $book['booking_status'] ?></td>
-                                                                        <td><span class="u-label g-bg-green g-rounded-20 g-px-10"><?php echo $book['total_amount']; ?></span>
-                                                                            <br><strong>Amount Status:</strong><br><?php echo $book['amount_status']; ?>
+                                                                        <td>
+                                                                            <i class="icon-finance-067 u-line-icon-pro"></i> <?php echo ucwords($book['first_name'] . ' ' . $book['second_name']); ?>
+                                                                            <br><i class="icon-phone u-line-icon-pro"></i> <?php echo $book['mobile']; ?>
+                                                                            <br><i class="icon-communication-062 u-line-icon-pro"></i> <?php echo $book['email']; ?>
+                                                                        </td>
+                                                                        <td>
+                                                                            <?php echo $book['places_booked']; ?>
+                                                                            <br>
+                                                                            <strong>Approval Status:</strong>
+                                                                            <br>
+                                                                            <span id="booking_text"><?php echo ucwords($book['booking_status']); ?></span>
+                                                                            <?php
+                                                                            if ($book['booking_status'] == 'pending') {
+                                                                                ?>
+                                                                                <br>
+                                                                                <span class="block u-label u-label-success g-color-white u-label-with-icon g-mt-5 g-cursor-pointer approve_reservation"
+                                                                                      data-booking_id="<?php echo $book['booking_id']; ?>"><i
+                                                                                            class="fa fa-check"></i>Approuver</span>
+                                                                                <?php
+                                                                            }
+                                                                            ?>
+                                                                        </td>
+                                                                        <td>
+                                                                            <span class="u-label g-bg-green g-rounded-20 g-px-10">&euro; <?php echo $book['total_amount']; ?></span>
+                                                                            <br>
+                                                                            <strong>Amount Status:</strong>
+                                                                            <br>
+                                                                            <span id="amount_text"><?php echo ucwords($book['amount_status']); ?></span>
+                                                                            <?php
+                                                                            if ($book['amount_status'] == 'pending') {
+                                                                                ?>
+                                                                                <br>
+                                                                                <span class="block u-label u-label-success g-color-white u-label-with-icon g-mt-5 g-cursor-pointer collect_payment"
+                                                                                      data-booking_id="<?php echo $book['booking_id']; ?>"><i
+                                                                                            class="fa fa-check"></i>collecte</span>
+                                                                                <?php
+                                                                            }
+                                                                            ?>
                                                                         </td>
                                                                     </tr>
                                                                     <?php
@@ -270,7 +303,8 @@
                                                             } else {
                                                                 ?>
                                                                 <tr>
-                                                                    <td colspan="5"><strong>Pas encore de réservations.</strong></td>
+                                                                    <td colspan="5"><strong>Pas encore de
+                                                                            réservations.</strong></td>
                                                                 </tr>
                                                                 <?php
                                                             }
@@ -321,11 +355,14 @@
                                         foreach ($booking_data as $booking) {
                                             ?>
                                             <tr>
-                                                <td><?php echo date('d/m/Y', strtotime($booking['date'])); ?> - <?php echo date('H:i', strtotime($booking['time'])); ?></td>
+                                                <td><?php echo date('d/m/Y', strtotime($booking['date'])); ?>
+                                                    - <?php echo date('H:i', strtotime($booking['time'])); ?></td>
                                                 <td><?php echo $booking['start']; ?></td>
                                                 <td class="hidden-sm"><?php echo $booking['end']; ?></td>
                                                 <td><?php echo $booking['places']; ?></td>
-                                                <td><?php echo $booking['total_amount']; ?></td>
+                                                <td>
+                                                    <span class="u-label g-bg-cyan g-rounded-20 g-px-10">&euro; <?php echo $booking['total_amount']; ?></span>
+                                                </td>
                                                 <td>
                                                     <span class="u-label <?php echo ($booking['booking_status'] == 'pending') ? 'g-bg-blue' : 'g-bg-green'; ?> g-rounded-20 g-px-10"><?php echo ucwords($booking['booking_status']); ?></span>
                                                 </td>
@@ -492,5 +529,39 @@
         }
     });
 
+    // approve reservation
+    $(document).on('click', '.approve_reservation', function () {
+        var thisObj = $(this);
+        var booking_id = $(thisObj).data('booking_id');
+        $.ajax({
+            type: "POST",
+            url: "<?php echo base_url('user_profile/approve_boooking'); ?>",
+            data: {booking_id: booking_id},
+            cache: false,
+            success: function (data) {
+                if(data == 'TRUE'){
+                    $(thisObj).closest('td').find('span#booking_text').html('Approved');
+                    $(thisObj).remove();
+                }
+            }
+        });
+    });
 
+    // collect payment
+    $(document).on('click', '.collect_payment', function () {
+        var thisObj = $(this);
+        var booking_id = $(thisObj).data('booking_id');
+        $.ajax({
+            type: "POST",
+            url: "<?php echo base_url('user_profile/collect_payment'); ?>",
+            data: {booking_id: booking_id},
+            cache: false,
+            success: function (data) {
+                if(data == 'TRUE'){
+                    $(thisObj).closest('td').find('span#amount_text').html('Collected');
+                    $(thisObj).remove();
+                }
+            }
+        });
+    });
 </script>

@@ -105,7 +105,7 @@
                                        value="<?php echo $search_data['travel_charges']; ?>">
                                 <button class="btn btn-xl btn-block u-btn-primary text-uppercase g-font-weight-600 g-font-size-12"
                                         name="submit"
-                                        type="submit" <?php echo (!isset($_SESSION['User_LoginId'])) ? 'disabled="disabled"' : ''; ?>>
+                                        type="submit" <?php echo (!isset($_SESSION['User_LoginId']) || $remaining_place < 1) ? 'disabled="disabled"' : ''; ?>>
                                     Acceptez
                                 </button>
 
