@@ -77,3 +77,20 @@ function remaining_places_by_route_id($id)
     $result = $CI->db->get('route')->row_array();
     return ($result['spaces'] - $result['total_booking']);
 }
+
+/**
+ * get booking by route id
+ */
+function boooking_by_route_id($id)
+{
+    $CI = &get_instance();
+    $CI->db->select('bookings.*, users.first_name as first_name, users.second_name as second_name, users.mobile as mobile, users.email as email');
+    $CI->db->where('bookings.route_id', $id);
+    $CI->db->join('users', 'bookings.user_id = users.user_id');
+    $result = $CI->db->get('bookings');
+    if ($result->num_rows() > 0) {
+        return $result->result_array();
+    } else {
+        return [];
+    }
+}

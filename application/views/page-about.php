@@ -35,7 +35,7 @@
 
       <div class="row">
         <div class="col-lg-6 g-mb-50">
-          <img class="img-fluid" src="assets/img/bg/about-us.png" alt="Image Description">
+          <img class="img-fluid" src="<?php echo base_url(); ?>assets/img/bg/about-us.png" alt="Image Description">
         </div>
         <div class="col-lg-6">
           <div class="mb-5">

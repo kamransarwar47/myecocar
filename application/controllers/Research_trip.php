@@ -35,4 +35,23 @@ class Research_trip extends CI_Controller
         $this->load->view('templates/template', $data);
     }
 
+    public function trip_details()
+    {
+        $this->form_validation->set_rules('places_booked', 'Siège de livre', 'trim|required');
+        if ($this->form_validation->run() == false) {
+            $data['search_data']        = $this->common_model->get('route', ['route_id' => $this->input->get('id')])->row_array();
+            $data['header_link_active'] = 'search_route';
+            $data['title']              = 'Trip Details';
+            $data['route_id']           = $this->input->get('id');
+            $data['content']            = $this->load->view('page-trip-details', $data, true);
+            $this->load->view('templates/template', $data);
+        } else {
+            $data['user_id']        = $this->session->userdata('User_LoginId');
+            $data['travel_charges'] = $this->input->post('travel_charges');
+            $this->common_model->insert('route', $data);
+
+            set_message('You Have Accepted Offer Successfully', 'success');
+            redirect('propose_route');
+        }
+    }
 }

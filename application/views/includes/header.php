@@ -96,7 +96,7 @@
 
                 <!-- Logo -->
                 <a href="index.php" class="navbar-brand">
-                    <img src="assets/img/bg/logo-new.png" alt="Image Description">
+                    <img src="<?php echo base_url('assets/img/bg/logo-new.png'); ?>" alt="Image Description">
                 </a>
                 <!-- End Logo -->
 

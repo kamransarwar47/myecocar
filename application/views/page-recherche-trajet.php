@@ -78,14 +78,18 @@
                                     <!-- Search Result -->
                                     <article class="g-pa-25 u-shadow-v11 rounded">
                                         <h2 class="h4 g-mb-15">
-                                            <a class="u-link-v5 g-color-gray-dark-v1 g-color-primary--hover" href="#!"><?php echo $record['origin_city']; ?> <i class="icon-arrow-right-circle"> <?php echo $record['dest_city']; ?></i></a>
+                                            <a class="u-link-v5 g-color-gray-dark-v1 g-color-primary--hover"
+                                               href="<?php echo base_url('research_trip/trip_details?id=' . $record['route_id']); ?>"><?php echo $record['origin_city']; ?>
+                                                <i
+                                                        class="icon-arrow-right-circle"> <?php echo $record['dest_city']; ?></i></a>
                                         </h2>
 
                                         <!-- Search Info -->
                                         <ul class="list-inline d-flex justify-content-between g-mb-20">
                                             <li class="list-inline-item g-mr-10">
                                                 <img class="g-height-25 g-width-25 rounded-circle g-mr-5"
-                                                     src="assets/img/bg/img7.jpg" alt="Image Description"><?php echo username_by_id($record['user_id']); ?>
+                                                     src="<?php echo base_url(); ?>assets/img/bg/img7.jpg"
+                                                     alt="Image Description"><?php echo username_by_id($record['user_id']); ?>
                                             </li>
                                         </ul>
                                         <!-- End Search Info -->
@@ -93,7 +97,8 @@
                                         <ul class="list-inline d-flex justify-content-between g-mb-20">
                                             <li class="list-inline-item">
                                                 <i class="icon-calendar g-pos-rel g-top-1 g-color-gray-dark-v5 g-mr-5"></i>
-                                                <?php echo date('l d F, Y', strtotime($record['datepickerFrom'])); ?> à <?php echo date('H:i', strtotime($record['depart_time_input'])); ?>
+                                                <?php echo date('l d F, Y', strtotime($record['datepickerFrom'])); ?>
+                                                à <?php echo date('H:i', strtotime($record['depart_time_input'])); ?>
                                             </li>
                                         </ul>
 
@@ -118,25 +123,22 @@
                                         <!-- Share, Print and More -->
                                         <ul class="list-inline mb-0">
                                             <li class="list-inline-item g-mr-20">
-                                                <a class="u-link-v5 g-color-gray-dark-v5 g-color-primary--hover"
-                                                   href="#!">
-                                                    <i class="icon-check g-pos-rel g-top-1 g-mr-5"></i> Véhicule: <?php echo $record['vehicle_model_make']; ?>
-                                                </a>
+                                                <span class="d-block g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer">
+                                                <i class="icon-check g-pos-rel g-top-1 g-mr-5"></i>
+                                                Véhicule: <?php echo $record['vehicle_model_make']; ?>
+                                                </span>
                                             </li>
                                             <li class="list-inline-item g-mr-20">
-                                                <a class="u-link-v5 g-color-gray-dark-v5 g-color-primary--hover"
-                                                   href="#!">
-                                                    <i class="icon-check g-pos-rel g-top-1 g-mr-5"></i> <?php echo remaining_places_by_route_id($record['route_id']); ?> places
-                                                    restantes
-                                                </a>
+                                                <span class="d-block g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer">
+                                                <i class="icon-check g-pos-rel g-top-1 g-mr-5"></i> <?php echo remaining_places_by_route_id($record['route_id']); ?>
+                                                    places
+                                                restantes
+                                                </span>
                                             </li>
                                             <li class="list-inline-item">
-                                                <div class="dropdown g-mb-10 g-mb-0--md">
-                        <span class="d-block g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer"
-                              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="d-block g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer">
                             <i class="icon-check g-pos-rel g-top-1"></i> Acceptation : <?php echo $record['acceptance']; ?>
                           </span>
-                                                </div>
                                             </li>
                                         </ul>
                                         <!-- End Share, Print and More -->

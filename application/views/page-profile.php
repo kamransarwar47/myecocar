@@ -209,8 +209,8 @@
                                         <th>Départ</th>
                                         <th class="hidden-sm">Arrivée</th>
                                         <th>Des places</th>
-                                        <th>Prix</th>
-
+                                        <th>Prix ​​par place</th>
+                                        <th>les réservations</th>
                                     </tr>
                                     </thead>
 
@@ -218,6 +218,7 @@
                                     <?php
                                     if (isset($route_data) && $route_data->num_rows() > 0) {
                                         $route_data = $route_data->result_array();
+                                        $n          = 0;
                                         foreach ($route_data as $route) {
                                             ?>
                                             <tr>
@@ -232,8 +233,55 @@
                                                 <td>
                                                     <span class="u-label g-bg-cyan g-rounded-20 g-px-10"><?php echo $route['travel_charges']; ?></span>
                                                 </td>
+                                                <td data-toggle="collapse" data-target="#accordion_<?php echo $n; ?>"
+                                                    class="clickable"><span
+                                                            class="u-label u-label-warning g-color-white"
+                                                            style="cursor: pointer;">Cliquez ici</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="6">
+                                                    <div id="accordion_<?php echo $n; ?>"
+                                                         class="collapse table-responsive">
+                                                        <table class="table table-bordered">
+                                                            <thead>
+                                                            <tr>
+                                                                <th>Date / Heure réservation</th>
+                                                                <th>Personne réservant</th>
+                                                                <th>Sièges réservés</th>
+                                                                <th>Montant total</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            <?php
+                                                            $bookings = boooking_by_route_id($route['route_id']);
+                                                            if (!empty($bookings)) {
+                                                                foreach ($bookings as $book) {
+                                                                    ?>
+                                                                    <tr>
+                                                                        <td><?php echo date('d-m-Y - H:i', strtotime($book['booking_datetime'])); ?></td>
+                                                                        <td><i class="icon-finance-067 u-line-icon-pro"></i> <?php echo ucwords($book['first_name'] . ' ' . $book['second_name']); ?><br><i class="icon-phone u-line-icon-pro"></i> <?php echo $book['mobile']; ?><br><i class="icon-communication-062 u-line-icon-pro"></i> <?php echo $book['email']; ?></td>
+                                                                        <td><?php echo $book['places_booked']; ?><br><strong>Approval Status:</strong><br><?php echo $book['booking_status'] ?></td>
+                                                                        <td><span class="u-label g-bg-green g-rounded-20 g-px-10"><?php echo $book['total_amount']; ?></span>
+                                                                            <br><strong>Amount Status:</strong><br><?php echo $book['amount_status']; ?>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <?php
+                                                                }
+                                                            } else {
+                                                                ?>
+                                                                <tr>
+                                                                    <td colspan="5"><strong>Pas encore de réservations.</strong></td>
+                                                                </tr>
+                                                                <?php
+                                                            }
+                                                            ?>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </td>
                                             </tr>
                                             <?php
+                                            $n++;
                                         }
                                     }
                                     ?>
@@ -273,13 +321,13 @@
                                         foreach ($booking_data as $booking) {
                                             ?>
                                             <tr>
-                                                <td><?php echo date('d/m/Y', strtotime($booking['date'])); ?><?php echo date('H:i', strtotime($booking['time'])); ?></td>
+                                                <td><?php echo date('d/m/Y', strtotime($booking['date'])); ?> - <?php echo date('H:i', strtotime($booking['time'])); ?></td>
                                                 <td><?php echo $booking['start']; ?></td>
                                                 <td class="hidden-sm"><?php echo $booking['end']; ?></td>
                                                 <td><?php echo $booking['places']; ?></td>
                                                 <td><?php echo $booking['total_amount']; ?></td>
                                                 <td>
-                                                    <span class="u-label <?php echo ($booking['booking_status'] == 'pending') ? 'g-bg-blue' : 'g-bg-green'; ?> g-rounded-20 g-px-10"><?php echo $booking['booking_status']; ?></span>
+                                                    <span class="u-label <?php echo ($booking['booking_status'] == 'pending') ? 'g-bg-blue' : 'g-bg-green'; ?> g-rounded-20 g-px-10"><?php echo ucwords($booking['booking_status']); ?></span>
                                                 </td>
                                             </tr>
                                             <?php
