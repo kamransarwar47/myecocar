@@ -48,5 +48,39 @@ class Registration extends CI_Controller {
 		}
 		 
 	}
+	
+	function mobile_verification(){
+		$mobile_number = $this->input->post('mobile_number');
+		if($mobile_number != ''){
+			$url="https://www.envoyersmspro.com/api/message/send";
+			$verification_code = rand('000001', '999999');
+		
+			$this->session->set_userdata('verification_code', $verification_code);
+			$this->session->set_userdata('verification_mobile_number', $mobile_number);
+			
+			$msg = "Your Verifivation Code for Myecocar is ".$verification_code;
+	 
+			//the parameters to pass to the server in POST
+			$myPostParams="text=".urlencode($msg)."&recipients=".$mobile_number."&sendername=Myecocar";
+			 
+			//Query configuration
+			$requestConfig = array( 'http' => array(
+									'method' => 'POST',
+									'header'=>"Authorization: Basic ".base64_encode(ENVOYERSMSPRO_LOGIN.":".ENVOYERSMSPRO_PASSWORD)."\r\n"
+									."Content-type: application/x-www-form-urlencoded\r\n",
+									'content' => $myPostParams
+									));
+			 
+			//Return of the server
+			$response = file_get_contents($url, false, stream_context_create($requestConfig));
+			if($response){
+				echo json_encode(['action' => 'success', 'msg' => 'Message has been send to your mobile number successfully']);
+			}else{
+				echo json_encode(['action' => 'error', 'msg' => 'There is some problem to send message']);
+			}
+		}else{
+			echo json_encode(['action' => 'warning', 'msg' => 'Before Send Message Please Fill this Field.']);
+		}
+	}
 
 }

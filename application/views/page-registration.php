@@ -72,7 +72,10 @@
                         </span>
                     <input name="mobile" id="mobile" class="form-control g-color-black g-brd-left-none g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-pl-0 g-pr-15 g-py-13" type="tel" placeholder="Mobile" required>
                   </div>
-                </div>
+                </div>    
+				<div class="mb-4 div-input-group">
+					<button type="button" id="send_verification_code" class="form-control">Sent Verification Code</button>
+				</div>
                 <div class="mb-4 div-input-group">
                   <div class="input-group rounded">
                     <span class="input-group-addon g-width-45 g-brd-gray-light-v4 g-color-gray-dark-v5">
@@ -190,5 +193,27 @@
 		if(is_valid){
 			$('#sigup_from').submit();
 		}
+	});
+	
+	$('#send_verification_code').click(function(){
+		var mobile_number = $('#mobile').val();
+		$.ajax({
+                cache: false,
+                type: 'POST',
+                url: "<?php echo site_url('registration/mobile_verification'); ?>",
+                data: 'mobile_number=' +mobile_number,
+                success: function (responce) {
+					var responce = JSON.parse(responce);
+					if(responce.action == 'warning'){
+						$('#mobile').parent().parent('.div-input-group').append('<p id="mobile_error_msg" class="" style="color:red">'+responce.msg+'</p>');
+					}else if(responce.action == 'error'){
+						alert(responce.msg);
+					}else if(responce.action == 'success'){
+						$('#verification_code_group').remove();
+						$('#mobile').parent().parent('.div-input-group').after('<div id="verification_code_group" class="mb-4 div-input-group"> <div class="input-group rounded"> <span class="input-group-addon g-width-45 g-brd-gray-light-v4 g-color-gray-dark-v5"> <i class="icon-flag u-line-icon-pro"></i> </span> <input name="mobile_verification_code" id="mobile_verification_code" class="form-control g-color-black g-brd-left-none g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-pl-0 g-pr-15 g-py-13" type="tel" placeholder="Verification Code" required> </div></div>');
+						alert(responce.msg);
+					}
+                }
+            });
 	});
 </script>
