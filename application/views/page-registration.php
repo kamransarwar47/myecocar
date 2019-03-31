@@ -131,7 +131,7 @@
        </div>
     </section>
     <!-- End Login & Signup -->
-<script>
+<script> 
 	//Validation of Form
 	$(document).on('click', '#sigup_save_btn', function(e){
 		var req_input = $('#sigup_from input[required]');
@@ -207,11 +207,11 @@
 					if(responce.action == 'warning'){
 						$('#mobile').parent().parent('.div-input-group').append('<p id="mobile_error_msg" class="" style="color:red">'+responce.msg+'</p>');
 					}else if(responce.action == 'error'){
-						alert(responce.msg);
+						swal("Warning!", responce.msg, "warning");
 					}else if(responce.action == 'success'){
 						$('#verification_code_group').remove();
 						$('#mobile').parent().parent('.div-input-group').after('<div id="verification_code_group" class="mb-4 div-input-group"> <div class="input-group rounded"> <span class="input-group-addon g-width-45 g-brd-gray-light-v4 g-color-gray-dark-v5"> <i class="icon-flag u-line-icon-pro"></i> </span> <input name="mobile_verification_code" id="mobile_verification_code" class="form-control g-color-black g-brd-left-none g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-pl-0 g-pr-15 g-py-13" type="tel" placeholder="Verification Code" required> </div></div>');
-						alert(responce.msg);
+						swal("Successfully Send!", responce.msg, "success");
 					}
                 }
             });

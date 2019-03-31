@@ -27,7 +27,9 @@
     <!-- uikit functions -->
     <script src="<?php echo base_url(); ?>assets/js/admin/uikit_custom.min.js"></script>
     <!-- altair common functions/helpers -->
-    <script src="<?php echo base_url(); ?>assets/js/admin/altair_admin_common.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/js/admin/altair_admin_common.min.js"></script>    
+	<!-- sweetalert -->
+    <script src="<?php echo base_url(); ?>assets/js/sweetalert.min.js"></script>
 
 
     <!-- enable hires images -->
