@@ -43,10 +43,6 @@
         <div class="row">
             <!-- Content -->
             <div class="col-lg-8 g-mb-30 g-mb-0--lg">
-			<?php 
-				echo $this->session->flashdata('message'); 
-				echo validation_errors();
-			?>
                 <form autocomplete="off" action="<?php echo base_url('propose_route'); ?>" method="post"
                       id="route_from">
                     <article class="u-shadow-v11 rounded g-pa-30">
@@ -290,7 +286,7 @@
                             <!-- End Column Sizing -->
                     </article>
                     <button class="btn btn-xl btn-block u-btn-primary text-uppercase g-font-weight-600 g-font-size-12"
-                            id="route_btn" name="submit" type="button" >Publier
+                            id="route_btn" name="route_from" type="button" >Publier
                     </button>
 					<input type="hidden" name="check_login" id="check_login" value="<?php echo (!isset($_SESSION['User_LoginId'])) ? 'not_login' : $_SESSION['User_LoginId']; ?>">
                 </form>
@@ -351,7 +347,7 @@
 </main>
 <script>
 	//Validation of Form
-	$(document).on('click', '#route_btn', function(e){
+	$(document).on('click', '#route_btn', function(event){
 		if($('#check_login').val() == 'not_login'){
 			swal("Warning!", 'Please Login First', "warning");
 			return false;
@@ -378,7 +374,7 @@
 						is_valid = false;
 					}
 				});			
-				console.log(req_textarea);
+				
 				$.each(req_textarea, function(k, input){
 					var error_msg_id = $(this).attr('id')+'_error_msg';
 					$('#'+error_msg_id).remove();
@@ -388,8 +384,9 @@
 					}
 				});
 				
+			console.log(is_valid);
 			if(is_valid){
-				$('#sigup_from').submit();
+				$('#route_from')[0].submit();
 			}
 		}
 	});
