@@ -208,7 +208,9 @@
                                         <th>Départ</th>
                                         <th class="hidden-sm">Arrivée</th>
                                         <th>Des places</th>
+                                        <th>Remaining Seats</th>
                                         <th>Prix ​​par place</th>
+                                        <th>Status</th>
                                         <th>les réservations</th>
                                     </tr>
                                     </thead>
@@ -223,22 +225,48 @@
                                             <tr>
                                                 <td>
                                                     <?php
-                                                    echo date('d-m-Y', strtotime($route['datepickerFrom'])) . ' - ' . date('H:i', strtotime($route['depart_time_input']));
+													$datepickerFrom = date('d-m-Y', strtotime($route['datepickerFrom'])) . ' - ' . date('H:i', strtotime($route['depart_time_input']));
+                                                    echo $datepickerFrom;
                                                     ?>
                                                 </td>
                                                 <td><?php echo $route['origin_input']; ?></td>
                                                 <td class="hidden-sm"><?php echo $route['destination_input']; ?></td>
                                                 <td><?php echo $route['free_spaces']; ?></td>
+												<?php 
+												$this->db->select('count(places_booked) as total_reserved_seats');
+												$this->db->where('route_id', $route['route_id']);
+												$this->db->group_by('route_id');
+												$result = $this->db->get('bookings');
+												if($result->num_rows() > 0){
+													$total_reserve = $result->row()->total_reserved_seats;
+													$total_reserve = $route['free_spaces'] - $total_reserve;
+												}else{
+													$total_reserve = $route['free_spaces'];
+												}
+												?>
+                                                <td><?php echo $total_reserve; ?></td>
                                                 <td>
                                                     <span class="u-label g-bg-cyan g-rounded-20 g-px-10">&euro; <?php echo $route['travel_charges']; ?></span>
                                                 </td>
+												<?php 
+												$datepickerFrom_informate = date('d-m-Y', strtotime($route['datepickerFrom'])) . ' ' . date('H:i', strtotime($route['depart_time_input']));
+												$status = 'Expired';
+												$color = 'red';
+												if(strtotime($datepickerFrom_informate) >= strtotime(date('d-m-Y H:i'))){
+													$status = "Active";
+													$color = 'blue';
+												}
+												?>
+												<td>
+												<span class="u-label g-bg-<?php echo $color; ?> g-rounded-20 g-px-10"><?php echo $status; ?></span>
+												</td>
                                                 <td data-toggle="collapse" data-target="#accordion_<?php echo $n; ?>"
                                                     class="clickable"><span
                                                             class="u-label u-label-warning g-color-white"
                                                             style="cursor: pointer;">Cliquez ici</span></td>
                                             </tr>
                                             <tr>
-                                                <td colspan="6">
+                                                <td colspan="8">
                                                     <div id="accordion_<?php echo $n; ?>"
                                                          class="collapse table-responsive">
                                                         <table class="table table-bordered">
@@ -246,6 +274,7 @@
                                                             <tr>
                                                                 <th>Date / Heure réservation</th>
                                                                 <th>Personne réservant</th>
+                                                                <th>Person Details</th>
                                                                 <th>Sièges réservés</th>
                                                                 <th>Montant total</th>
                                                             </tr>
@@ -260,11 +289,13 @@
                                                                         <td><?php echo date('d-m-Y - H:i', strtotime($book['booking_datetime'])); ?></td>
                                                                         <td>
                                                                             <i class="icon-finance-067 u-line-icon-pro"></i> <?php echo ucwords($book['first_name'] . ' ' . $book['second_name']); ?>
-                                                                            <br><i class="icon-phone u-line-icon-pro"></i> <?php echo $book['mobile']; ?>
-                                                                            <br><i class="icon-communication-062 u-line-icon-pro"></i> <?php echo $book['email']; ?>
                                                                         </td>
+																		<td>
+																		<i class="icon-phone u-line-icon-pro"></i> <?php echo $book['mobile']; ?>
+                                                                            <br><i class="icon-communication-062 u-line-icon-pro"></i> <?php echo $book['email']; ?>
+																		</td>
                                                                         <td>
-                                                                            <?php echo $book['places_booked']; ?>
+                                                                            <span class="u-label g-bg-orange g-rounded-20 g-px-10"><i class="icon-flag u-line-icon-pro"></i> <?php echo $book['places_booked']; ?></span>
                                                                             <br>
                                                                             <strong>Approval Status:</strong>
                                                                             <br>
