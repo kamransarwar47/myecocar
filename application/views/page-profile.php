@@ -20,7 +20,7 @@
             <?php $this->load->view('includes/user_sidebar'); ?>
 
             <!-- Profle Content -->
-            <div class="col-lg-9">
+            <div class="col-lg-10">
                 <!-- Nav tabs -->
                 <ul class="nav nav-justified u-nav-v1-1 u-nav-primary g-brd-bottom--md g-brd-bottom-2 g-brd-primary g-mb-20"
                     role="tablist" data-target="nav-1-1-default-hor-left-underline"
@@ -260,10 +260,16 @@
 												<td>
 												<span class="u-label g-bg-<?php echo $color; ?> g-rounded-20 g-px-10"><?php echo $status; ?></span>
 												</td>
-                                                <td data-toggle="collapse" data-target="#accordion_<?php echo $n; ?>"
-                                                    class="clickable"><span
-                                                            class="u-label u-label-warning g-color-white"
-                                                            style="cursor: pointer;">Cliquez ici</span></td>
+                                                <td>
+													<?php if($status == 'Active' && $total_reserve == $route['free_spaces']){ ?>
+														<button type="button" data-id="<?php echo $route['route_id']; ?>" class="btn btn-primary btn-xs trip_edit">Edit</button>
+														<button type="button" data-id="<?php echo $route['route_id']; ?>" class="btn btn-danger btn-xs trip_del">Del</button>
+													<?php } ?>
+													
+													<span data-toggle="collapse" data-target="#accordion_<?php echo $n; ?>" 
+													class="u-label u-label-warning g-color-white clickable"
+													style="cursor: pointer;">Cliquez ici</span>
+												</td>
                                             </tr>
                                             <tr>
                                                 <td colspan="8">
@@ -594,5 +600,42 @@
                 }
             }
         });
-    });
+    });   
+
+	// Confirmation for delete 
+    $(document).on('click', '.trip_del', function () {
+		 swal({
+		  title: "Are you sure?",
+		  text: "Once deleted, you will not be able to recover this Record!",
+		  icon: "warning",
+		  buttons: true,
+		  dangerMode: true,
+		})
+		.then((willDelete) => {
+		  if (willDelete) {
+			  // Del trip if no user booked
+			   var thisObj = $(this);
+				var trip_id = thisObj.data('id');
+				$.ajax({
+					type: "POST",
+					url: "<?php echo base_url('user_profile/delete_trip'); ?>",
+					data: {'trip_id': trip_id},
+					cache: false,
+					success: function (data) {
+					   if(data == 'TRUE'){
+						   thisObj.closest('tr').remove();
+						   swal("Poof! Your Record has been deleted!", {
+							  icon: "success",
+							});
+					   }else{
+						  swal ( "Oops" ,  "Something went wrong!" ,  "error" );
+					   }
+					}
+				});
+				
+		  } else {
+			swal("Your Record is safe!");
+		  }
+		});
+    });    
 </script>

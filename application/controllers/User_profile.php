@@ -123,5 +123,20 @@ class User_profile extends CI_Controller
         } else {
             exit('No direct script access allowed');
         }
+    }   
+	
+	// delete trip
+    public function delete_trip()
+    {
+        if ($this->input->is_ajax_request()) {
+            $result = $this->common_model->delete('route', ['route_id' => $this->input->post('trip_id')]);
+            if ($result) {
+                echo 'TRUE';
+            } else {
+                echo 'FALSE';
+            }
+        } else {
+            exit('No direct script access allowed');
+        }
     }
 }

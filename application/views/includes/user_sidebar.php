@@ -1,5 +1,5 @@
 <!-- Profile Sidebar -->
-          <div class="col-lg-3 g-mb-50 g-mb-0--lg">
+          <div class="col-lg-2 g-mb-50 g-mb-0--lg">
             <!-- User Image -->
             <div class="u-block-hover g-pos-rel">
               <figure>
