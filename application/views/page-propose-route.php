@@ -43,6 +43,10 @@
         <div class="row">
             <!-- Content -->
             <div class="col-lg-8 g-mb-30 g-mb-0--lg">
+			<?php 
+				echo $this->session->flashdata('message'); 
+				echo validation_errors();
+			?>
                 <form autocomplete="off" action="<?php echo base_url('propose_route'); ?>" method="post"
                       id="route_from">
                     <article class="u-shadow-v11 rounded g-pa-30">
@@ -68,7 +72,7 @@
 
                         <div class="g-brd-around g-brd-gray-light-v4 g-pa-30 g-mb-30" style="background:#afcb0838">
 
-                            <div class="form-group g-mb-25">
+                            <div class="form-group g-mb-25 div-input-group">
                                 <label for="disabledTextInput">D’où partez-vous ?
                                     <span class="u-icon-v1 g-color-primary g-mr-15 g-mb-15">
                         <i class="icon-communication-011 u-line-icon-pro"></i>
@@ -76,12 +80,12 @@
                                 </label>
                                 <input type="text" id="origin-input" name="origin_input"
                                        class="form-control form-control-md g-font-size-default g-color-gray-dark-v4 g-placeholder-gray-dark-v3 border-0 g-rounded-right-50 g-rounded-left-50  g-px-20"
-                                       type="text" placeholder="Adresse de départ">
+                                       type="text" placeholder="Adresse de départ" required>
                                 <input type="hidden" id="origin-city" name="origin_city">
                                 <input type="hidden" id="origin-country" name="origin_country">
                             </div>
 
-                            <div class="form-group g-mb-25">
+                            <div class="form-group g-mb-25 div-input-group">
                                 <label for="disabledTextInput">Où allez-vous ?
                                     <span class="u-icon-v1 g-color-primary g-mr-15 g-mb-15">
                         <i class="icon-communication-011 u-line-icon-pro"></i>
@@ -89,7 +93,7 @@
                                 </label>
                                 <input type="text" id="destination-input" name="destination_input"
                                        class="form-control form-control-md g-font-size-default g-color-gray-dark-v4 g-placeholder-gray-dark-v3 border-0 g-rounded-right-50 g-rounded-left-50  g-px-20"
-                                       type="text" placeholder="Adresse d'Arrivée">
+                                       type="text" placeholder="Adresse d'Arrivée" required>
                                 <input type="hidden" id="dest-city" name="dest_city">
                                 <input type="hidden" id="dest-country" name="dest_country">
                             </div>
@@ -120,20 +124,20 @@
                                 <div class="row" style="margin-bottom: 15px;">
                                     <div class="col-md-6">
                                         <!-- Datepicker -->
-                                        <div class="input-group g-brd-primary--focus">
+                                        <div class="input-group g-brd-primary--focus div-input-group">
                                             <input id="datepickerFrom" name="datepickerFrom"
                                                    class="form-control form-control-md u-datepicker-v1 g-brd-right-none g-color-gray-dark-v4 g-placeholder-gray-dark-v3 border-0 g-rounded-right-50 g-rounded-left-50  g-px-20"
                                                    type="text" placeholder="Date de départ" data-range="true"
-                                                   data-to="datepickerTo">
+                                                   data-to="datepickerTo" required>
                                         </div>
                                         <!-- End Datepicker -->
                                     </div>
                                     <div class="col-md-6">
                                         <!-- Datepicker -->
-                                        <div class="input-group g-brd-primary--focus">
+                                        <div class="input-group g-brd-primary--focus div-input-group">
                                             <input class="form-control form-control-md u-datepicker-v1 g-brd-right-none g-color-gray-dark-v4 g-placeholder-gray-dark-v3 border-0 g-rounded-right-50 g-rounded-left-50  g-px-20"
                                                    type="time" value="00:00:00" id="depart-time-input"
-                                                   name="depart_time_input">
+                                                   name="depart_time_input" required>
                                         </div>
                                         <!-- End Datepicker -->
                                     </div>
@@ -142,20 +146,20 @@
                                 <div class="row" id="date-retour-box">
                                     <div class="col-md-6">
                                         <!-- Datepicker -->
-                                        <div class="input-group g-brd-primary--focus">
+                                        <div class="input-group g-brd-primary--focus div-input-group">
                                             <input id="datepickerTo" name="datepickerTo"
                                                    class="form-control form-control-md u-datepicker-v1 g-brd-right-none g-color-gray-dark-v4 g-placeholder-gray-dark-v3 border-0 g-rounded-right-50 g-rounded-left-50  g-px-20"
-                                                   type="text" placeholder="Date de retour">
+                                                   type="text" placeholder="Date de retour" required>
 
                                         </div>
                                         <!-- End Datepicker -->
                                     </div>
                                     <div class="col-md-6">
                                         <!-- Datepicker -->
-                                        <div class="input-group g-brd-primary--focus">
+                                        <div class="input-group g-brd-primary--focus div-input-group">
                                             <input class="form-control form-control-md u-datepicker-v1 g-brd-right-none g-color-gray-dark-v4 g-placeholder-gray-dark-v3 border-0 g-rounded-right-50 g-rounded-left-50  g-px-20"
                                                    type="time" value="00:00:00" id="arrival-time-input"
-                                                   name="arrival_time_input">
+                                                   name="arrival_time_input" required>
                                         </div>
                                         <!-- End Datepicker -->
                                     </div>
@@ -175,22 +179,26 @@
                             </label>
                             <div class="form-group row g-mb-25">
 
-                                <div class="col-md-4">
-                                    <input id="vehicle-model-make" name="vehicle_model_make"
-                                           class="form-control form-control-md g-font-size-default g-color-gray-dark-v4 g-placeholder-gray-dark-v3 border-0 g-rounded-right-50 g-rounded-left-50  g-px-20"
-                                           type="text" placeholder="Marque et modèle">
-                                </div>
+                               
+									<div class="col-md-4">
+										<div class="div-input-group">
+											<input id="vehicle-model-make" name="vehicle_model_make"
+												   class="form-control form-control-md g-font-size-default g-color-gray-dark-v4 g-placeholder-gray-dark-v3 border-0 g-rounded-right-50 g-rounded-left-50  g-px-20"
+												   type="text" placeholder="Marque et modèle" required>
+										</div>
+									</div>
+                             
 
-                                <div class="col-md-4">
-                                    <select class="form-control" id="fuel-type" name="fuel_type">
+                                <div class="col-md-4 div-input-group">
+                                    <select class="form-control" id="fuel-type" name="fuel_type" required>
                                         <option value="">Carburant</option>
                                         <option value="Disiel">Disiel</option>
                                         <option value="Essence">Essence</option>
                                     </select>
                                 </div>
 
-                                <div class="col-md-4">
-                                    <select class="form-control" id="free-spaces" name="free_spaces">
+                                <div class="col-md-4 div-input-group">
+                                    <select class="form-control" id="free-spaces" name="free_spaces" required>
                                         <option value="">Places libres</option>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
@@ -203,8 +211,8 @@
 
                             <div class="form-group row g-mb-25">
 
-                                <div class="col-md-4">
-                                    <select class="form-control" id="baggages" name="baggages">
+                                <div class="col-md-4 div-input-group">
+                                    <select class="form-control" id="baggages" name="baggages" required>
                                         <option value="">Bagages</option>
                                         <option value="petite taille">petite taille</option>
                                         <option value="moyenne taille">moyenne taille</option>
@@ -212,8 +220,8 @@
                                     </select>
                                 </div>
 
-                                <div class="col-md-4">
-                                    <select class="form-control" id="max-detour" name="max_detour">
+                                <div class="col-md-4 div-input-group">
+                                    <select class="form-control" id="max-detour" name="max_detour" required>
                                         <option value="">Détour maximum</option>
                                         <option value="aucun détour">aucun détour</option>
                                         <option value="15 minutes">15 minutes</option>
@@ -222,8 +230,8 @@
                                     </select>
                                 </div>
 
-                                <div class="col-md-4">
-                                    <select class="form-control" id="sch-flex" name="sch_flex">
+                                <div class="col-md-4 div-input-group">
+                                    <select class="form-control" id="sch-flex" name="sch_flex" required>
                                         <option value="">Flexibilité Horaire</option>
                                         <option value="Pile a l'heure">Pile a l'heure</option>
                                         <option value="15 minutes">15 minutes</option>
@@ -234,8 +242,8 @@
                             </div>
 
                             <div class="form-group row g-mb-25">
-                                <div class="col-md-4">
-                                    <select class="form-control" id="acceptance" name="acceptance">
+                                <div class="col-md-4 div-input-group">
+                                    <select class="form-control" id="acceptance" name="acceptance" required>
                                         <option value="">Acceptation</option>
                                         <option value="moins de 1h">moins de 1h</option>
                                         <option value="moins de 3h">moins de 3h</option>
@@ -246,9 +254,9 @@
                             </div>
 
                             <div class="form-group mb-0">
-                                <div class="u-input-group-v2">
-                                <textarea id="message" class="form-control rounded-0 u-form-control g-resize-none"
-                                          name="travel_description" rows="4"></textarea>
+                                <div class="u-input-group-v2 div-input-group">
+                                <textarea id="message" class="form-control rounded-0 u-form-control g-resize-none div-input-group"
+                                          name="travel_description" rows="4" required></textarea>
                                     <label for="message">Description du trajet</label>
                                 </div>
                             </div>
@@ -268,12 +276,12 @@
 
                                     <div class="col-md-12">
                                         <!-- Quantity -->
-                                        <div class="form-group g-mb-20">
+                                        <div class="form-group g-mb-20 div-input-group">
                                             <label class="g-mb-10"></label>
-                                            <div class="js-quantity input-group u-quantity-v1 w-100 g-brd-gray-light-v3 g-brd-primary--focus">
+                                            <div class="js-quantity input-group u-quantity-v1 w-100 g-brd-gray-light-v3 g-brd-primary--focus div-input-group">
                                                 <input class="js-result form-control text-center g-font-size-16  g-pa-10-16  g-color-gray-dark-v4 g-placeholder-gray-dark-v3 border-0 g-rounded-right-50 g-rounded-left-50  g-px-20"
                                                        type="text" placeholder="entrer le montant" id="travel-charges"
-                                                       name="travel_charges">
+                                                       name="travel_charges" required>
                                             </div>
                                         </div>
                                     </div>
@@ -282,8 +290,9 @@
                             <!-- End Column Sizing -->
                     </article>
                     <button class="btn btn-xl btn-block u-btn-primary text-uppercase g-font-weight-600 g-font-size-12"
-                            name="submit" type="submit" <?php echo (!isset($_SESSION['User_LoginId'])) ? 'disabled="disabled"' : ''; ?>>Publier
+                            id="route_btn" name="submit" type="button" >Publier
                     </button>
+					<input type="hidden" name="check_login" id="check_login" value="<?php echo (!isset($_SESSION['User_LoginId'])) ? 'not_login' : $_SESSION['User_LoginId']; ?>">
                 </form>
             </div>
             <!-- End Content -->
@@ -340,3 +349,48 @@
     <i class="hs-icon hs-icon-arrow-top"></i>
 </a>
 </main>
+<script>
+	//Validation of Form
+	$(document).on('click', '#route_btn', function(e){
+		if($('#check_login').val() == 'not_login'){
+			swal("Warning!", 'Please Login First', "warning");
+			return false;
+		}else{
+			var req_input = $('#route_from input[required]');
+			var req_select = $('#route_from select[required]');
+			var req_textarea = $('#route_from textarea[required]');
+			var is_valid = true;
+			var input_types_1 = ['text', 'tel', 'time', 'number']; 
+
+			$.each(req_input, function(k, input){
+					var error_msg_id = $(this).attr('id')+'_error_msg';
+					$('#'+error_msg_id).remove();
+					if(input_types_1.indexOf($(this).attr('type')) != -1 && $(this).val() == ''){
+						$(this).parent('.div-input-group').after('<p id="'+error_msg_id+'" class="" style="color:red">This Field is required</p>');
+						is_valid = false;
+					}
+				});		
+				$.each(req_select, function(k, input){
+					var error_msg_id = $(this).attr('id')+'_error_msg';
+					$('#'+error_msg_id).remove();
+					if($(this).val() == ''){
+						$(this).parent('.div-input-group').append('<p id="'+error_msg_id+'" class="" style="color:red">This Field is required</p>');
+						is_valid = false;
+					}
+				});			
+				console.log(req_textarea);
+				$.each(req_textarea, function(k, input){
+					var error_msg_id = $(this).attr('id')+'_error_msg';
+					$('#'+error_msg_id).remove();
+					if($(this).val() == ''){
+						$(this).parent('.div-input-group').append('<p id="'+error_msg_id+'" class="" style="color:red">This Field is required</p>');
+						is_valid = false;
+					}
+				});
+				
+			if(is_valid){
+				$('#sigup_from').submit();
+			}
+		}
+	});
+</script>
