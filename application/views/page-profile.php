@@ -505,12 +505,12 @@
             var error_msg_id = $(this).attr('id') + '_error_msg';
             $('#' + error_msg_id).remove();
             if (input_types_1.indexOf($(this).attr('type')) != -1 && $(this).val() == '') {
-                $(this).after('<p id="' + error_msg_id + '" class="" style="color:red">This Field is required</p>');
+                $(this).after('<p id="' + error_msg_id + '" class="" style="color:red">required*</p>');
                 is_valid = false;
             } else if (input_types_3.indexOf($(this).attr('type')) != -1) {
                 $('#reg_gender_1_error_msg').remove();
                 if ($('#reg_gender_1').attr("checked") !== 'checked' && $('#reg_gender_2').attr("checked") !== 'checked') {
-                    $(this).after('<p id="' + error_msg_id + '" class="" style="color:red">This Field is required</p>');
+                    $(this).after('<p id="' + error_msg_id + '" class="" style="color:red">required*</p>');
                     is_valid = false;
                 } else {
                     $('#reg_gender_1_error_msg').remove();
@@ -527,7 +527,7 @@
                         is_valid = false;
                     }
                 } else {
-                    $(this).after('<p id="' + error_msg_id + '" class="" style="color:red">This Field is required</p>');
+                    $(this).after('<p id="' + error_msg_id + '" class="" style="color:red">required*</p>');
                     is_valid = false;
                 }
             }
