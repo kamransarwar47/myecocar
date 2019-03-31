@@ -276,7 +276,7 @@
                                             <label class="g-mb-10"></label>
                                             <div class="js-quantity input-group u-quantity-v1 w-100 g-brd-gray-light-v3 g-brd-primary--focus div-input-group">
                                                 <input class="js-result form-control text-center g-font-size-16  g-pa-10-16  g-color-gray-dark-v4 g-placeholder-gray-dark-v3 border-0 g-rounded-right-50 g-rounded-left-50  g-px-20"
-                                                       type="text" placeholder="entrer le montant" id="travel-charges"
+                                                       type="number" placeholder="entrer le montant" id="travel-charges"
                                                        name="travel_charges" required>
                                             </div>
                                         </div>

@@ -13,6 +13,7 @@ class Research_trip extends CI_Controller
         $data['search_records'] = [];
         if (isset($_GET['dc'])) {
             $search_query = [];
+			$search_query['datepickerFrom >='] = date('Y-m-d');
             if (isset($_GET['dc']) && $_GET['dc'] != '') {
                 $search_query['origin_city']    = $this->input->get('sdcty');
                 $search_query['origin_country'] = $this->input->get('sdcnt');
