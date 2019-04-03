@@ -135,7 +135,9 @@
                                     </div>
                                     <input value="<?php echo $mobile; ?>" style="width:70%" name="mobile" id="mobile"
                                            class="form-control profile_fields" type="tel" placeholder="Mobile" required>
+										   <input type="hidden" name="verify_mobile" id="verify_mobile" value="<?php echo $mobile; ?>" >
                                     <span>
+						
 						<i class="icon-phone u-line-icon-pro g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i>
                       </span>
                                 </li>
@@ -502,8 +504,17 @@
     //Validation of Form edit profile
     $(document).on('click', '#save_profile_btn', function (e) {
         e.preventDefault();
+		$('input').css('width', '70%');
         var req_input = $('#edit_sigup_from input[required]');
         var is_valid = true;
+		if($('#verification_code').length > 0){
+			$('#verification_code').css('width', '10%');
+			$('#mobile').css('width', '44%');
+			if($('#verification_code').val() == ''){
+				$('#verification_code').css('border-color', 'red');
+				is_valid = false;
+			}
+		 }
         var input_types_1 = ['text', 'tel', 'number'];
         var input_types_3 = ['radio'];
         var input_types_4 = ['email'];
@@ -511,6 +522,7 @@
             var error_msg_id = $(this).attr('id') + '_error_msg';
             $('#' + error_msg_id).remove();
             if (input_types_1.indexOf($(this).attr('type')) != -1 && $(this).val() == '') {
+				$('#'+$(this).attr('id')).css('width', '60%');
                 $(this).after('<p id="' + error_msg_id + '" class="" style="color:red">required*</p>');
                 is_valid = false;
             } else if (input_types_3.indexOf($(this).attr('type')) != -1) {
@@ -529,10 +541,12 @@
                     var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
                     var valid_email = regex.test($(this).val());
                     if (!valid_email) {
-                        $(this).after('<p id="' + error_msg_id + '" class="" style="color:red">Please enter the valid email address</p>');
+						$(this).css('width', '47%');
+                        $(this).after('<p id="' + error_msg_id + '" class="" style="color:red">Enter the valid email address</p>');
                         is_valid = false;
                     }
                 } else {
+					$(this).css('width', '60%');
                     $(this).after('<p id="' + error_msg_id + '" class="" style="color:red">required*</p>');
                     is_valid = false;
                 }
@@ -637,5 +651,60 @@
 			swal("Your Record is safe!");
 		  }
 		});
-    });    
+    });   
+
+	//send verfication message
+	$(document).on('click', '#send_verification_code', function(){
+		var mobile_number = $('#mobile').val();
+		$.ajax({
+                cache: false,
+                type: 'POST',
+                url: "<?php echo site_url('registration/mobile_verification'); ?>",
+                data: 'mobile_number=' +mobile_number,
+                success: function (responce) {
+					var responce = JSON.parse(responce);
+					if(responce.action == 'warning'){
+						$('#mobile').parent().parent('.div-input-group').append('<p id="mobile_error_msg" class="" style="color:red">'+responce.msg+'</p>');
+					}else if(responce.action == 'error'){
+						swal("Warning!", responce.msg, "warning");
+					}else if(responce.action == 'success'){
+						$('#mobile').css('width', '44%');
+						$('#verification_code').remove();
+						$('#mobile').after('<input style="width: 10%; display: block;" name="verification_code" id="verification_code" class="form-control profile_fields g-state-not-empty" type="text">');
+						swal("Successfully Send!", responce.msg, "success");
+					}
+                }
+            });
+	});	
+	
+	$(document).on('keyup', '#mobile', function(){
+		var mobile_number = $('#mobile').val();
+		var verify_mobile = $('#verify_mobile').val();
+		$('.send_verification_code').remove();
+		if(mobile_number !==  verify_mobile){
+			if($('#verification_code').length > 0){
+				$('#mobile').css('width', '44%');
+			}else{
+				$('#mobile').css('width', '57%');
+			}
+			
+			 var btn = '<button type="button" class="btn send_verification_code u-btn-primary rounded-0" id="send_verification_code" class="form-control">Verification</button>';
+			 if($('#verification_code').length > 0){
+				 $('#verification_code').after(btn);
+			 }else{
+				 $(this).after(btn);
+			 }
+			 
+			 
+		}else if(mobile_number ===  verify_mobile){
+			$('#verification_code').remove();
+			$('.send_verification_code').remove();
+			$('#mobile').css('width', '70%');
+		}
+		if(mobile_number == ''){
+			$('#verification_code').remove();
+			$('.send_verification_code').remove();
+			$('#mobile').css('width', '70%');
+		}
+	});
 </script>

@@ -15,7 +15,10 @@ class User_profile extends CI_Controller
      */
     public function index()
     {
-
+		if($this->input->post('verification_code') != ''){
+			$this->form_validation->set_rules('verification_code', 'Mobile Verified Code', 'trim|required');
+		}
+        
         $this->form_validation->set_rules('first_name', 'First name', 'trim|required');
         $this->form_validation->set_rules('second_name', 'Second name', 'trim|required');
         $this->form_validation->set_rules('reg_gender', 'Gender', 'trim|required');
@@ -44,6 +47,22 @@ class User_profile extends CI_Controller
             $data['mobile']        = $this->input->post('mobile');
             $data['date_of_birth'] = date('Y-m-d', strtotime($this->input->post('date_of_birth')));
             $data['email']         = $this->input->post('reg_email');
+			
+			//For new number verification must
+			$mobile_number = $this->db->get('users', ['user_id', $this->session->userdata('User_LoginId')], 'mobile');
+			 if ($mobile_number->num_rows() > 0) {
+				$mobile_no = $mobile_number->row()->mobile;
+				if($mobile_no != $data['mobile']){
+					if($this->session->userdata('verification_code') != $this->input->post('verification_code')){
+						set_message('Your Verification code is not correct', 'warning');
+						redirect('user_profile');
+					}else if($data['mobile'] != $this->session->userdata('verification_mobile_number')){
+						set_message('Your New mobile number need to be verified', 'warning');
+						redirect('user_profile');
+					}
+				}
+			}
+			
             $this->common_model->update('users', $data, ['user_id' => $this->session->userdata('User_LoginId')]);
             set_message('You Have Update your profile Successfully', 'success');
             redirect('user_profile');
