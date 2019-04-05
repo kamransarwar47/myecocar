@@ -52,6 +52,10 @@
                         <h2 class="h4 g-font-weight-300">Gérez votre nom, votre identifiant et vos adresses email</h2>
                         <p>Vous trouverez ci-dessous le nom, l’adresse e-mail, les contacts, etc., enregistrés pour
                             votre compte.</p>
+							<form id="edit_sigup_from" enctype="multipart/form-data" action="<?php echo base_url('user_profile/img_upload_user_profile'); ?>" method="post">
+							<input type="file" name="user_profile_img" id="user_profile_img" >
+							<button type="submit">Submit</button>
+							</form>
                         <?php
                         if (isset($user_data) && $user_data->num_rows() > 0){
                         $user_data         = $user_data->row_array();

@@ -197,4 +197,15 @@ class User_profile extends CI_Controller
         }
 		
 	}
+	
+	//uploads an user image
+	function img_upload_user_profile(){
+		
+		$config['upload_path']          = './assets/uploads/';
+		$config['allowed_types']        = 'gif|jpg|png';
+		$result = file_upload_admin('user_profile_img', $config);
+		$image_name = $result['file_name'];
+		$this->common_model->update('users', ['user_profile_img' => $image_name], ['user_id' => $this->session->userdata('User_LoginId')]);
+		redirect('user_profile');
+	}
 }
