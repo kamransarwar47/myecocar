@@ -94,3 +94,28 @@ function boooking_by_route_id($id)
         return [];
     }
 }
+	
+/**
+ * get booking by route id
+ */
+function send_email($arrgs = [])
+{	
+	if(!empty($arrgs)){
+		$to = $arrgs['to'];
+		$subject =  $arrgs['subject'];
+		$txt = $arrgs['txt'];
+		
+		// Always set content-type when sending HTML email
+		$headers = "MIME-Version: 1.0" . "\r\n";
+		$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+		
+		// More headers
+		$headers .=  "From: <info@myecocar.org>";
+
+		$res = mail($to,$subject,$txt,$headers);
+		if($res){
+			return true;
+		}
+	}
+	return false;
+}

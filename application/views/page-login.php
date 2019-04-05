@@ -38,7 +38,9 @@
                     <input name="user_password" id="user_password" class="form-control g-color-black g-brd-left-none g-brd-white g-bg-transparent g-color-white g-placeholder-white g-pl-0 g-pr-15 g-py-13" type="password" placeholder="mot de passe" required>
                   </div>
                 </div>
-
+               <div class="g-mb-40">
+                    <a href="<?php echo base_url('login/forget_password'); ?>" class="g-color-white mb-4">Forget Password</a>
+                </div>
                 <div class="g-mb-60">
                   <button id="login_btn" class="btn btn-md btn-block u-btn-primary rounded text-uppercase g-py-13" type="button">Connexion</button>
                 </div>

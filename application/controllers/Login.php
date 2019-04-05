@@ -53,6 +53,76 @@ class Login extends CI_Controller {
         $this->session->unset_userdata('User_LoginId');
         $this->session->unset_userdata('User_UserName');
         redirect('login');
+    }    
+	
+	function change_password()
+    {
+        $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'trim|required');
+        $this->form_validation->set_rules('password', 'Password', 'trim|required|matches[confirm_password]|min_length[8]');
+    
+        if ($this->form_validation->run() == false) {
+            $data['title'] = 'Change Password';
+			$data['content'] = $this->load->view('page-change-password', '', true);
+			$this->load->view('templates/template', $data);
+        } else {
+			
+			$verifying_code = $this->input->post('code');
+			$user_id = $this->input->post('u_id');
+			if($verifying_code != '' && $user_id != ''){
+				$email_token = $this->common_model->get('users', ['user_id' => $user_id], 'email_token');
+				if($email_token->num_rows() > 0){
+					$email_token = $email_token->row()->email_token;
+					if($email_token == $verifying_code && $user_id != ''){
+						$where['user_id'] = $user_id;
+						$data['password'] = md5($this->input->post('password'));
+						$this->common_model->update('users', $data, $where);
+						set_message('You Have successfully change your password', 'success');
+					}else{
+							set_message('There is some problem with the link you have use for recovery password', 'warning');
+						}
+				}
+			}
+			redirect('login');
+        }
+    }
+
+    function forget_password()
+    {
+		$this->form_validation->set_rules('verification_email', 'Email', 'trim|valid_email');
+
+        if ($this->form_validation->run() == false) {
+            $data['title'] = 'Forget Password';
+            $data['content'] = $this->load->view('page-forget-password', '', true);
+            $this->load->view('templates/template', $data);
+        } else {
+			$email = $this->input->post('verification_email');
+			
+				$res = $this->common_model->get('users', ['email' => $email], 'email, first_name, user_id');
+				if($res->num_rows() > 0){
+					$result = $res->row();
+					$name = $result->first_name;
+					$email = $result->email;
+					$user_id = $result->user_id;
+					
+					$verification_Code	= md5(md5(time()));
+					$arrgs = [
+						'to' => $email,
+						'subject' => 'Myecocar Recover Password',
+						'txt' => 'Hi '.$name.',<br>'.'Recover Password Email has been send to your registered email address please verify your email address by clicking on the link below<br><a href="'.base_url("login/change_password?code=".$verification_Code.'&u_id='.$user_id).'">Click Here</a>'
+					];
+					$res = send_email($arrgs);
+					
+					if($res){
+						$token_update['email_token'] = $verification_Code;
+						$this->common_model->update('users', $token_update, ['user_id' => $user_id]);
+						set_message('Recovery Password has been successfully send to your email address Please Verified.', 'success');
+					}
+				
+				}else{ 
+					set_message('This email is not in our record', 'success');
+				}
+			redirect('login/forget_password');	
+        }
     }
 	
 }

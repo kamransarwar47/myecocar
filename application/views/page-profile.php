@@ -60,7 +60,9 @@
                         $gender            = $user_data['gender'];
                         $mobile            = $user_data['mobile'];
                         $date_of_birth     = date('d-m-Y', strtotime($user_data['date_of_birth']));
+                        $user_id           = $user_data['user_id'];
                         $email             = $user_data['email'];
+                        $is_verified       = $user_data['is_verified'];
                         $register_datetime = date('d-m-Y H:i:s', strtotime($user_data['register_datetime']));
 
                         echo $this->session->flashdata('message');
@@ -99,8 +101,9 @@
                                 <!-- Your ID -->
                                 <li class="d-flex align-items-center justify-content-between g-brd-bottom g-brd-gray-light-v4 g-py-15">
                                     <div class="g-pr-10">
-                                        <strong class="d-block d-md-inline-block g-color-gray-dark-v2 g-width-200 g-pr-10"><?php _l('user_profile_email'); ?></strong>
-                                        <span class="align-top profile_values"><?php echo $email; ?></span>
+                                        <strong class="d-block d-md-inline-block g-color-gray-dark-v2 g-width-200 g-pr-10"><?php _l('user_profile_email'); echo ($is_verified == 0) ?  '<span style="color:red; font-size: 12px;"> Not Verified</span> <button type="button" class="btn btn-xs u-btn-darkgray rounded-0" data-id="'.$user_id.'" data-name="'.$first_name .'" data-email="'.$email.'" id="send_verifying_email">Verify</button>' : '<span style="color:#72c02c; font-size: 12px;"> Verified</span>'; ?></strong>
+                                        <span class="align-top profile_values">
+										<?php echo $email; ?></span>
                                     </div>
                                     <input value="<?php echo $email; ?>" name="reg_email" id="reg_email"
                                            class="form-control profile_fields" style="width:70%" type="email"
@@ -677,6 +680,7 @@
             });
 	});	
 	
+	// send mobile verification code
 	$(document).on('keyup', '#mobile', function(){
 		var mobile_number = $('#mobile').val();
 		var verify_mobile = $('#verify_mobile').val();
@@ -706,5 +710,27 @@
 			$('.send_verification_code').remove();
 			$('#mobile').css('width', '70%');
 		}
+	});
+	
+	//send verifying email to verified email
+	$(document).on('click', '#send_verifying_email', function(){
+		var user_id = $(this).data('id');
+		var email = $(this).data('email');
+		var name = $(this).data('name');
+		$.ajax({
+			type: "POST",
+			url: "<?php echo base_url('user_profile/verifying_email'); ?>",
+			data: {'user_id': user_id, 'email': email, 'name': name},
+			cache: false,
+			success: function (data) {
+			   if(data){
+				   swal("Email has been send to your email address successfully please verified.", {
+					  icon: "success",
+					});
+			   }else{
+				  swal ( "Oops" ,  "Something went wrong!" ,  "error" );
+			   }
+			}
+		});
 	});
 </script>

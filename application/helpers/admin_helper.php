@@ -12,6 +12,21 @@ function set_message($message, $status)
     $message = $CI->load->view('includes/message', $message, true);
     $CI->session->set_flashdata('message', $message);
 }
+
+/**
+ * @param $message
+ * @param $status
+ */
+function set_heading_message($message)
+{
+	if($message){
+		$CI =	&get_instance();
+		$data['message'] = $message;
+		$data['content'] = $CI->load->view('page-verification-msg', $data, true);
+		$CI->load->view('templates/template', $data);	
+	}
+}
+
 /**
  * @param array $unlink
  * @return bool

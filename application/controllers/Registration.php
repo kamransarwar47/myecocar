@@ -31,7 +31,25 @@ class Registration extends CI_Controller {
 			$data['password'] = md5($this->input->post('password'));
 			$data['term_conditions'] = ($this->input->post('term_conditions') == 'on') ? 1 : 0;
 			$data['register_datetime'] = date('Y-m-d H:i:s');
-			$this->common_model->insert('users', $data);
+
+			$user_id = $this->common_model->insert('users', $data);
+			if($user_id ){
+				$verification_Code	= md5(md5(time()));
+				//send email
+				if($data['email']){	
+					$arrgs = [
+						'to' => $data['email'],
+						'subject' => 'Myecocar Registeration Email Verification',
+						'txt' => 'Hi '.$data['first_name'].',<br>'.'You have successfully registered to Myecocar please verify your email address by clicking on the link below<br><a href="'.base_url("registration/verifying_email?code=".$verification_Code.'&u_id='.$user_id).'">Click Here</a>'
+					];
+					$res = send_email($arrgs);
+					if($res){
+						$token_update['email_token'] = $verification_Code;
+						$this->common_model->update('users', $token_update, ['user_id' => $user_id]);
+					}
+				}
+			}
+			
 			set_message('You Have Register Successfully', 'success');
 			redirect('registration');
 			
@@ -51,6 +69,13 @@ class Registration extends CI_Controller {
 	
 	function mobile_verification(){
 		$mobile_number = $this->input->post('mobile_number');
+		//need to del
+		$verification_code = rand('000001', '999999');
+		$this->session->set_userdata('verification_code', $verification_code);
+			$this->session->set_userdata('verification_mobile_number', $mobile_number);
+		echo json_encode(['action' => 'success', 'msg' => 'Message has been send to your mobile number successfully '.$verification_code]);
+		
+		die();
 		if($mobile_number != ''){
 			$url="https://www.envoyersmspro.com/api/message/send";
 			$verification_code = rand('000001', '999999');
@@ -83,4 +108,20 @@ class Registration extends CI_Controller {
 		}
 	}
 
+	// verifying email
+	public function verifying_email(){
+		$verifying_code = $this->input->get('code');
+		$user_id = $this->input->get('u_id');
+		$email_token = $this->common_model->get('users', ['user_id' => $user_id], 'email_token');
+		if($email_token->num_rows() > 0){
+			$email_token = $email_token->row()->email_token;
+			if($email_token == $verifying_code){
+				$verified['is_verified'] = 1;
+				$this->common_model->update('users', $verified, ['user_id' => $user_id]);
+				set_heading_message('You have successfully verified your email address');
+			}else{
+				set_heading_message('Sorry! Your Security verifing link in invalid');
+			}
+		}
+	}
 }

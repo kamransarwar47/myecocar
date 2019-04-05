@@ -21,7 +21,7 @@ class Common_model extends CI_Model
      * @return mixed
      */
     function get($table_name, $where = [], $fields = '*')
-    {
+    { 
         $this->db->select($fields);
         if (count($where) > 0) {
             $this->db->where($where);

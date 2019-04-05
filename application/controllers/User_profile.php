@@ -14,7 +14,7 @@ class User_profile extends CI_Controller
      * Home Page
      */
     public function index()
-    {
+    { 
 		if($this->input->post('verification_code') != ''){
 			$this->form_validation->set_rules('verification_code', 'Mobile Verified Code', 'trim|required');
 		}
@@ -49,9 +49,14 @@ class User_profile extends CI_Controller
             $data['email']         = $this->input->post('reg_email');
 			
 			//For new number verification must
-			$mobile_number = $this->db->get('users', ['user_id', $this->session->userdata('User_LoginId')], 'mobile');
-			 if ($mobile_number->num_rows() > 0) {
-				$mobile_no = $mobile_number->row()->mobile;
+			$result = $this->common_model->get('users', ['user_id' => $this->session->userdata('User_LoginId')], 'mobile, email');
+			 if ($result->num_rows() > 0) {
+				$res = $result->row();
+				$mobile_no 	= $res->mobile;
+				$email 		= $res->email;
+				if($email != $data['email']){
+					$data['is_verified'] = 0;
+				}
 				if($mobile_no != $data['mobile']){
 					if($this->session->userdata('verification_code') != $this->input->post('verification_code')){
 						set_message('Your Verification code is not correct', 'warning');
@@ -158,4 +163,38 @@ class User_profile extends CI_Controller
             exit('No direct script access allowed');
         }
     }
+	
+	//verifying email address
+	public function verifying_email(){
+		
+		 if ($this->input->is_ajax_request()) {
+			 
+			$email = $this->input->post('email');
+			$user_id = $this->input->post('user_id');
+			$name = $this->input->post('name');
+		
+			if($user_id != '' && $email != ''){
+				$verification_Code	= md5(md5(time()));
+				//send email
+				if($email != ''){	
+					$arrgs = [
+						'to' => $email,
+						'subject' => 'Myecocar Registeration Email Verification',
+						'txt' => 'Hi '.$name.',<br>'.'You have successfully registered to Myecocar please verify your email address by clicking on the link below<br><a href="'.base_url("registration/verifying_email?code=".$verification_Code.'&u_id='.$user_id).'">Click Here</a>'
+					];
+					$res = send_email($arrgs);
+					
+					if($res){
+						$token_update['email_token'] = $verification_Code;
+						$this->common_model->update('users', $token_update, ['user_id' => $user_id]);
+						echo true;
+					}
+				}
+			}
+			echo false;
+		 } else {
+            exit('No direct script access allowed');
+        }
+		
+	}
 }
