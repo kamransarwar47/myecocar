@@ -52,9 +52,30 @@ class Research_trip extends CI_Controller
             $data['places_booked']    = $this->input->post('places_booked');
             $data['booking_datetime'] = date("Y-m-d H:i:s", time());
             $data['total_amount']     = ($this->input->post('amount_per_seat') * $this->input->post('places_booked'));
-            $this->common_model->insert('bookings', $data);
-
-            set_message('You Have Accepted Offer Successfully', 'success');
+            $id = $this->common_model->insert('bookings', $data);
+			
+			//send email
+			$user_id = $this->session->userdata('User_LoginId');
+			$res = $this->db->get('users', ['user_id' => $user_id], 'email, first_name');
+			if($res->num_rows() > 0){
+				$res =$res->row();
+				$email = $res->email;
+				$name = $res->first_name;
+				if($email){	
+				// route To From
+				 $search_data        = $this->common_model->get('route', ['route_id' => $this->input->get('id')], 'origin_city, origin_country, dest_city, dest_country');
+				 if($search_data->num_rows() > 0){
+					$search_data = $search_data->row_array();
+					$arrgs = [
+						'to' => $email,
+						'subject' => 'Myecocar Reservation of Seat',
+						'txt' => 'Hi '.$name.',<br>'.'You have successfully reserved your seat against booking Number '.$id. ' From '.$search_data['dest_city'].', '.$search_data['dest_country'].' To '.$search_data['origin_city'].', '.$search_data['origin_country'].' Data & Time: '.date('d-m-Y H:i:s'),
+					];
+					$res = send_email($arrgs);
+					}					
+				}
+			}
+            set_message('You Have Accepted Offer & Reservation email has been send to your registered email address Successfully please check', 'success');
             redirect('research_trip/trip_details?id=' . $this->input->get('id'));
         }
     }
