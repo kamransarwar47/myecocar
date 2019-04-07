@@ -120,8 +120,8 @@
                             </a>
                         </li>
                         <li class="nav-item g-mx-20--lg <?php echo (isset($header_link_active) && $header_link_active == 'about_page') ? 'active' : ''; ?>">
-                            <a href="<?php echo base_url('about'); ?>"
-                               class="nav-link px-0"><?php _l('header_who_we_are'); ?>
+                            <a href="<?php echo base_url('contact_us'); ?>"
+                               class="nav-link px-0"><?php _l('contact_us'); ?>
                             </a>
                         </li>
                     </ul>

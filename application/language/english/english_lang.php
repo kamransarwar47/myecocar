@@ -9,6 +9,7 @@ $lang['user_profile_mobile'] = "Mobile";
 $lang['user_profile_sec_name'] = "Last Name";
 
 // header heading
+$lang['contact_us'] = "Contact Us";
 $lang['header_register'] = "REGISTER";
 $lang['header_connection'] = "Login";
 $lang['header_current'] = "(CURRENT)";

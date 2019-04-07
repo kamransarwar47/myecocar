@@ -200,10 +200,21 @@ class User_profile extends CI_Controller
 	
 	//uploads an user image
 	function img_upload_user_profile(){
-		
+
 		$config['upload_path']          = './assets/uploads/';
 		$config['allowed_types']        = 'gif|jpg|png';
 		$result = file_upload_admin('user_profile_img', $config);
+		//echo $result; die();
+		if(!isset($result['file_name']) && $result['file_name'] != ''){
+			set_message('The Image You Have choose is bad formated only use .gif, .jpg, .png ', 'warning');
+			redirect('user_profile');
+		}
+		//unset img
+		$img_res = $this->common_model->get('users', ['user_id' => $this->session->userdata('User_LoginId')], 'user_profile_img');
+		if($img_res->num_rows() > 0 && $img_res->row()->user_profile_img != ''){
+			$user_image_name = $img_res->row()->user_profile_img;
+			unlink_files(['assets/uploads/'.$user_image_name]);
+		}
 		$image_name = $result['file_name'];
 		$this->common_model->update('users', ['user_profile_img' => $image_name], ['user_id' => $this->session->userdata('User_LoginId')]);
 		redirect('user_profile');

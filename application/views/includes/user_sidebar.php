@@ -4,9 +4,9 @@
             <div class="u-block-hover g-pos-rel">
               <figure>
 			  <?php
-				$user_image_name = '';
+				$user_image_name = 'no-image.jpg';
 				$img_res = $this->common_model->get('users', ['user_id' => $this->session->userdata('User_LoginId')], 'user_profile_img');
-				if($img_res->num_rows() > 0){
+				if($img_res->num_rows() > 0 && $img_res->row()->user_profile_img != ''){
 					$user_image_name = $img_res->row()->user_profile_img;
 				}
 			  ?>

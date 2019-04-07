@@ -52,9 +52,13 @@
                         <h2 class="h4 g-font-weight-300">Gérez votre nom, votre identifiant et vos adresses email</h2>
                         <p>Vous trouverez ci-dessous le nom, l’adresse e-mail, les contacts, etc., enregistrés pour
                             votre compte.</p>
+							<?php
+								echo $this->session->flashdata('message');
+								echo validation_errors();
+							?>
 							<form id="edit_sigup_from" enctype="multipart/form-data" action="<?php echo base_url('user_profile/img_upload_user_profile'); ?>" method="post">
-							<input type="file" name="user_profile_img" id="user_profile_img" >
-							<button type="submit">Submit</button>
+								<input type="file" name="user_profile_img" id="user_profile_img form-control profile_fields" >
+								<button type="submit" class="btn btn-sm u-btn-primary rounded-0">Submit</button>
 							</form>
                         <?php
                         if (isset($user_data) && $user_data->num_rows() > 0){
@@ -69,8 +73,6 @@
                         $is_verified       = $user_data['is_verified'];
                         $register_datetime = date('d-m-Y H:i:s', strtotime($user_data['register_datetime']));
 
-                        echo $this->session->flashdata('message');
-                        echo validation_errors();
                         ?>
                         <form id="edit_sigup_from" action="<?php echo base_url('user_profile'); ?>" method="post">
                             <ul class="list-unstyled g-mb-30">

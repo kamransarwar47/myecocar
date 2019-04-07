@@ -69,13 +69,7 @@ class Registration extends CI_Controller {
 	
 	function mobile_verification(){
 		$mobile_number = $this->input->post('mobile_number');
-		//need to del
-		$verification_code = rand('000001', '999999');
-		$this->session->set_userdata('verification_code', $verification_code);
-			$this->session->set_userdata('verification_mobile_number', $mobile_number);
-		echo json_encode(['action' => 'success', 'msg' => 'Message has been send to your mobile number successfully '.$verification_code]);
-		
-		die();
+
 		if($mobile_number != ''){
 			$url="https://www.envoyersmspro.com/api/message/send";
 			$verification_code = rand('000001', '999999');
