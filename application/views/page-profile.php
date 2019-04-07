@@ -3,11 +3,11 @@
     <div class="container">
         <ul class="u-list-inline">
             <li class="list-inline-item g-mr-7">
-                <a class="u-link-v5 g-color-main g-color-primary--hover" href="#">Accueil</a>
+                <a class="u-link-v5 g-color-main g-color-primary--hover" href="#"><?php echo _l('home'); ?></a>
                 <i class="fa fa-angle-right g-ml-7"></i>
             </li>
             <li class="list-inline-item g-color-primary">
-                <span>Tableau de bord</span>
+                <span><?php echo _l('dashboard'); ?></span>
             </li>
         </ul>
     </div>
@@ -32,19 +32,19 @@
                     data-btn-classes="btn btn-md btn-block rounded-0 u-btn-outline-primary g-mb-20">
                     <li class="nav-item">
                         <a class="nav-link g-py-10 active" data-toggle="tab"
-                           href="#nav-1-1-default-hor-left-underline--1" role="tab">Editer le profil</a>
+                           href="#nav-1-1-default-hor-left-underline--1" role="tab"><?php echo _l('edit_profile_tab'); ?></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link g-py-10" data-toggle="tab" href="#nav-1-1-default-hor-left-underline--2"
-                           role="tab">Trajets</a>
+                           role="tab"><?php echo _l('trips_tab'); ?></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link g-py-10" data-toggle="tab" href="#nav-1-1-default-hor-left-underline--3"
-                           role="tab">Resérvations</a>
+                           role="tab"><?php echo _l('reservations_tab'); ?></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link g-py-10" data-toggle="tab" href="#nav-1-1-default-hor-left-underline--4"
-                           role="tab">Paramètres</a>
+                           role="tab"><?php echo _l('settings_tab'); ?></a>
                     </li>
                 </ul>
                 <!-- End Nav tabs -->
@@ -53,9 +53,8 @@
                 <div id="nav-1-1-default-hor-left-underline" class="tab-content">
                     <!-- Edit Profile -->
                     <div class="tab-pane fade show active" id="nav-1-1-default-hor-left-underline--1" role="tabpanel">
-                        <h2 class="h4 g-font-weight-300">Gérez votre nom, votre identifiant et vos adresses email</h2>
-                        <p>Vous trouverez ci-dessous le nom, l’adresse e-mail, les contacts, etc., enregistrés pour
-                            votre compte.</p>
+                        <h2 class="h4 g-font-weight-300"><?php echo _l('manage_profile_heading'); ?></h2>
+                        <p><?php echo _l('manage_profile_details'); ?></p>
 							<form enctype="multipart/form-data" action="<?php echo base_url('user_profile/img_upload_user_profile'); ?>" method="post">
 								<input type="file" name="user_profile_img" id="user_profile_img form-control profile_fields" >
 								<button type="submit" class="btn btn-sm u-btn-primary rounded-0">Submit</button>
@@ -79,7 +78,7 @@
                                 <!-- Name -->
                                 <li class="d-flex align-items-center justify-content-between g-brd-bottom g-brd-gray-light-v4 g-py-15">
                                     <div class="g-pr-10">
-                                        <strong class="d-block d-md-inline-block g-color-gray-dark-v2 g-width-200 g-pr-10"><?php _l('user_profile_first_name'); ?></strong>
+                                        <strong class="d-block d-md-inline-block g-color-gray-dark-v2 g-width-200 g-pr-10"><?php echo _l('user_profile_first_name'); ?></strong>
                                         <span class="align-top profile_values"><?php echo $first_name; ?></span>
                                     </div>
                                     <input name="first_name" id="first_name" class="form-control profile_fields"
@@ -93,7 +92,7 @@
 
                                 <li class="d-flex align-items-center justify-content-between g-brd-bottom g-brd-gray-light-v4 g-py-15">
                                     <div class="g-pr-10">
-                                        <strong class="d-block d-md-inline-block g-color-gray-dark-v2 g-width-200 g-pr-10"><?php _l('user_profile_sec_name'); ?></strong>
+                                        <strong class="d-block d-md-inline-block g-color-gray-dark-v2 g-width-200 g-pr-10"><?php echo _l('user_profile_sec_name'); ?></strong>
                                         <span class="align-top profile_values"><?php echo $second_name; ?></span>
                                     </div>
                                     <input name="second_name" id="second_name" class="form-control profile_fields"
@@ -107,7 +106,7 @@
                                 <!-- Your ID -->
                                 <li class="d-flex align-items-center justify-content-between g-brd-bottom g-brd-gray-light-v4 g-py-15">
                                     <div class="g-pr-10">
-                                        <strong class="d-block d-md-inline-block g-color-gray-dark-v2 g-width-200 g-pr-10"><?php _l('user_profile_email'); echo ($is_verified == 0) ?  '<span style="color:red; font-size: 12px;"> Not Verified</span> <button type="button" class="btn btn-xs u-btn-darkgray rounded-0" data-id="'.$user_id.'" data-name="'.$first_name .'" data-email="'.$email.'" id="send_verifying_email">Verify</button>' : '<span style="color:#72c02c; font-size: 12px;"> Verified</span>'; ?></strong>
+                                        <strong class="d-block d-md-inline-block g-color-gray-dark-v2 g-width-200 g-pr-10"><?php echo _l('user_profile_email'); echo ($is_verified == 0) ?  '<span style="color:red; font-size: 12px;"> Not Verified</span> <button type="button" class="btn btn-xs u-btn-darkgray rounded-0" data-id="'.$user_id.'" data-name="'.$first_name .'" data-email="'.$email.'" id="send_verifying_email">Verify</button>' : '<span style="color:#72c02c; font-size: 12px;"> Verified</span>'; ?></strong>
                                         <span class="align-top profile_values">
 										<?php echo $email; ?></span>
                                     </div>
@@ -123,7 +122,7 @@
                                 <!-- Company Name -->
                                 <li class="d-flex align-items-center justify-content-between g-brd-bottom g-brd-gray-light-v4 g-py-15">
                                     <div class="g-pr-10">
-                                        <strong class="d-block d-md-inline-block g-color-gray-dark-v2 g-width-200 g-pr-10"><?php _l('user_profile_dob'); ?></strong>
+                                        <strong class="d-block d-md-inline-block g-color-gray-dark-v2 g-width-200 g-pr-10"><?php echo _l('user_profile_dob'); ?></strong>
                                         <span class="align-top profile_values"><?php echo $date_of_birth; ?></span>
                                     </div>
                                     <input name="date_of_birth" id="datepickerDefault" placeholder="DOB"
@@ -139,7 +138,7 @@
                                 <!-- Phone Number -->
                                 <li class="d-flex align-items-center justify-content-between g-brd-bottom g-brd-gray-light-v4 g-py-15">
                                     <div class="g-pr-10">
-                                        <strong class="d-block d-md-inline-block g-color-gray-dark-v2 g-width-200 g-pr-10"><?php _l('user_profile_mobile'); ?></strong>
+                                        <strong class="d-block d-md-inline-block g-color-gray-dark-v2 g-width-200 g-pr-10"><?php echo _l('user_profile_mobile'); ?></strong>
                                         <span class="align-top profile_values"><?php echo $mobile; ?></span>
                                     </div>
                                     <input value="<?php echo $mobile; ?>" style="width:70%" name="mobile" id="mobile"
@@ -155,7 +154,7 @@
                                 <!-- Position -->
                                 <li class="d-flex align-items-center justify-content-between g-brd-bottom g-brd-gray-light-v4 g-py-15">
                                     <div class="g-pr-10">
-                                        <strong class="d-block d-md-inline-block g-color-gray-dark-v2 g-width-200 g-pr-10"><?php _l('user_profile_gender'); ?></strong>
+                                        <strong class="d-block d-md-inline-block g-color-gray-dark-v2 g-width-200 g-pr-10"><?php echo _l('user_profile_gender'); ?></strong>
                                         <span class="align-top profile_values"><?php echo $gender; ?></span>
                                     </div>
                                     <label class="form-check-inline u-check g-color-gray-dark-v5 g-font-size-12 g-pl-25 mb-2 profile_fields">
@@ -189,14 +188,14 @@
                             <div class="text-sm-right">
                                 <button id="cancel_profile_btn"
                                         class="btn u-btn-darkgray rounded-0 g-py-12 g-px-25 g-mr-10" type="button">
-                                    Anuller
+                                    <?php echo _l('cancel_btn'); ?>
                                 </button>
                                 <button id="edit_profile_btn"
                                         class="btn u-btn-darkgray rounded-0 g-py-12 g-px-25 g-mr-10" type="button">Edit
                                     Profile
                                 </button>
                                 <button id="save_profile_btn" class="btn u-btn-primary rounded-0 g-py-12 g-px-25"
-                                        type="button">Enregistrer
+                                        type="button"><?php echo _l('submit'); ?>
                                 </button>
                             </div>
                         </form>
@@ -205,7 +204,7 @@
 
                     <!-- Security Settings -->
                     <div class="tab-pane fade" id="nav-1-1-default-hor-left-underline--2" role="tabpanel">
-                        <h2 class="h4 g-font-weight-300">Mes Trajets</h2>
+                        <h2 class="h4 g-font-weight-300"><?php echo _l('my_routes'); ?></h2>
                         <p class="g-mb-25"></p>
 
 
@@ -215,14 +214,14 @@
                                 <table class="table">
                                     <thead>
                                     <tr>
-                                        <th>Date / heure</th>
-                                        <th>Départ</th>
-                                        <th class="hidden-sm">Arrivée</th>
-                                        <th>Des places</th>
-                                        <th>Remaining Seats</th>
-                                        <th>Prix ​​par place</th>
-                                        <th>Status</th>
-                                        <th>les réservations</th>
+                                        <th><?php echo _l('date_time_text'); ?></th>
+                                        <th><?php echo _l('departure'); ?></th>
+                                        <th class="hidden-sm"><?php echo _l('arrival'); ?></th>
+                                        <th><?php echo _l('seat_text'); ?></th>
+                                        <th><?php echo _l('remaining_seats'); ?></th>
+                                        <th><?php echo _l('price_per_seat'); ?></th>
+                                        <th><?php echo _l('status'); ?></th>
+                                        <th><?php echo _l('reservations_tab'); ?></th>
                                     </tr>
                                     </thead>
 
@@ -279,7 +278,7 @@
 
 													<span data-toggle="collapse" data-target="#accordion_<?php echo $n; ?>"
 													class="u-label u-label-warning g-color-white clickable"
-													style="cursor: pointer;">Cliquez ici</span>
+													style="cursor: pointer;"><?php echo _l('click_here'); ?></span>
 												</td>
                                             </tr>
                                             <tr>
@@ -289,11 +288,11 @@
                                                         <table class="table table-bordered">
                                                             <thead>
                                                             <tr>
-                                                                <th>Date / Heure réservation</th>
-                                                                <th>Personne réservant</th>
-                                                                <th>Person Details</th>
-                                                                <th>Sièges réservés</th>
-                                                                <th>Montant total</th>
+                                                                <th><?php echo _l('date_time_res'); ?></th>
+                                                                <th><?php echo _l('res_person'); ?></th>
+                                                                <th><?php echo _l('res_person_details'); ?></th>
+                                                                <th><?php echo _l('res_seats_res'); ?></th>
+                                                                <th><?php echo _l('res_amount'); ?></th>
                                                             </tr>
                                                             </thead>
                                                             <tbody>
@@ -351,8 +350,7 @@
                                                             } else {
                                                                 ?>
                                                                 <tr>
-                                                                    <td colspan="5"><strong>Pas encore de
-                                                                            réservations.</strong></td>
+                                                                    <td colspan="5"><strong><?php echo _l('no_res_msg'); ?></strong></td>
                                                                 </tr>
                                                                 <?php
                                                             }
@@ -378,8 +376,8 @@
 
                     <!-- Payment Options -->
                     <div class="tab-pane fade" id="nav-1-1-default-hor-left-underline--3" role="tabpanel">
-                        <h2 class="h4 g-font-weight-300">Mes Reservations</h2>
-                        <p class="g-mb-25">Vous trouverez ci-dessous les réservations effectuées pour votre compte.</p>
+                        <h2 class="h4 g-font-weight-300"><?php echo _l('my_res_heading'); ?></h2>
+                        <p class="g-mb-25"><?php echo _l('my_res_heading_details'); ?></p>
 
                         <div class="shortcode-html">
                             <!-- Basic Table -->
@@ -387,12 +385,12 @@
                                 <table class="table">
                                     <thead>
                                     <tr>
-                                        <th>Date / heure</th>
-                                        <th>Départ</th>
-                                        <th class="hidden-sm">Arrivée</th>
-                                        <th>Places réservées</th>
-                                        <th>Prix</th>
-                                        <th>Statut approuvé</th>
+                                        <th><?php echo _l('date_time_text'); ?></th>
+                                        <th><?php echo _l('departure'); ?></th>
+                                        <th class="hidden-sm"><?php echo _l('arrival'); ?></th>
+                                        <th><?php echo _l('my_res_seats'); ?></th>
+                                        <th><?php echo _l('price_text'); ?></th>
+                                        <th><?php echo _l('my_res_status'); ?></th>
                                     </tr>
                                     </thead>
 
@@ -429,21 +427,19 @@
 
                     <!-- Notification Settings -->
                     <div class="tab-pane fade" id="nav-1-1-default-hor-left-underline--4" role="tabpanel">
-                        <h2 class="h4 g-font-weight-300">Mes Paramètres</h2>
-                        <p class="g-mb-25">Pour modifier votre mot de passe, veuillez remplir les trois champs
-                            ci-dessous.</p>
+                        <h2 class="h4 g-font-weight-300"><?php echo _l('my_settings_heading'); ?></h2>
+                        <p class="g-mb-25"><?php echo _l('my_settings_heading_details'); ?></p>
 
                         <form id="change_password_form" method="post"
                               action="<?php echo base_url('user_profile/change_password'); ?>">
                             <!-- Current Password -->
                             <div class="form-group row g-mb-25">
-                                <label class="col-sm-3 col-form-label g-color-gray-dark-v2 g-font-weight-700 text-sm-right g-mb-10">Mot
-                                    de passe actuel</label>
+                                <label class="col-sm-3 col-form-label g-color-gray-dark-v2 g-font-weight-700 text-sm-right g-mb-10"><?php echo _l('my_settings_curr_pass'); ?></label>
                                 <div class="col-sm-9">
                                     <div class="input-group g-brd-primary--focus">
                                         <input name="current_password"
                                                class="form-control form-control-md border-right-0 rounded-0 g-py-13 pr-0"
-                                               type="password" placeholder="Mot de passe actuel" required>
+                                               type="password" placeholder="<?php echo _l('my_settings_curr_pass'); ?>" required>
                                         <div class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-light-v1 rounded-0">
                                             <i class="icon-lock"></i>
                                         </div>
@@ -454,13 +450,12 @@
 
                             <!-- New Password -->
                             <div class="form-group row g-mb-25">
-                                <label class="col-sm-3 col-form-label g-color-gray-dark-v2 g-font-weight-700 text-sm-right g-mb-10">Nouveau
-                                    mot de passe</label>
+                                <label class="col-sm-3 col-form-label g-color-gray-dark-v2 g-font-weight-700 text-sm-right g-mb-10"><?php echo _l('my_settings_new_pass'); ?></label>
                                 <div class="col-sm-9">
                                     <div class="input-group g-brd-primary--focus">
                                         <input name="new_password" id="new_password"
                                                class="form-control form-control-md border-right-0 rounded-0 g-py-13 pr-0"
-                                               type="password" placeholder="Nouveau mot de passe" required>
+                                               type="password" placeholder="<?php echo _l('my_settings_new_pass'); ?>" required>
                                         <div class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-light-v1 rounded-0">
                                             <i class="icon-lock"></i>
                                         </div>
@@ -471,12 +466,12 @@
 
                             <!-- Verify Password -->
                             <div class="form-group row g-mb-25">
-                                <label class="col-sm-3 col-form-label g-color-gray-dark-v2 g-font-weight-700 text-sm-right g-mb-10">Confirmation</label>
+                                <label class="col-sm-3 col-form-label g-color-gray-dark-v2 g-font-weight-700 text-sm-right g-mb-10"><?php echo _l('my_settings_confirmation'); ?></label>
                                 <div class="col-sm-9">
                                     <div class="input-group g-brd-primary--focus">
                                         <input id="confirm_new_password" name="confirm_new_password"
                                                class="form-control form-control-md border-right-0 rounded-0 g-py-13 pr-0"
-                                               type="password" placeholder="Confirmation" required>
+                                               type="password" placeholder="<?php echo _l('my_settings_confirmation'); ?>" required>
                                         <div class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-light-v1 rounded-0">
                                             <i class="icon-lock"></i>
                                         </div>
@@ -486,7 +481,7 @@
                             <!-- End Verify Password -->
                             <div class="text-sm-right">
                                 <button id="change_password" class="btn u-btn-primary rounded-0 g-py-12 g-px-25"
-                                        href="#">Enregistrer
+                                        href="#"><?php echo _l('submit'); ?>
                                 </button>
                             </div>
                             <!-- End Verify Password -->
@@ -498,12 +493,12 @@
                               action="">
 							<hr class="g-brd-gray-light-v4 g-my-25">
 
-							   <h2 class="h4 g-font-weight-300">Désactivation</h2>
-							   <p class="g-mb-25">Pour désactiver votre compte, veuillez renseigner le mot DESACTIVER dans le champ ci-dessous et cliquer sur le bouton Enregistrer.</p>
+							   <h2 class="h4 g-font-weight-300"><?php echo _l('my_settings_Deactivation_heading'); ?></h2>
+							   <p class="g-mb-25"><?php echo _l('my_settings_Deactivation_heading_details'); ?></p>
 
 								<!-- Verify Password -->
 							  <div class="form-group row g-mb-25">
-								<label class="col-sm-3 col-form-label g-color-gray-dark-v2 g-font-weight-700 text-sm-right g-mb-10">Que voulez-vous faire ?</label>
+								<label class="col-sm-3 col-form-label g-color-gray-dark-v2 g-font-weight-700 text-sm-right g-mb-10"><?php echo _l('my_settings_Deactivation'); ?></label>
 								<div class="col-sm-9">
 								  <div class="input-group g-brd-primary--focus">
 									<input name="deactivate_account" id="deactivate_account" class="form-control form-control-md border-right-0 rounded-0 g-py-13 pr-0" type="password" placeholder="" required>
@@ -515,7 +510,7 @@
 							  </div>
 							  
 							  <div class="text-sm-right">
-								   <button id="deactivate_account_btn" type="button" class="btn u-btn-primary rounded-0 g-py-12 g-px-25" >Enregistrer</button>
+								   <button id="deactivate_account_btn" type="button" class="btn u-btn-primary rounded-0 g-py-12 g-px-25" ><?php echo _l('submit'); ?></button>
 							  </div>
 						 </form>
 						  <!-- End Deactivate Account -->
@@ -526,11 +521,11 @@
 							  
 							  <hr class="g-brd-gray-light-v4 g-my-25">
 
-							   <h2 class="h4 g-font-weight-300">Suppression </h2>
-							   <p class="g-mb-25">Pour supprimer votre compte, veuillez renseigner le mot SUPPRIMER dans le champ ci-dessous et cliquer sur le bouton Enregistrer.</p>
+							   <h2 class="h4 g-font-weight-300"><?php echo _l('my_settings_Suppression_heading'); ?> </h2>
+							   <p class="g-mb-25"><?php echo _l('my_settings_Suppression_heading_details'); ?></p>
 
 							  <div class="form-group row g-mb-25">
-								<label class="col-sm-3 col-form-label g-color-gray-dark-v2 g-font-weight-700 text-sm-right g-mb-10">Que voulez-vous faire ?</label>
+								<label class="col-sm-3 col-form-label g-color-gray-dark-v2 g-font-weight-700 text-sm-right g-mb-10"><?php echo _l('my_settings_Deactivation'); ?></label>
 								<div class="col-sm-9">
 								  <div class="input-group g-brd-primary--focus">
 									<input class="form-control form-control-md border-right-0 rounded-0 g-py-13 pr-0" name="delete_account" id="delete_account" type="password" placeholder="" required>
@@ -542,7 +537,7 @@
 							  </div>
 							  
 							  <div class="text-sm-right">
-								   <button id="delete_account_btn"  type="button" class="btn u-btn-primary rounded-0 g-py-12 g-px-25">Enregistrer</button>
+								   <button id="delete_account_btn"  type="button" class="btn u-btn-primary rounded-0 g-py-12 g-px-25"><?php echo _l('submit'); ?></button>
 							  </div>
                         </form>
 						<!-- End Delete Account -->

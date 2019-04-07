@@ -72,21 +72,21 @@ window.cookieconsent.initialise({
                         <?php if ($this->session->userdata('User_LoginId')) { ?>
                             <li class="list-inline-item g-mx-4">
                                 <a class="g-color-white g-color-primary--hover g-text-underline--none--hover"
-                                   href="<?php echo base_url('user_profile'); ?>"><?php _l('dashboard'); ?></a>
+                                   href="<?php echo base_url('user_profile'); ?>"><?php echo _l('dashboard'); ?></a>
                             </li> |
                             <li class="list-inline-item g-mx-4">
                                 <a class="g-color-white g-color-primary--hover g-text-underline--none--hover"
-                                   href="<?php echo base_url('login/logout'); ?>"><?php _l('logout'); ?></a>
+                                   href="<?php echo base_url('login/logout'); ?>"><?php echo _l('logout'); ?></a>
                             </li>
                         <?php } else { ?>
                             <li class="list-inline-item g-mx-4">
                                 <a class="g-color-white g-color-primary--hover g-text-underline--none--hover"
-                                   href="<?php echo base_url('login'); ?>"><?php _l('header_connection'); ?></a>
+                                   href="<?php echo base_url('login'); ?>"><?php echo _l('header_connection'); ?></a>
                             </li>
                             <li class="list-inline-item g-mx-4">|</li>
                             <li class="list-inline-item g-mx-4">
                                 <a class="g-color-white g-color-primary--hover g-text-underline--none--hover"
-                                   href="<?php echo base_url('registration'); ?>"><?php _l('header_register'); ?></a>
+                                   href="<?php echo base_url('registration'); ?>"><?php echo _l('header_register'); ?></a>
                             </li>
                         <?php } ?>
                     </ul>
@@ -124,24 +124,24 @@ window.cookieconsent.initialise({
                 <div class="collapse navbar-collapse align-items-center flex-sm-row g-pt-10 g-pt-5--lg" id="navBar">
                     <ul class="navbar-nav text-uppercase g-font-weight-600 ml-auto">
                         <li class="nav-item g-mx-20--lg <?php echo (isset($header_link_active) && $header_link_active == 'home') ? 'active' : ''; ?>">
-                            <a href="<?php echo base_url(); ?>" class="nav-link px-0"><?php _l('header_home'); ?>
+                            <a href="<?php echo base_url(); ?>" class="nav-link px-0"><?php echo _l('header_home'); ?>
 
                             </a>
                         </li>
                         <li class="nav-item g-mx-20--lg <?php echo (isset($header_link_active) && $header_link_active == 'propose_route') ? 'active' : ''; ?>">
                             <a href="<?php echo base_url('propose_route'); ?>"
-                               class="nav-link px-0"><?php _l('header_route'); ?>
+                               class="nav-link px-0"><?php echo _l('header_route'); ?>
                             </a>
                         </li>
                         <li class="nav-item g-mx-20--lg <?php echo (isset($header_link_active) && $header_link_active == 'search_route') ? 'active' : ''; ?>">
                             <a href="<?php echo base_url('research_trip'); ?>"
-                               class="nav-link px-0"><?php _l('header_search'); ?>
+                               class="nav-link px-0"><?php echo _l('header_search'); ?>
 
                             </a>
                         </li>
                         <li class="nav-item g-mx-20--lg <?php echo (isset($header_link_active) && $header_link_active == 'about_page') ? 'active' : ''; ?>">
                             <a href="<?php echo base_url('contact_us'); ?>"
-                               class="nav-link px-0"><?php _l('contact_us'); ?>
+                               class="nav-link px-0"><?php echo _l('contact_us'); ?>
                             </a>
                         </li>
                     </ul>

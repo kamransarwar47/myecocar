@@ -14,16 +14,16 @@
             <div class="form-group g-mb-20">
                 <div class="input-group u-shadow-v21 rounded g-mb-15">
                     <input class="form-control form-control-md g-brd-white g-font-size-16 border-right-0 pr-0 g-py-15"
-                           type="text" placeholder="Ville de départ?" id="search_departure_city" name="dc"
+                           type="text" placeholder="<?php echo _l('departure_city'); ?>" id="search_departure_city" name="dc"
                            value="<?php echo (isset($_GET['dc'])) ? $_GET['dc'] : ''; ?>">
 
                     <input class="form-control form-control-md g-brd-white g-font-size-16 border-right-0 pr-0 g-py-15"
-                           type="text" placeholder="Ville d'arrivée?" id="search_arrival_city" name="ac"
+                           type="text" placeholder="<?php echo _l('arrival_city') ?>" id="search_arrival_city" name="ac"
                            value="<?php echo (isset($_GET['ac'])) ? $_GET['ac'] : ''; ?>">
 
                     <input id="datepickerDepartureResearch"
                            class="form-control form-control-md u-datepicker-v1 g-brd-white"
-                           placeholder="Date de départ?" type="text" name="dt"
+                           placeholder="<?php echo _l('departure_date'); ?>" type="text" name="dt"
                            value="<?php echo (isset($_GET['dt'])) ? $_GET['dt'] : ''; ?>">
                     <div class="input-group-addon d-flex align-items-center g-bg-white g-brd-white g-color-gray-light-v1 g-pa-2">
                         <button class="btn u-btn-primary g-font-size-16 g-py-15 g-px-20" type="submit">
@@ -63,8 +63,8 @@
                 <div class="card border-0">
 
                     <div class="d-md-flex justify-content-between g-mb-30">
-                        <h3 class="h6 text-uppercase g-mb-10 g-mb--lg">Environ <span
-                                    class="g-color-gray-dark-v1"><?php echo $total_records; ?></span> résultats</h3>
+                        <h3 class="h6 text-uppercase g-mb-10 g-mb--lg"><?php echo _l('about_text'); ?> <span
+                                    class="g-color-gray-dark-v1"><?php echo $total_records; ?></span> <?php echo _l('result_text'); ?></h3>
                     </div>
                     <!-- End Search Info -->
 
@@ -98,7 +98,7 @@
                                             <li class="list-inline-item">
                                                 <i class="icon-calendar g-pos-rel g-top-1 g-color-gray-dark-v5 g-mr-5"></i>
                                                 <?php echo date('l d F, Y', strtotime($record['datepickerFrom'])); ?>
-                                                à <?php echo date('H:i', strtotime($record['depart_time_input'])); ?>
+                                                <?php echo _l('at_text'); ?> <?php echo date('H:i', strtotime($record['depart_time_input'])); ?>
                                             </li>
                                         </ul>
 
@@ -125,24 +125,22 @@
                                             <li class="list-inline-item g-mr-20">
                                                 <span class="d-block g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer">
                                                 <i class="icon-check g-pos-rel g-top-1 g-mr-5"></i>
-                                                Véhicule: <?php echo $record['vehicle_model_make']; ?>
+                                                <?php echo _l('vehicle_text'); ?>: <?php echo $record['vehicle_model_make']; ?>
                                                 </span>
                                             </li>
                                             <li class="list-inline-item g-mr-20">
                                                 <span class="d-block g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer">
-                                                <i class="icon-check g-pos-rel g-top-1 g-mr-5"></i> <?php echo remaining_places_by_route_id($record['route_id']); ?>
-                                                    places
-                                                restantes
+                                                <i class="icon-check g-pos-rel g-top-1 g-mr-5"></i> <?php echo remaining_places_by_route_id($record['route_id']) . ' ' . _l('rem_plc_text'); ?>
                                                 </span>
                                             </li>
                                             <li class="list-inline-item">
                         <span class="d-block g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer">
-                            <i class="icon-check g-pos-rel g-top-1"></i> Acceptation : <?php echo $record['acceptance']; ?>
+                            <i class="icon-check g-pos-rel g-top-1"></i> <?php echo _l('post_ad_acceptance'); ?> : <?php echo $record['acceptance']; ?>
                           </span>
                                             </li>
                                             <li class="list-inline-item">
                         <span class="d-block g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer">
-                            <i class="icon-check g-pos-rel g-top-1"></i> Mode de paiement : <?php echo ($record['payment_method'] == 'cash') ? ucwords($record['payment_method']) . ' ' . '<i class="fa fa-money g-font-size-20 align-self-center mx-auto g-color-darkblue"></i>' : ucwords($record['payment_method']) . ' ' . '<i class="fa fa-paypal g-font-size-20 align-self-center mx-auto g-color-darkblue"></i>'; ?>
+                            <i class="icon-check g-pos-rel g-top-1"></i> <?php echo _l('pay_mtd_text'); ?> : <?php echo ($record['payment_method'] == 'cash') ? ucwords($record['payment_method']) . ' ' . '<i class="fa fa-money g-font-size-20 align-self-center mx-auto g-color-darkblue"></i>' : ucwords($record['payment_method']) . ' ' . '<i class="fa fa-paypal g-font-size-20 align-self-center mx-auto g-color-darkblue"></i>'; ?>
 
                           </span>
                                             </li>

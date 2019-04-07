@@ -10,7 +10,7 @@
           <i class="icon-info g-font-size-25"></i>
         </span>
                     <span class="media-body align-self-center">
-          <strong>Pas connecté!</strong> Veuillez vous <strong>connecter / vous inscrire</strong> pour poster une annonce.
+          <?php echo _l('route_page_not_login_msg'); ?>
         </span>
                 </div>
             </div>
@@ -28,7 +28,7 @@
                     <i class="fa fa-exclamation-triangle"></i>
                     Warning!
                 </h4>
-                <p>Corrigez ces erreurs avant de soumettre le formulaire.</p>
+                <p><?php echo _l('form_error_msg') ?></p>
                 <?php
                 echo validation_errors();
                 ?>
@@ -56,7 +56,7 @@
                                     </div>
                                     <div class="media-body">
                       <span class="d-block g-mb-3">
-                          <a class="u-link-v5 g-font-size-18 g-color-gray-dark-v1 g-color-primary--hover" href="#">Publier une annonce</a>
+                          <a class="u-link-v5 g-font-size-18 g-color-gray-dark-v1 g-color-primary--hover" href="#"><?php echo _l('post_ad_heading'); ?></a>
                         </span>
                                     </div>
                                 </div>
@@ -69,27 +69,27 @@
                         <div class="g-brd-around g-brd-gray-light-v4 g-pa-30 g-mb-30" style="background:#afcb0838">
 
                             <div class="form-group g-mb-25 div-input-group">
-                                <label for="disabledTextInput">D’où partez-vous ?
+                                <label for="disabledTextInput"><?php echo _l('post_ad_field1'); ?>
                                     <span class="u-icon-v1 g-color-primary g-mr-15 g-mb-15">
                         <i class="icon-communication-011 u-line-icon-pro"></i>
                       </span>
                                 </label>
                                 <input type="text" id="origin-input" name="origin_input"
                                        class="form-control form-control-md g-font-size-default g-color-gray-dark-v4 g-placeholder-gray-dark-v3 border-0 g-rounded-right-50 g-rounded-left-50  g-px-20"
-                                       type="text" placeholder="Adresse de départ" value="<?php echo set_value('origin_input',  ($edit != false) ? $route_data['origin_input'] : '') ?>" required>
+                                       type="text" placeholder="<?php echo _l('post_ad_field1_placeholder'); ?>" value="<?php echo set_value('origin_input',  ($edit != false) ? $route_data['origin_input'] : '') ?>" required>
                                 <input type="hidden" id="origin-city" name="origin_city" value="<?php echo set_value('origin_city',  ($edit != false) ? $route_data['origin_city'] : '') ?>">
                                 <input type="hidden" id="origin-country" name="origin_country" value="<?php echo set_value('origin_country',  ($edit != false) ? $route_data['origin_country'] : '') ?>">
                             </div>
 
                             <div class="form-group g-mb-25 div-input-group">
-                                <label for="disabledTextInput">Où allez-vous ?
+                                <label for="disabledTextInput"><?php echo _l('post_ad_field2'); ?>
                                     <span class="u-icon-v1 g-color-primary g-mr-15 g-mb-15">
                         <i class="icon-communication-011 u-line-icon-pro"></i>
                       </span>
                                 </label>
                                 <input type="text" id="destination-input" name="destination_input"
                                        class="form-control form-control-md g-font-size-default g-color-gray-dark-v4 g-placeholder-gray-dark-v3 border-0 g-rounded-right-50 g-rounded-left-50  g-px-20"
-                                       type="text" placeholder="Adresse d'Arrivée" required value="<?php echo set_value('destination_input',  ($edit != false) ? $route_data['destination_input'] : '') ?>">
+                                       type="text" placeholder="<?php echo _l('post_ad_field2_placeholder'); ?>" required value="<?php echo set_value('destination_input',  ($edit != false) ? $route_data['destination_input'] : '') ?>">
                                 <input type="hidden" id="dest-city" name="dest_city" value="<?php echo set_value('dest_city',  ($edit != false) ? $route_data['dest_city'] : '') ?>">
                                 <input type="hidden" id="dest-country" name="dest_country" value="<?php echo set_value('dest_country',  ($edit != false) ? $route_data['dest_country'] : '') ?>">
                             </div>
@@ -101,7 +101,7 @@
 
                             <div class="row">
                                 <div class="col-md-12">
-                                    <label for="disabledTextInput" class="pull-left">Horaire
+                                    <label for="disabledTextInput" class="pull-left"><?php echo _l('post_ad_heading_schedule'); ?>
                                     </label>
                                     <label class="form-check-inline u-check g-pl-25 pull-right">
                                         <input class="g-hidden-xs-up g-pos-abs g-top-0 g-left-0" type="checkbox"
@@ -109,7 +109,7 @@
                                         <div class="u-check-icon-checkbox-v4 g-absolute-centered--y g-left-0">
                                             <i class="fa" data-check-icon=""></i>
                                         </div>
-                                        aller-retour
+                                        <?php echo _l('post_ad_round_trip'); ?>
                                     </label>
                                 </div>
                             </div>
@@ -122,7 +122,7 @@
                                         <div class="input-group g-brd-primary--focus div-input-group">
                                             <input id="datepickerFrom" name="datepickerFrom"
                                                    class="form-control form-control-md u-datepicker-v1 g-brd-right-none g-color-gray-dark-v4 g-placeholder-gray-dark-v3 border-0 g-rounded-right-50 g-rounded-left-50  g-px-20"
-                                                   type="text" placeholder="Date de départ" data-range="true"
+                                                   type="text" placeholder="<?php echo _l('post_ad_dept_date'); ?>" data-range="true"
                                                    data-to="datepickerTo" required value="<?php echo set_value('datepickerFrom',  ($edit != false) ? date('d-m-Y', strtotime($route_data['datepickerFrom'])) : '') ?>">
                                         </div>
                                         <!-- End Datepicker -->
@@ -144,7 +144,7 @@
                                         <div class="input-group g-brd-primary--focus div-input-group">
                                             <input id="datepickerTo" name="datepickerTo"
                                                    class="form-control form-control-md u-datepicker-v1 g-brd-right-none g-color-gray-dark-v4 g-placeholder-gray-dark-v3 border-0 g-rounded-right-50 g-rounded-left-50  g-px-20"
-                                                   type="text" placeholder="Date de retour" required>
+                                                   type="text" placeholder="<?php echo _l('post_ad_arr_date'); ?>" required>
 
                                         </div>
                                         <!-- End Datepicker -->
@@ -167,7 +167,7 @@
 
                         <!-- Column Sizing -->
                         <div class="g-brd-around g-brd-gray-light-v4 g-pa-30 g-mb-30" style="background:#afcb0838">
-                            <label for="disabledTextInput">Information sur vehicule
+                            <label for="disabledTextInput"><?php echo _l('post_ad_veh_info'); ?>
                                 <span class="u-icon-v1 g-color-primary g-mr-15 g-mb-15">
                        <!-- <i class="icon-communication-011 u-line-icon-pro"></i> -->
                       </span>
@@ -179,14 +179,14 @@
 										<div class="div-input-group">
 											<input id="vehicle-model-make" name="vehicle_model_make"
 												   class="form-control form-control-md g-font-size-default g-color-gray-dark-v4 g-placeholder-gray-dark-v3 border-0 g-rounded-right-50 g-rounded-left-50  g-px-20"
-												   type="text" placeholder="Marque et modèle" required value="<?php echo set_value('vehicle_model_make',  ($edit != false) ? $route_data['vehicle_model_make'] : '') ?>">
+												   type="text" placeholder="<?php echo _l('post_ad_veh_mkmdl'); ?>" required value="<?php echo set_value('vehicle_model_make',  ($edit != false) ? $route_data['vehicle_model_make'] : '') ?>">
 										</div>
 									</div>
 
 
                                 <div class="col-md-4 div-input-group">
                                     <select class="form-control" id="fuel-type" name="fuel_type" required>
-                                        <option value="">Carburant</option>
+                                        <option value=""><?php echo _l('post_ad_fuel'); ?></option>
                                         <option value="Disiel" <?php echo set_select('fuel_type',  'Disiel', ($edit != false) ? ($route_data['fuel_type'] == 'Disiel') ? true : false : false); ?>>Disiel</option>
                                         <option value="Essence" <?php echo set_select('fuel_type',  'Essence', ($edit != false) ? ($route_data['fuel_type'] == 'Essence') ? true : false : false); ?>>Essence</option>
                                     </select>
@@ -194,7 +194,7 @@
 
                                 <div class="col-md-4 div-input-group">
                                     <select class="form-control" id="free-spaces" name="free_spaces" required>
-                                        <option value="">Places libres</option>
+                                        <option value=""><?php echo _l('post_ad_free_place'); ?></option>
                                         <option value="1" <?php echo set_select('free_spaces',  '1', ($edit != false) ? ($route_data['free_spaces'] == '1') ? true : false : false); ?>>1</option>
                                         <option value="2" <?php echo set_select('free_spaces',  '2', ($edit != false) ? ($route_data['free_spaces'] == '2') ? true : false : false); ?>>2</option>
                                         <option value="3" <?php echo set_select('free_spaces',  '3', ($edit != false) ? ($route_data['free_spaces'] == '3') ? true : false : false); ?>>3</option>
@@ -208,7 +208,7 @@
 
                                 <div class="col-md-4 div-input-group">
                                     <select class="form-control" id="baggages" name="baggages" required>
-                                        <option value="">Bagages</option>
+                                        <option value=""><?php echo _l('post_ad_baggage'); ?></option>
                                         <option value="petite taille" <?php echo set_select('baggages',  'petite taille', ($edit != false) ? ($route_data['baggages'] == 'petite taille') ? true : false : false); ?>>petite taille</option>
                                         <option value="moyenne taille" <?php echo set_select('baggages',  'moyenne taille', ($edit != false) ? ($route_data['baggages'] == 'moyenne taille') ? true : false : false); ?>>moyenne taille</option>
                                         <option value="grande taille" <?php echo set_select('baggages',  'grande taille', ($edit != false) ? ($route_data['baggages'] == 'grande taille') ? true : false : false); ?>>grande taille</option>
@@ -217,7 +217,7 @@
 
                                 <div class="col-md-4 div-input-group">
                                     <select class="form-control" id="max-detour" name="max_detour" required>
-                                        <option value="">Détour maximum</option>
+                                        <option value=""><?php echo _l('post_ad_max_detour'); ?></option>
                                         <option value="aucun détour" <?php echo set_select('max_detour',  'aucun détour', ($edit != false) ? ($route_data['max_detour'] == 'aucun détour') ? true : false : false); ?>>aucun détour</option>
                                         <option value="15 minutes" <?php echo set_select('max_detour',  '15 minutes', ($edit != false) ? ($route_data['max_detour'] == '15 minutes') ? true : false : false); ?>>15 minutes</option>
                                         <option value="30 minutes" <?php echo set_select('max_detour',  '30 minutes', ($edit != false) ? ($route_data['max_detour'] == '30 minutes') ? true : false : false); ?>>30 minutes</option>
@@ -227,7 +227,7 @@
 
                                 <div class="col-md-4 div-input-group">
                                     <select class="form-control" id="sch-flex" name="sch_flex" required>
-                                        <option value="">Flexibilité Horaire</option>
+                                        <option value=""><?php echo _l('post_ad_sch_flex'); ?></option>
                                         <option value="Pile a l'heure" <?php echo set_select('sch_flex',  "Pile a l'heure", ($edit != false) ? ($route_data['sch_flex'] == "Pile a l'heure") ? true : false : false); ?>>Pile a l'heure</option>
                                         <option value="15 minutes" <?php echo set_select('sch_flex',  "15 minutes", ($edit != false) ? ($route_data['sch_flex'] == "15 minutes") ? true : false : false); ?>>15 minutes</option>
                                         <option value="30 minutes" <?php echo set_select('sch_flex',  "30 minutes", ($edit != false) ? ($route_data['sch_flex'] == "30 minutes") ? true : false : false); ?>>30 minutes</option>
@@ -239,7 +239,7 @@
                             <div class="form-group row g-mb-25">
                                 <div class="col-md-4 div-input-group">
                                     <select class="form-control" id="acceptance" name="acceptance" required>
-                                        <option value="">Acceptation</option>
+                                        <option value=""><?php echo _l('post_ad_acceptance'); ?></option>
                                         <option value="moins de 1h" <?php echo set_select('acceptance',  "moins de 1h", ($edit != false) ? ($route_data['acceptance'] == "moins de 1h") ? true : false : false); ?>>moins de 1h</option>
                                         <option value="moins de 3h" <?php echo set_select('acceptance',  "moins de 3h", ($edit != false) ? ($route_data['acceptance'] == "moins de 3h") ? true : false : false); ?>>moins de 3h</option>
                                         <option value="moins de 6h" <?php echo set_select('acceptance',  "moins de 6h", ($edit != false) ? ($route_data['acceptance'] == "moins de 6h") ? true : false : false); ?>>moins de 6h</option>
@@ -252,7 +252,7 @@
                                 <div class="u-input-group-v2 div-input-group">
                                 <textarea id="message" class="form-control rounded-0 u-form-control g-resize-none div-input-group"
                                           name="travel_description" rows="4" required><?php echo ($edit != false) ? $route_data['travel_description'] : ''; ?></textarea>
-                                    <label for="message">Description du trajet</label>
+                                    <label for="message"><?php echo _l('post_ad_travel_desc'); ?></label>
                                 </div>
                             </div>
                         </div>
@@ -261,7 +261,7 @@
                         <div class="g-brd-around g-brd-gray-light-v4 g-pa-30 g-mb-30" style="background:#afcb0838">
 
                             <div class="form-group row g-mb-25">
-                                <label for="disabledTextInput">Quel prix pour votre trajet ?
+                                <label for="disabledTextInput"><?php echo _l('post_ad_price_heading'); ?>
                                     <span class="u-icon-v1 g-color-primary g-mr-15 g-mb-15">
                        <!-- <i class="icon-communication-011 u-line-icon-pro"></i>-->
                       </span>
@@ -275,7 +275,7 @@
                                             <label class="g-mb-10"></label>
                                             <div class="js-quantity input-group u-quantity-v1 w-100 g-brd-gray-light-v3 g-brd-primary--focus div-input-group">
                                                 <input class="js-result form-control text-center g-font-size-16  g-pa-10-16  g-color-gray-dark-v4 g-placeholder-gray-dark-v3 border-0 g-rounded-right-50 g-rounded-left-50  g-px-20"
-                                                       type="number" placeholder="entrer le montant" id="travel-charges"
+                                                       type="number" placeholder="<?php echo _l('post_ad_price_field'); ?>" id="travel-charges"
                                                        name="travel_charges" required value="<?php echo set_value('travel_charges',  ($edit != false) ? $route_data['travel_charges'] : '') ?>">
                                             </div>
                                         </div>
@@ -288,7 +288,7 @@
                                 <!-- Visa Card -->
                                 <div class="col-md-8">
                                     <label class="u-check w-100 g-mb-25">
-                                        <strong class="d-block g-color-gray-dark-v2 g-font-weight-700 g-mb-10">En espèces</strong>
+                                        <strong class="d-block g-color-gray-dark-v2 g-font-weight-700 g-mb-10"><?php echo _l('post_ad_cash_icon'); ?></strong>
                                         <input class="g-hidden-xs-up g-pos-abs g-top-10 g-right-10" type="radio" name="payment_method" data-toggle="tooltip" data-placement="top" title="Tooltip on top" <?php echo ($edit != false) ? ($route_data['payment_method'] == "cash") ? 'checked="checked"' : "" : 'checked="checked"'; ?> value="cash">
 
                                         <div class="g-brd-primary--checked g-bg-primary-opacity-0_2--checked g-brd-around g-brd-gray-light-v2 g-rounded-5">
@@ -343,7 +343,7 @@
                     ?>
                     <input type="hidden" name="check_login" id="check_login" value="<?php echo (!isset($_SESSION['User_LoginId'])) ? 'not_login' : $_SESSION['User_LoginId']; ?>">
                     <button class="btn btn-xl btn-block u-btn-primary text-uppercase g-font-weight-600 g-font-size-12"
-                            id="route_btn" name="route_from" type="button" >Publier
+                            id="route_btn" name="route_from" type="button" ><?php echo _l('post_ad_publish_btn'); ?>
                     </button>
                 </form>
             </div>
@@ -360,7 +360,7 @@
                         </div>
                         <div class="media-body">
                   <span class="d-block">
-                      <a class="u-link-v5 g-font-size-18 g-color-gray-dark-v1 g-color-primary--hover" href="#">Votre itinéraire</a>
+                      <a class="u-link-v5 g-font-size-18 g-color-gray-dark-v1 g-color-primary--hover" href="#"><?php echo _l('post_ad_heading_itinerary'); ?></a>
                    </span>
                             <!--<span class="js-rating d-inline-block small g-color-primary g-mr-15" data-rating="4.5"></span>
                             <span class="g-color-gray-dark-v5">4713 Reviews</span>-->

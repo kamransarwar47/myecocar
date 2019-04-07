@@ -5,19 +5,17 @@
             <!-- Footer Content -->
             <div class="col-lg-3 col-md-6 g-mb-40 g-mb-0--lg">
                 <div class="u-heading-v2-3--bottom g-brd-white-opacity-0_8 g-mb-20">
-                    <h2 class="u-heading-v2__title h6 text-uppercase mb-0">Qui somme nous ?</h2>
+                    <h2 class="u-heading-v2__title h6 text-uppercase mb-0"><?php echo _l('footer_who_we_are'); ?></h2>
                 </div>
 
-                <p>Créé en 2015 par MyEcoCar Team. L’objectif premier du site est de proposer un service de qualité
-                    entre les particuliers souhaitant pratiquer le covoiturage dans un esprit résolument collaboratif et
-                    convivial !</p>
+                <p><?php echo _l('footer_who_we_are_details'); ?></p>
             </div>
             <!-- End Footer Content -->
 
             <!-- Footer Content -->
             <div class="col-lg-3 col-md-6 g-mb-40 g-mb-0--lg">
                 <div class="u-heading-v2-3--bottom g-brd-white-opacity-0_8 g-mb-20">
-                    <h2 class="u-heading-v2__title h6 text-uppercase mb-0">Informations</h2>
+                    <h2 class="u-heading-v2__title h6 text-uppercase mb-0"><?php echo _l('footer_information_tab'); ?></h2>
                 </div>
 
                 <nav class="text-uppercase1">
@@ -25,34 +23,32 @@
                         <li class="g-pos-rel g-brd-bottom g-brd-white-opacity-0_1 g-py-10">
                             <h4 class="h6 g-pr-20 mb-0">
                                 <a class="g-color-white-opacity-0_8 g-color-white--hover"
-                                   href="<?php echo base_url('how_its_work'); ?>">Comment ça marche</a>
+                                   href="<?php echo base_url('how_its_work'); ?>"><?php echo _l('footer_information_tab1'); ?></a>
                                 <i class="fa fa-angle-right g-absolute-centered--y g-right-0"></i>
                             </h4>
                         </li>
                         <li class="g-pos-rel g-brd-bottom g-brd-white-opacity-0_1 g-py-10">
                             <h4 class="h6 g-pr-20 mb-0">
-                                <a class="g-color-white-opacity-0_8 g-color-white--hover" href="javascript:void(0)">Application
-                                    Mobile</a>
+                                <a class="g-color-white-opacity-0_8 g-color-white--hover" href="javascript:void(0)"><?php echo _l('footer_information_tab2'); ?></a>
                                 <i class="fa fa-angle-right g-absolute-centered--y g-right-0"></i>
                             </h4>
                         </li>
                         <li class="g-pos-rel g-brd-bottom g-brd-white-opacity-0_1 g-py-10">
                             <h4 class="h6 g-pr-20 mb-0">
-                                <a class="g-color-white-opacity-0_8 g-color-white--hover" href="<?php echo base_url('reviews'); ?>">Lire tous
-                                    les avis</a>
+                                <a class="g-color-white-opacity-0_8 g-color-white--hover" href="<?php echo base_url('reviews'); ?>"><?php echo _l('footer_information_tab3'); ?></a>
                                 <i class="fa fa-angle-right g-absolute-centered--y g-right-0"></i>
                             </h4>
                         </li>
                         <li class="g-pos-rel g-brd-bottom g-brd-white-opacity-0_1 g-py-10">
                             <h4 class="h6 g-pr-20 mb-0">
                                 <a class="g-color-white-opacity-0_8 g-color-white--hover"
-                                   href="<?php echo base_url('terms_services'); ?>#price">Prix du covoiturage</a>
+                                   href="<?php echo base_url('terms_services'); ?>#price"><?php echo _l('footer_information_tab4'); ?></a>
                                 <i class="fa fa-angle-right g-absolute-centered--y g-right-0"></i>
                             </h4>
                         </li>
                         <li class="g-pos-rel g-py-10">
                             <h4 class="h6 g-pr-20 mb-0">
-                                <a class="g-color-white-opacity-0_8 g-color-white--hover" href="<?php echo base_url('contact_us'); ?>">Contact</a>
+                                <a class="g-color-white-opacity-0_8 g-color-white--hover" href="<?php echo base_url('contact_us'); ?>"><?php echo _l('footer_information_tab5'); ?></a>
                                 <i class="fa fa-angle-right g-absolute-centered--y g-right-0"></i>
                             </h4>
                         </li>
@@ -64,36 +60,33 @@
             <!-- Footer Content -->
             <div class="col-lg-3 col-md-6 g-mb-40 g-mb-0--lg">
                 <div class="u-heading-v2-3--bottom g-brd-white-opacity-0_8 g-mb-20">
-                    <h2 class="u-heading-v2__title h6 text-uppercase mb-0">Support</h2>
+                    <h2 class="u-heading-v2__title h6 text-uppercase mb-0"><?php echo _l('footer_support_tab'); ?></h2>
                 </div>
 
                 <nav class="text-uppercase1">
                     <ul class="list-unstyled g-mt-minus-10 mb-0">
                         <li class="g-pos-rel g-brd-bottom g-brd-white-opacity-0_1 g-py-10">
                             <h4 class="h6 g-pr-20 mb-0">
-                                <a class="g-color-white-opacity-0_8 g-color-white--hover" href="<?php echo base_url('about'); ?>">Qui
-                                    sommes nous?</a>
+                                <a class="g-color-white-opacity-0_8 g-color-white--hover" href="<?php echo base_url('about'); ?>"><?php echo _l('footer_support_tab1'); ?></a>
                                 <i class="fa fa-angle-right g-absolute-centered--y g-right-0"></i>
                             </h4>
                         </li>
                         <li class="g-pos-rel g-brd-bottom g-brd-white-opacity-0_1 g-py-10">
                             <h4 class="h6 g-pr-20 mb-0">
-                                <a class="g-color-white-opacity-0_8 g-color-white--hover" href="<?php echo base_url('cookies'); ?>">Utilisation
-                                    des cookies</a> 
+                                <a class="g-color-white-opacity-0_8 g-color-white--hover" href="<?php echo base_url('cookies'); ?>"><?php echo _l('footer_support_tab2'); ?></a>
                                 <i class="fa fa-angle-right g-absolute-centered--y g-right-0"></i>
                             </h4>
                         </li>
                         <li class="g-pos-rel g-brd-bottom g-brd-white-opacity-0_1 g-py-10">
                             <h4 class="h6 g-pr-20 mb-0">
-                                <a class="g-color-white-opacity-0_8 g-color-white--hover" href="<?php echo base_url('Charter'); ?>">Charte
-                                    de bonne conduite</a>
+                                <a class="g-color-white-opacity-0_8 g-color-white--hover" href="<?php echo base_url('Charter'); ?>"><?php echo _l('footer_support_tab3'); ?></a>
                                 <i class="fa fa-angle-right g-absolute-centered--y g-right-0"></i>
                             </h4>
                         </li>
                         <li class="g-pos-rel g-brd-bottom g-brd-white-opacity-0_1 g-py-10">
                             <h4 class="h6 g-pr-20 mb-0">
                                 <a class="g-color-white-opacity-0_8 g-color-white--hover"
-                                   href="<?php echo base_url('terms_services'); ?>">Conditions Générales d'Utilisation</a>
+                                   href="<?php echo base_url('terms_services'); ?>"><?php echo _l('footer_support_tab4'); ?></a>
                                 <i class="fa fa-angle-right g-absolute-centered--y g-right-0"></i> 
                             </h4>
                     </ul>
@@ -104,7 +97,7 @@
             <!-- Footer Content -->
             <div class="col-lg-3 col-md-6">
                 <div class="u-heading-v2-3--bottom g-brd-white-opacity-0_8 g-mb-20">
-                    <h2 class="u-heading-v2__title h6 text-uppercase mb-0">Nos coordonnées</h2>
+                    <h2 class="u-heading-v2__title h6 text-uppercase mb-0"><?php echo _l('footer_coordinate_tab'); ?></h2>
                 </div>
 
                 <address class="g-bg-no-repeat g-font-size-12 mb-0"
@@ -159,8 +152,7 @@
         <div class="row">
             <div class="col-md-8 text-center text-md-left g-mb-10 g-mb-0--md">
                 <div class="d-lg-flex">
-                    <small class="d-block g-font-size-default g-mr-10 g-mb-10 g-mb-0--md">© 2019 MyEcoCar. Tout droit
-                        réservés. Réalisé par MyEcoCar
+                    <small class="d-block g-font-size-default g-mr-10 g-mb-10 g-mb-0--md">© <?php echo _l('footer_copyright'); ?>
                     </small>
                 </div>
             </div>

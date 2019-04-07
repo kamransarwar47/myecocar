@@ -9,26 +9,26 @@ class Propose_route extends CI_Controller
      */
     public function index($edit = false, $id = 0)
     {
-        $this->form_validation->set_rules('origin_input', 'D’où partez-vous', 'trim|required');
-        $this->form_validation->set_rules('destination_input', 'Où allez-vous', 'trim|required');
-        $this->form_validation->set_rules('datepickerFrom', 'Date de départ', 'trim|required');
-        $this->form_validation->set_rules('depart_time_input', 'heure de départ', 'trim|required');
+        $this->form_validation->set_rules('origin_input', _l('post_ad_field1'), 'trim|required');
+        $this->form_validation->set_rules('destination_input', _l('post_ad_field2'), 'trim|required');
+        $this->form_validation->set_rules('datepickerFrom', _l('post_ad_dept_date'), 'trim|required');
+        $this->form_validation->set_rules('depart_time_input', _l('post_ad_dept_time'), 'trim|required');
         if ($this->input->post('round_trip_checkbox') == 'on') {
-            $this->form_validation->set_rules('datepickerTo', 'Date de retour', 'trim|required');
-            $this->form_validation->set_rules('arrival_time_input', 'temps de retour', 'trim|required');
+            $this->form_validation->set_rules('datepickerTo', _l('post_ad_arr_date'), 'trim|required');
+            $this->form_validation->set_rules('arrival_time_input', _l('post_ad_arr_time'), 'trim|required');
         }
-        $this->form_validation->set_rules('vehicle_model_make', 'Marque et modèle', 'trim|required');
-        $this->form_validation->set_rules('fuel_type', 'Carburant', 'trim|required');
-        $this->form_validation->set_rules('free_spaces', 'Places libres', 'trim|required');
-        $this->form_validation->set_rules('baggages', 'bagages', 'trim|required');
-        $this->form_validation->set_rules('max_detour', 'Détour maximum', 'trim|required');
-        $this->form_validation->set_rules('sch_flex', 'Flexibilité Horaire', 'trim|required');
-        $this->form_validation->set_rules('acceptance', 'Acceptation', 'trim|required');
-        $this->form_validation->set_rules('travel_description', 'Description du trajet', 'trim|required');
-        $this->form_validation->set_rules('travel_charges', 'entrer le montant', 'trim|required');
+        $this->form_validation->set_rules('vehicle_model_make', _l('post_ad_veh_mkmdl'), 'trim|required');
+        $this->form_validation->set_rules('fuel_type', _l('post_ad_fuel'), 'trim|required');
+        $this->form_validation->set_rules('free_spaces', _l('post_ad_free_place'), 'trim|required');
+        $this->form_validation->set_rules('baggages', _l('post_ad_baggage'), 'trim|required');
+        $this->form_validation->set_rules('max_detour', _l('post_ad_max_detour'), 'trim|required');
+        $this->form_validation->set_rules('sch_flex', _l('post_ad_sch_flex'), 'trim|required');
+        $this->form_validation->set_rules('acceptance', _l('post_ad_acceptance'), 'trim|required');
+        $this->form_validation->set_rules('travel_description', _l('post_ad_travel_desc'), 'trim|required');
+        $this->form_validation->set_rules('travel_charges', _l('post_ad_price_field'), 'trim|required');
 
         if ($this->form_validation->run() == false) {
-            $data['title']              = 'PROPOSER UNE ROUTE';
+            $data['title']              = _l('post_ad_page_title');
             $data['header_link_active'] = 'propose_route';
             $data['edit']               = $edit;
             if ($edit != false && $id != 0) {
@@ -78,10 +78,10 @@ class Propose_route extends CI_Controller
             }
 
             if (isset($_POST['edit_check']) && $_POST['edit_check'] == '1') {
-                set_message('You Have Updated a Travel Successfully', 'success');
+                set_message(_l('route_update_msg'), 'success');
                 redirect('user_profile');
             } else {
-                set_message('You Have Entered a Travel Successfully', 'success');
+                set_message(_l('route_add_msg'), 'success');
                 redirect('propose_route');
             }
         }

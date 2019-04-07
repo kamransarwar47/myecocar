@@ -34,7 +34,7 @@ class Research_trip extends CI_Controller
             $data['search_records'] = $search_data->result_array();
         }
         $data['header_link_active'] = 'search_route';
-        $data['title']              = 'Search';
+        $data['title']              = _l('search_page_title');
         $data['content']            = $this->load->view('page-recherche-trajet', $data, true);
         $this->load->view('templates/template', $data);
     }
@@ -45,7 +45,7 @@ class Research_trip extends CI_Controller
         if ($this->form_validation->run() == false) {
             $data['search_data']        = $this->common_model->get('route', ['route_id' => $this->input->get('id')])->row_array();
             $data['header_link_active'] = 'search_route';
-            $data['title']              = 'Trip Details';
+            $data['title']              = _l('trip_detail_page_title');
             $data['route_id']           = $this->input->get('id');
             $data['content']            = $this->load->view('page-trip-details', $data, true);
             $this->load->view('templates/template', $data);

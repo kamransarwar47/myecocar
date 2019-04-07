@@ -8,15 +8,15 @@ class Login extends CI_Controller {
 	 */
 	public function index()
 	{	
-		$this->form_validation->set_rules('user_email', 'Email', 'trim|valid_email');
-        $this->form_validation->set_rules('user_password', 'Password', 'trim|required|callback_ValidateLogin');
+		$this->form_validation->set_rules('user_email', _l('email_field'), 'trim|valid_email');
+        $this->form_validation->set_rules('user_password', _l('password_field'), 'trim|required|callback_ValidateLogin');
     
         if ($this->form_validation->run() == false) {
             $data['title'] = 'Login';
             $data['content'] = $this->load->view('page-login', '', true);
             $this->load->view('templates/template', $data);
         } else {
-				set_message('Successfully Login', 'success');
+				set_message(_l('login_success_msg'), 'success');
 				redirect('user_profile');
         }
 	}
@@ -43,7 +43,7 @@ class Login extends CI_Controller {
 					$this->common_model->update('users', ['user_status' => 1], ['user_id' => $this->session->userdata('User_LoginId')]);
                     return true;
             }else{
-				$this->form_validation->set_message('ValidateLogin', 'User name or password is invalid.');
+				$this->form_validation->set_message('ValidateLogin', _l('username_pass_inv_msg'));
                 return false;
 			}
         }
@@ -59,8 +59,8 @@ class Login extends CI_Controller {
 	
 	function change_password()
     {
-        $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'trim|required');
-        $this->form_validation->set_rules('password', 'Password', 'trim|required|matches[confirm_password]|min_length[8]');
+        $this->form_validation->set_rules('confirm_password', _l('cnfrm_pass_field'), 'trim|required');
+        $this->form_validation->set_rules('password', _l('password_field'), 'trim|required|matches[confirm_password]|min_length[8]');
     
         if ($this->form_validation->run() == false) {
             $data['title'] = 'Change Password';
@@ -78,9 +78,9 @@ class Login extends CI_Controller {
 						$where['user_id'] = $user_id;
 						$data['password'] = md5($this->input->post('password'));
 						$this->common_model->update('users', $data, $where);
-						set_message('You Have successfully change your password', 'success');
+						set_message(_l('chng_pass_success_msg'), 'success');
 					}else{
-							set_message('There is some problem with the link you have use for recovery password', 'warning');
+							set_message(_l('pass_rec_error_msg'), 'warning');
 						}
 				}
 			}
@@ -90,7 +90,7 @@ class Login extends CI_Controller {
 
     function forget_password()
     {
-		$this->form_validation->set_rules('verification_email', 'Email', 'trim|valid_email');
+		$this->form_validation->set_rules('verification_email', _l('email_field'), 'trim|valid_email');
 
         if ($this->form_validation->run() == false) {
             $data['title'] = 'Forget Password';
@@ -117,11 +117,11 @@ class Login extends CI_Controller {
 					if($res){
 						$token_update['email_token'] = $verification_Code;
 						$this->common_model->update('users', $token_update, ['user_id' => $user_id]);
-						set_message('Recovery Password has been successfully send to your email address Please Verified.', 'success');
+						set_message(_l('rec_pass_email_msg'), 'success');
 					}
 				
 				}else{ 
-					set_message('This email is not in our record', 'success');
+					set_message(_l('email_dont_exist_msg'), 'success');
 				}
 			redirect('login/forget_password');	
         }

@@ -34,9 +34,9 @@ function _l($lang)
     $CI          = &get_instance();
     $lang_output = $CI->lang->line($lang);
     if ($lang_output) {
-        echo $lang_output;
+        return $lang_output;
     } else {
-        echo $lang;
+        return $lang;
     }
 }
 

@@ -10,7 +10,7 @@
           <i class="icon-info g-font-size-25"></i>
         </span>
                     <span class="media-body align-self-center">
-          <strong>Pas connecté!</strong> Veuillez vous <strong>connecter / vous inscrire</strong> accepter une offre.
+          <?php echo _l('trip_page_not_login_msg'); ?>
         </span>
                 </div>
             </div>
@@ -28,7 +28,7 @@
                     <i class="fa fa-exclamation-triangle"></i>
                     Warning!
                 </h4>
-                <p>Corrigez ces erreurs avant de soumettre le formulaire.</p>
+                <p><?php echo _l('form_error_msg'); ?></p>
                 <?php
                 echo validation_errors();
                 ?>
@@ -76,15 +76,15 @@
                                         <li class="d-flex align-items-center g-mb-12">
                                             <i class="icon-check d-block g-color-primary g-mr-8"></i>
                                             <span class="d-block"><strong><?php echo $remaining_place; ?>
-                                                    places restantes</strong></span>
+                                                    <?php echo _l('rem_plc_text'); ?></strong></span>
                                         </li>
                                         <li class="d-flex align-items-center g-mb-12">
                                             <select class="form-control" name="places_booked">
-                                                <option value="">Siège de livre</option>
+                                                <option value=""><?php echo _l('book_seat_text'); ?></option>
                                                 <?php
                                                 for ($i = 1; $i <= $remaining_place; $i++) {
                                                     ?>
-                                                    <option value="<?php echo $i; ?>"><?php echo $i; ?> Siège</option>
+                                                    <option value="<?php echo $i; ?>"><?php echo $i; ?> <?php echo _l('seat_text'); ?></option>
                                                     <?php
                                                 }
                                                 ?>
@@ -95,7 +95,7 @@
                                         ?>
                                         <li class="d-flex align-items-center g-mb-12">
                                             <i class="icon-check d-block g-color-primary g-mr-8"></i>
-                                            <span class="d-block"><strong>Pas de place restante</strong></span>
+                                            <span class="d-block"><strong><?php echo _l('no_seat_text'); ?></strong></span>
                                         </li>
                                         <?php
                                     }
@@ -106,7 +106,7 @@
                                 <button class="btn btn-xl btn-block u-btn-primary text-uppercase g-font-weight-600 g-font-size-12"
                                         name="submit"
                                         type="submit" <?php echo (!isset($_SESSION['User_LoginId']) || $remaining_place < 1) ? 'disabled="disabled"' : ''; ?>>
-                                    Acceptez
+                                    <?php echo _l('accept_btn'); ?>
                                 </button>
 
                             </div>
@@ -117,58 +117,58 @@
                     <hr class="g-brd-gray-light-v4">
 
                     <div class="col-lg g-mb-30 g-mb-0--lg">
-                        <h3 class="h5 g-color-gray-dark-v1 g-mb-10">Détail de l'offre</h3>
+                        <h3 class="h5 g-color-gray-dark-v1 g-mb-10"><?php echo _l('offer_detail_text'); ?></h3>
                         <ul class="list-unstyled mb-0">
                             <li class="media g-mb-10">
                       <span class="d-block g-color-gray-dark-v5 g-width-110">
-                          <i class="icon-calendar g-pos-rel g-top-1 g-mr-5"></i> Date - heure:
+                          <i class="icon-calendar g-pos-rel g-top-1 g-mr-5"></i> <?php echo _l('date_time_text'); ?>:
                         </span>
                                 <span class="media-body"><?php echo date('d M, Y', strtotime($search_data['datepickerFrom'])); ?>
                                     - <?php echo date('H:i', strtotime($search_data['depart_time_input'])); ?></span>
                             </li>
                             <li class="media">
                       <span class="d-block g-color-gray-dark-v5 g-width-110">
-                          <i class="icon-wallet g-pos-rel g-top-1 g-mr-5"></i> Prix:
+                          <i class="icon-wallet g-pos-rel g-top-1 g-mr-5"></i> <?php echo _l('price_text'); ?>:
                         </span>
                                 <span class="u-label g-bg-cyan g-rounded-20 g-px-10">&euro; <?php echo $search_data['travel_charges']; ?>
-                                    par place</span>
+                                    <?php echo _l('per_seat_text'); ?></span>
                             </li>
                         </ul>
                     </div>
 
                     <div class="col-lg g-mb-30 g-mt-30 g-mb-0--lg">
-                        <h3 class="h5 g-color-gray-dark-v1 g-mb-10">Détail du véhicule</h3>
+                        <h3 class="h5 g-color-gray-dark-v1 g-mb-10"><?php echo _l('post_ad_veh_info'); ?></h3>
                         <ul class="list-unstyled g-mb-12 g-mb-0--md">
                             <li class="d-flex align-items-center g-mb-12">
                                 <i class="icon-check d-block g-color-primary g-mr-8"></i>
-                                <span class="d-block">Véhicule: <?php echo $search_data['vehicle_model_make']; ?></span>
+                                <span class="d-block"><?php echo _l('vehicle_text'); ?>: <?php echo $search_data['vehicle_model_make']; ?></span>
                             </li>
                             <li class="d-flex align-items-center g-mb-12">
                                 <i class="icon-check d-block g-color-primary g-mr-8"></i>
-                                <span class="d-block">Carburant: <?php echo $search_data['fuel_type']; ?></span>
+                                <span class="d-block"><?php echo _l('post_ad_fuel'); ?>: <?php echo $search_data['fuel_type']; ?></span>
                             </li>
                             <li class="d-flex align-items-center g-mb-12">
                                 <i class="icon-check d-block g-color-primary g-mr-8"></i>
-                                <span class="d-block">Bagages: <?php echo $search_data['baggages']; ?></span>
+                                <span class="d-block"><?php echo _l('post_ad_baggage'); ?>: <?php echo $search_data['baggages']; ?></span>
                             </li>
                             <li class="d-flex align-items-center g-mb-12">
                                 <i class="icon-check d-block g-color-primary g-mr-8"></i>
-                                <span class="d-block">Détour maximum: <?php echo $search_data['max_detour']; ?></span>
+                                <span class="d-block"><?php echo _l('post_ad_max_detour'); ?>: <?php echo $search_data['max_detour']; ?></span>
                             </li>
                             <li class="d-flex align-items-center g-mb-12">
                                 <i class="icon-check d-block g-color-primary g-mr-8"></i>
-                                <span class="d-block">Flexibilité Horaire: <?php echo $search_data['sch_flex']; ?></span>
+                                <span class="d-block"><?php echo _l('post_ad_sch_flex'); ?>: <?php echo $search_data['sch_flex']; ?></span>
                             </li>
                             <li class="d-flex align-items-center g-mb-12">
                                 <i class="icon-check d-block g-color-primary g-mr-8"></i>
-                                <span class="d-block">Acceptation : <?php echo $search_data['acceptance']; ?></span>
+                                <span class="d-block"><?php echo _l('post_ad_acceptance'); ?> : <?php echo $search_data['acceptance']; ?></span>
                             </li>
                             <li class="d-flex align-items-center g-mb-12">
                                 <i class="icon-check d-block g-color-primary g-mr-8"></i>
-                                <span class="d-block">Mode de paiement : <?php echo ($search_data['payment_method'] == 'cash') ? ucwords($search_data['payment_method']) . ' ' . '<i class="fa fa-money g-font-size-20 align-self-center mx-auto g-color-darkblue"></i>' : ucwords($search_data['payment_method']) . ' ' . '<i class="fa fa-paypal g-font-size-20 align-self-center mx-auto g-color-darkblue"></i>'; ?></span>
+                                <span class="d-block"><?php echo _l('pay_mtd_text'); ?> : <?php echo ($search_data['payment_method'] == 'cash') ? ucwords($search_data['payment_method']) . ' ' . '<i class="fa fa-money g-font-size-20 align-self-center mx-auto g-color-darkblue"></i>' : ucwords($search_data['payment_method']) . ' ' . '<i class="fa fa-paypal g-font-size-20 align-self-center mx-auto g-color-darkblue"></i>'; ?></span>
                             </li>
                         </ul>
-                        <h3 class="h5 g-color-gray-dark-v1 g-mb-10 g-mt-30">Description du trajet</h3>
+                        <h3 class="h5 g-color-gray-dark-v1 g-mb-10 g-mt-30"><?php echo _l('post_ad_travel_desc'); ?></h3>
                         <p><?php echo $search_data['travel_description']; ?></p>
                     </div>
 
