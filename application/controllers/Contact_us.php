@@ -7,6 +7,8 @@ class Contact_us extends CI_Controller
     function __construct()
     {
         parent::__construct();
+		//load library
+		$this->load->library('captcha/securimage');
     }
 	
 	public function index(){
@@ -15,11 +17,10 @@ class Contact_us extends CI_Controller
 		$this->form_validation->set_rules('email', 'Email', 'trim|required');
 		$this->form_validation->set_rules('descriptions', 'Descriptions', 'trim|required');
         $this->form_validation->set_rules('subject', 'Subject', 'trim|required');
+        $this->form_validation->set_rules('ct_captcha', 'Captcha', 'trim|required');
 
         if ($this->form_validation->run() == false) {
             $data['title'] = 'Contactus';
-			//load library
-			$this->load->library('securimage');
             $data['content']      = $this->load->view('page-contacts', $data, true);
             $this->load->view('templates/template', $data);
         } else {
@@ -27,6 +28,16 @@ class Contact_us extends CI_Controller
 			$email = $this->input->post('email');
 			$descriptions = $this->input->post('descriptions');
 			$subject = $this->input->post('subject');
+			$captcha = $this->input->post('ct_captcha');
+			
+			$securimage = new Securimage();
+
+            if ($securimage->check($captcha) == false) {
+				set_message('Incorrect security code entered', 'warning');
+				redirect('contact_us');
+            }
+			
+			
 			if($email != ''){	
 					$arrgs = [
 						'to' => $email,

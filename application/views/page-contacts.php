@@ -89,6 +89,7 @@
 			  <div class="col-md-12 form-group g-mb-40 div-input-group">
                   <label class="g-color-gray-dark-v2 g-font-size-13">Captcha</label>
                   <?php 
+				  
 					  $options = array();
 					  $options['input_name']             = 'ct_captcha'; // change name of input element for form post
 					  $options['disable_flash_fallback'] = false; // allow flash fallback
@@ -103,8 +104,7 @@
 					  echo "\n</div>\n";
 				  ?>
                 </div>
-              </div>
-
+             
               <div class="text-center">
                 <button id="send_contactus_email" class="btn u-btn-primary g-font-weight-600 g-font-size-13 text-uppercase g-rounded-25 g-py-15 g-px-30" type="button" role="button">Envoyer une demande</button>
               </div>
@@ -125,6 +125,9 @@
     </a>
   </main>
   <script> 
+  $(function(){
+	  $('#captcha_code').attr('required', 'required');
+  });
 	//Validation of Form
 	$(document).on('click', '#send_contactus_email', function(e){
 		var req_input = $('#contactus_form input[required]');
@@ -137,7 +140,12 @@
 			var error_msg_id = $(this).attr('id')+'_error_msg';
 			$('#'+error_msg_id).remove();
 			if(input_types_1.indexOf($(this).attr('type')) != -1 && $(this).val() == ''){
-				$(this).parent('.div-input-group').append('<p id="'+error_msg_id+'" class="" style="color:red">This Field is required</p>');
+				console.log($(this).attr('id'));
+				if($(this).attr('id') != 'captcha_code'){
+					$(this).parent('.div-input-group').append('<p id="'+error_msg_id+'" class="" style="color:red">This Field is required</p>');
+				}else{
+					$(this).parent().parent('.div-input-group').append('<p id="'+error_msg_id+'" class="" style="color:red">This Field is required</p>');
+				}
 				is_valid = false;
 			}else if(input_types_4.indexOf($(this).attr('type')) != -1){
 				var email = $(this).val();

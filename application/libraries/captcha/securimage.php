@@ -1275,10 +1275,11 @@ class Securimage
     public function check($code)
     {
         if (!is_string($code)) {
+		
             trigger_error("The \$code parameter passed to Securimage::check() must be a string, " . gettype($code) . " given", E_USER_NOTICE);
             $code = '';
         }
-
+		
         $this->code_entered = $code;
         $this->validate();
         return $this->correct_code;
@@ -1480,8 +1481,8 @@ class Securimage
                      sprintf('<a tabindex="-1" class="captcha_play_button" href="%sid=%s" onclick="return false">',
                              $play_path, uniqid()
                      ) . "\n" .
-                     sprintf('<img class="captcha_play_image" height="%d" width="%d" src="'.site_url('assets/uploads/captcha/audio_icon.png').'" alt="Play CAPTCHA Audio" style="border: 0px">', $icon_size, $icon_size, htmlspecialchars($icon_path)) . "\n" .
-                     sprintf('<img class="captcha_loading_image rotating" height="%d" width="%d" src="'.site_url('assets/uploads/captcha/loading.png').'" alt="Loading audio" style="display: none">', $icon_size, $icon_size, htmlspecialchars($load_path)) . "\n" .
+                     sprintf('<img class="captcha_play_image" height="%d" width="%d" src="%s" alt="Play CAPTCHA Audio" style="border: 0px">', $icon_size, $icon_size, htmlspecialchars($icon_path)) . "\n" .
+                     sprintf('<img class="captcha_loading_image rotating" height="%d" width="%d" src="%s" alt="Loading audio" style="display: none">', $icon_size, $icon_size, htmlspecialchars($load_path)) . "\n" .
                      "</a>\n<noscript>Enable Javascript for audio controls</noscript>\n" .
                      "</div>\n";
 
@@ -1500,7 +1501,7 @@ class Securimage
             if ($refresh_icon_url) {
                 $icon_path = $refresh_icon_url;
             }
-            $img_tag = sprintf('<img height="%d" width="%d" src="'.site_url('assets/uploads/captcha/refresh.png').'" alt="%s" onclick="this.blur()" style="border: 0px; vertical-align: bottom">',
+            $img_tag = sprintf('<img height="%d" width="%d" src="%s" alt="%s" onclick="this.blur()" style="border: 0px; vertical-align: bottom">',
                                $icon_size, $icon_size, htmlspecialchars($icon_path), htmlspecialchars($refresh_alt));
 
             $html .= sprintf('<a tabindex="-1" style="border: 0" href="#" title="%s" onclick="%sdocument.getElementById(\'%s\').src = \'%s\' + Math.random(); this.blur(); return false">%s</a><br>',
