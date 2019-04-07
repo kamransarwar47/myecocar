@@ -1,3 +1,8 @@
+<!-- cookies -->
+<div id="cookieConsent">
+    <div id="closeCookieConsent">x</div>
+    This website is using cookies. <a href="<?php echo base_url('cookies'); ?>" target="_blank">More info</a>. <a class="cookieConsentOK">That's Fine</a>
+</div>
 <!-- Header -->
 <header id="js-header" class="u-header u-header--static u-header--toggle-section u-header--change-appearance"
         data-header-fix-moment="300">
