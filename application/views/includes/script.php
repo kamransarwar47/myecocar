@@ -36,7 +36,7 @@
 <script src="<?php echo base_url(); ?>assets/vendor/jquery-ui/ui/widgets/slider.js"></script>
 
 <!-- JS Unify -->
-<script src="assets/js/hs.core.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/hs.core.js"></script>
 
 
 <script src="<?php echo base_url(); ?>assets/js/components/hs.header.js"></script>
@@ -135,11 +135,17 @@
             $.HSCore.components.HSTabs.init('[role="tablist"]');
         }, 200);
     });
+</script>
 
-    // initialization of google map
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8lyv6djqrIUQLkBoIcJjoZlG4IIt_wXU&libraries=places&callback=initMap"
+    async defer></script>
+
+    <script>
+        // initialization of google map
+        var map;
     function initMap() {
         initAutocomplete();
-        var map = new google.maps.Map(document.getElementById('map'), {
+        map = new google.maps.Map(document.getElementById('map'), {
             mapTypeControl: false,
             streetViewControl: false,
             center: {lat: 46.2276, lng: 2.2137},
@@ -152,6 +158,7 @@
     /**
      * @constructor
      */
+
     function AutocompleteDirectionsHandler(map) {
         this.map = map;
         this.originPlaceId = null;
@@ -179,6 +186,7 @@
 
     AutocompleteDirectionsHandler.prototype.setupPlaceChangedListener = function (autocomplete, mode) {
         var me = this;
+
         autocomplete.bindTo('bounds', this.map);
 
         autocomplete.addListener('place_changed', function () {
@@ -220,6 +228,7 @@
         if (!this.originPlaceId || !this.destinationPlaceId) {
             return;
         }
+
         var me = this;
 
         this.directionsService.route(
@@ -230,6 +239,7 @@
             },
             function (response, status) {
                 if (status === 'OK') {
+                    clearDisplayObj();
                     var point = response.routes[0].legs[0];
                     $('div#route-detail-box').css('display', 'block');
                     $('span#route-directions').html(point.start_address + ' <i class="fa fa-arrow-circle-right"></i> ' + point.end_address);
@@ -243,8 +253,6 @@
     };
 
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8lyv6djqrIUQLkBoIcJjoZlG4IIt_wXU&libraries=places&callback=initMap"
-        async defer></script>
 <script>
     $(document).ready(function () {
         // Round trip checkbox
@@ -304,6 +312,43 @@
             if (addressType == 'country') {
                 document.getElementById('search_a_country').value = val;
             }
+        }
+    }
+</script>
+
+<script>
+    var displayObj;
+    function calculateRoute(from, to) {
+        var directionsService = new google.maps.DirectionsService();
+        var directionsRequest = {
+            origin: from,
+            destination: to,
+            travelMode: google.maps.DirectionsTravelMode.DRIVING
+        };
+        directionsService.route(
+            directionsRequest,
+            function(response, status) {
+                if (status == google.maps.DirectionsStatus.OK) {
+                    displayObj = new google.maps.DirectionsRenderer({
+                        map: map,
+                        directions: response
+                    });
+                    var point = response.routes[0].legs[0];
+                    $('div#route-detail-box').css('display', 'block');
+                    $('span#route-directions').html(point.start_address + ' <i class="fa fa-arrow-circle-right"></i> ' + point.end_address);
+                    $('span#route-dist-time').html('Estimated travel time: ' + point.duration.text + ' (' + point.distance.text + ')');
+                }
+                else {
+                    $('div#route-detail-box').css('display', 'none');
+                    window.alert('Directions request failed due to ' + status);
+                }
+            }
+        );
+    }
+
+    function clearDisplayObj(){
+        if(displayObj != null){
+            displayObj.setMap(null);
         }
     }
 </script>

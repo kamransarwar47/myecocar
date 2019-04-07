@@ -7,7 +7,7 @@ class Propose_route extends CI_Controller
     /**
      * Page Propose Route
      */
-    public function index()
+    public function index($edit = false, $id = 0)
     {
         $this->form_validation->set_rules('origin_input', 'D’où partez-vous', 'trim|required');
         $this->form_validation->set_rules('destination_input', 'Où allez-vous', 'trim|required');
@@ -30,7 +30,13 @@ class Propose_route extends CI_Controller
         if ($this->form_validation->run() == false) {
             $data['title']              = 'PROPOSER UNE ROUTE';
             $data['header_link_active'] = 'propose_route';
-            $data['content']            = $this->load->view('page-propose-route', '', true);
+            $data['edit']               = $edit;
+            if ($edit != false && $id != 0) {
+                // route details
+                $route_data         = $this->common_model->get('route', ['route_id' => $id]);
+                $data['route_data'] = $route_data->row_array();
+            }
+            $data['content'] = $this->load->view('page-propose-route', $data, true);
             $this->load->view('templates/template', $data);
         } else {
             $data['user_id']            = $this->session->userdata('User_LoginId');
@@ -51,8 +57,12 @@ class Propose_route extends CI_Controller
             $data['acceptance']         = $this->input->post('acceptance');
             $data['travel_description'] = $this->input->post('travel_description');
             $data['travel_charges']     = $this->input->post('travel_charges');
+            $data['payment_method']     = $this->input->post('payment_method');
 
             if ($this->common_model->insert('route', $data) != false) {
+                if (isset($_POST['edit_check']) && $_POST['edit_check'] == '1') {
+                    $this->common_model->delete('route', ['route_id' => $_POST['edit_check_id']]);
+                }
                 // return tour details
                 if (isset($_POST['round_trip_checkbox']) && $_POST['round_trip_checkbox'] == 'on') {
                     $data['origin_input']      = $this->input->post('destination_input');
@@ -67,8 +77,13 @@ class Propose_route extends CI_Controller
                 }
             }
 
-            set_message('You Have Entered a Travel Successfully', 'success');
-            redirect('propose_route');
+            if (isset($_POST['edit_check']) && $_POST['edit_check'] == '1') {
+                set_message('You Have Updated a Travel Successfully', 'success');
+                redirect('user_profile');
+            } else {
+                set_message('You Have Entered a Travel Successfully', 'success');
+                redirect('propose_route');
+            }
         }
     }
 
