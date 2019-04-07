@@ -1,5 +1,5 @@
 <!-- cookies -->
-<div id="cookieConsent">
+<div id="cookieConsent"> 
     <div id="closeCookieConsent">x</div>
     This website is using cookies. <a href="<?php echo base_url('cookies'); ?>" target="_blank">More info</a>. <a class="cookieConsentOK">That's Fine</a>
 </div>
@@ -10,7 +10,7 @@
     <div class="u-header__section u-header__section--hidden u-header__section--dark g-bg-black g-transition-0_3 g-py-10">
         <div class="container">
             <div class="row flex-column flex-sm-row justify-content-between align-items-center text-uppercase g-font-weight-600 g-color-white g-font-size-12 g-mx-0--lg">
-                <div class="col-auto">
+                <!--<div class="col-auto">
                     <ul class="list-inline mb-0">
                         <li class="list-inline-item">
                             <a href="#" class="g-color-white g-color-primary--hover g-pa-3">
@@ -38,7 +38,7 @@
                             </a>
                         </li>
                     </ul>
-                </div>
+                </div>-->
 
                 <div class="col-auto">
                     <i class="fa fa-phone g-font-size-18 g-valign-middle g-color-primary g-mr-10 g-mt-minus-2"></i>

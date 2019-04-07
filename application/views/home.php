@@ -10,14 +10,6 @@
               <h1 class="g-color-white g-font-weight-600 g-font-size-50 mb-3"><?php _l('new_carpool'); ?></h1>
               <p class="g-color-white g-font-size-18"><?php _l('header_slider_detail'); ?></p>
             </div>
-            <a class="btn u-btn-primary g-font-weight-500 g-font-size-12 text-uppercase g-px-25 g-py-13 mr-3" href="#">
-              <?php _l('login'); ?>
-              <i class="g-pos-rel g-top-minus-1 ml-2 fa fa-angle-right"></i>
-            </a>
-            <a class="btn u-btn-black g-font-weight-500 g-font-size-12 text-uppercase g-px-25 g-py-13" href="#">
-              <?php _l('signup'); ?>
-              <i class="g-pos-rel g-top-minus-1 ml-2 fa fa-angle-right"></i>
-            </a>
             <!-- End Content Info -->
           </div>
 

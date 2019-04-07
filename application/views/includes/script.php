@@ -314,7 +314,20 @@ $(document).ready(function(){
         $("#cookieConsent").fadeIn(200);
      }, 4000);
     $("#closeCookieConsent, .cookieConsentOK").click(function() {
+		are_cookies_enabled();
         $("#cookieConsent").fadeOut(200);
     }); 
-}); 
+});
+
+function are_cookies_enabled()
+{
+    var cookieEnabled = (navigator.cookieEnabled) ? true : false;
+
+    if (typeof navigator.cookieEnabled == "undefined" && !cookieEnabled)
+    { 
+        document.cookie="testcookie";
+        cookieEnabled = (document.cookie.indexOf("testcookie") != -1) ? true : false;
+    }
+    return (cookieEnabled);
+}
 </script>

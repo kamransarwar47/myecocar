@@ -172,8 +172,28 @@
                            class="g-color-white-opacity-0_5 g-color-white--hover">
                             <i class="fa fa-facebook"></i>
                         </a>
+                    </li>                    
+                    <li class="list-inline-item g-mx-10" data-toggle="tooltip" data-placement="top" title="Twitter">
+                        <a href="https://twitter.com/MyecocarC" class="g-color-white-opacity-0_5 g-color-white--hover">
+                            <i class="fa fa-twitter"></i>
+                        </a>
                     </li>
-                    <li class="list-inline-item g-mx-10" data-toggle="tooltip" data-placement="top" title="Skype">
+					<li class="list-inline-item g-mx-10" data-toggle="tooltip" data-placement="top" title="Instagram">
+                        <a href="https://twitter.com/MyecocarC" class="g-color-white-opacity-0_5 g-color-white--hover">
+                            <i class="fa fa-instagram"></i>
+                        </a>
+                    </li>
+                    <!--<li class="list-inline-item g-mx-10" data-toggle="tooltip" data-placement="top" title="Dribbble">
+                        <a href="#" class="g-color-white-opacity-0_5 g-color-white--hover">
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                    </li>
+					<li class="list-inline-item g-mx-10" data-toggle="tooltip" data-placement="top" title="Pinterest">
+                        <a href="#" class="g-color-white-opacity-0_5 g-color-white--hover">
+                            <i class="fa fa-pinterest"></i>
+                        </a>
+                    </li>
+					<li class="list-inline-item g-mx-10" data-toggle="tooltip" data-placement="top" title="Skype">
                         <a href="#" class="g-color-white-opacity-0_5 g-color-white--hover">
                             <i class="fa fa-skype"></i>
                         </a>
@@ -182,22 +202,7 @@
                         <a href="#" class="g-color-white-opacity-0_5 g-color-white--hover">
                             <i class="fa fa-linkedin"></i>
                         </a>
-                    </li>
-                    <li class="list-inline-item g-mx-10" data-toggle="tooltip" data-placement="top" title="Pinterest">
-                        <a href="#" class="g-color-white-opacity-0_5 g-color-white--hover">
-                            <i class="fa fa-pinterest"></i>
-                        </a>
-                    </li>
-                    <li class="list-inline-item g-mx-10" data-toggle="tooltip" data-placement="top" title="Twitter">
-                        <a href="https://twitter.com/MyecocarC" class="g-color-white-opacity-0_5 g-color-white--hover">
-                            <i class="fa fa-twitter"></i>
-                        </a>
-                    </li>
-                    <li class="list-inline-item g-mx-10" data-toggle="tooltip" data-placement="top" title="Dribbble">
-                        <a href="#" class="g-color-white-opacity-0_5 g-color-white--hover">
-                            <i class="fa fa-dribbble"></i>
-                        </a>
-                    </li>
+                    </li>-->
                 </ul>
             </div>
         </div>
