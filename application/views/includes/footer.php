@@ -179,7 +179,7 @@
                         </a>
                     </li>
 					<li class="list-inline-item g-mx-10" data-toggle="tooltip" data-placement="top" title="Instagram">
-                        <a href="https://twitter.com/MyecocarC" class="g-color-white-opacity-0_5 g-color-white--hover">
+                        <a href="https://www.instagram.com/myecocar_covoiturage/" class="g-color-white-opacity-0_5 g-color-white--hover">
                             <i class="fa fa-instagram"></i>
                         </a>
                     </li>

@@ -1,8 +1,23 @@
 <!-- cookies -->
-<div id="cookieConsent"> 
-    <div id="closeCookieConsent">x</div>
-    This website is using cookies. <a href="<?php echo base_url('cookies'); ?>" target="_blank">More info</a>. <a class="cookieConsentOK">That's Fine</a>
-</div>
+<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/cookies-min.css" />
+<script>
+	var cookies_link = "<?php echo base_url('cookies'); ?>";
+</script>
+<script src="<?php echo base_url(); ?>assets/js/cookies-min.js"></script>
+<script>
+window.addEventListener("load", function(){
+window.cookieconsent.initialise({
+  "palette": {
+    "popup": {
+      "background": "#000"
+    },
+    "button": {
+      "background": "#f1d600"
+    }
+  }
+})});
+</script>
+
 <!-- Header -->
 <header id="js-header" class="u-header u-header--static u-header--toggle-section u-header--change-appearance"
         data-header-fix-moment="300">
