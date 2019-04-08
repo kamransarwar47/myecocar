@@ -485,16 +485,17 @@
                             </div>
                             <!-- End Verify Password -->
                             <div class="text-sm-right">
-                                <button id="deactivate_account_btn" class="btn u-btn-primary rounded-0 g-py-12 g-px-25"
+                                <button id="change_password" class="btn u-btn-primary rounded-0 g-py-12 g-px-25"
                                         href="#">Enregistrer
                                 </button>
                             </div>
                             <!-- End Verify Password -->
-						</form>
-						
+                        </form>
+                    
+
 						<!--Deactivate Account -->
 						<form id="deactivate_account_form" method="post"
-                              action="<?php echo base_url('user_profile/deactivate'); ?>">
+                              action="">
 							<hr class="g-brd-gray-light-v4 g-my-25">
 
 							   <h2 class="h4 g-font-weight-300">Désactivation</h2>
@@ -505,7 +506,7 @@
 								<label class="col-sm-3 col-form-label g-color-gray-dark-v2 g-font-weight-700 text-sm-right g-mb-10">Que voulez-vous faire ?</label>
 								<div class="col-sm-9">
 								  <div class="input-group g-brd-primary--focus">
-									<input name="deactivate_account" id="deactivate_account" class="form-control form-control-md border-right-0 rounded-0 g-py-13 pr-0" type="password" placeholder="">
+									<input name="deactivate_account" id="deactivate_account" class="form-control form-control-md border-right-0 rounded-0 g-py-13 pr-0" type="password" placeholder="" required>
 									<div class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-light-v1 rounded-0">
 									  <i class="icon-lock"></i>
 									</div>
@@ -514,14 +515,14 @@
 							  </div>
 							  
 							  <div class="text-sm-right">
-								   <button id="deactivate_account_btn" class="btn u-btn-primary rounded-0 g-py-12 g-px-25" >Enregistrer</button>
+								   <button id="deactivate_account_btn" type="button" class="btn u-btn-primary rounded-0 g-py-12 g-px-25" >Enregistrer</button>
 							  </div>
 						 </form>
 						  <!-- End Deactivate Account -->
 						 
 						<!-- Delete Account -->						 
 						 <form id="delete_account_form" method="post"
-                              action="<?php echo base_url('user_profile/delete_account'); ?>">
+                              action="">
 							  
 							  <hr class="g-brd-gray-light-v4 g-my-25">
 
@@ -532,7 +533,7 @@
 								<label class="col-sm-3 col-form-label g-color-gray-dark-v2 g-font-weight-700 text-sm-right g-mb-10">Que voulez-vous faire ?</label>
 								<div class="col-sm-9">
 								  <div class="input-group g-brd-primary--focus">
-									<input class="form-control form-control-md border-right-0 rounded-0 g-py-13 pr-0" name="delete_account" id="delete_account" type="password" placeholder="">
+									<input class="form-control form-control-md border-right-0 rounded-0 g-py-13 pr-0" name="delete_account" id="delete_account" type="password" placeholder="" required>
 									<div class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-light-v1 rounded-0">
 									  <i class="icon-lock"></i>
 									</div>
@@ -541,12 +542,12 @@
 							  </div>
 							  
 							  <div class="text-sm-right">
-								   <button id="delete_account_btn"  class="btn u-btn-primary rounded-0 g-py-12 g-px-25">Enregistrer</button>
+								   <button id="delete_account_btn"  type="button" class="btn u-btn-primary rounded-0 g-py-12 g-px-25">Enregistrer</button>
 							  </div>
                         </form>
 						<!-- End Delete Account -->
-						
-                    </div>
+					
+					</div>
                     <!-- End Notification Settings -->
                 </div>
                 <!-- End Tab panes -->
@@ -632,7 +633,7 @@
             var error_msg_id = $(this).attr('id') + '_error_msg';
             $('#' + error_msg_id).remove();
             if (input_types_1.indexOf($(this).attr('type')) != -1 && $(this).val() == '') {
-                $(this).after('<p id="' + error_msg_id + '" class="" style="color:red">This Field is required</p>');
+                $(this).parent().after('<p id="' + error_msg_id + '" class="" style="color:red">This Field is required</p>');
                 is_valid_form = false;
             }
         });
@@ -795,36 +796,86 @@
 		});
 	});
 	
-	// validation of form forget password
-	$(document).on('click', '#sigup_save_btn', function(e){
-		var req_input = $('#sigup_from input[required]');
-		var is_valid = true;
-		var input_types_1 = ['password']; 
-	 
-		$.each(req_input, function(k, input){
-			var error_msg_id = $(this).attr('id')+'_error_msg';
-			$('#'+error_msg_id).remove();
-			if(input_types_1.indexOf($(this).attr('type')) != -1 && $(this).val() == ''){
-				$(this).parent().parent('.div-input-group').append('<p id="'+error_msg_id+'" class="" style="color:red">This Field is required</p>');
-				is_valid = false;
-			}
-		});	
-		//confirm new_password
-		var new_password = $('#new_password').val();
-		var confirm_new_password = $('#confirm_new_password').val();
-		if( new_password !== '' && confirm_new_password !== ''){
-			if(new_password.length >= 8 ){
-				if(new_password !== confirm_new_password){
-					$('#confirm_new_password').parent().parent('.div-input-group').append('<p id="confirm_password_error_msg" class="" style="color:red">Your Confirm new password does not Match</p>');
-					is_valid = false;
+	// Delete account
+    $(document).on('click', '#delete_account_btn', function (e) {
+        e.preventDefault();
+		var delete_account_val =$('#delete_account').val();
+        var req_input = $('#delete_account_form input[required]');
+        var is_valid_form = true;
+        var input_types_1 = ['password'];
+
+        $.each(req_input, function (k, input) {
+            var error_msg_id = $(this).attr('id') + '_error_msg';
+            $('#' + error_msg_id).remove();
+            if (input_types_1.indexOf($(this).attr('type')) != -1 && $(this).val() == '') {
+                $(this).parent().after('<p id="' + error_msg_id + '" class="" style="color:red">This Field is required</p>');
+                is_valid_form = false;
+            }
+        });
+        //confirm password
+
+
+        if (is_valid_form) {
+			 $.ajax({
+            type: "POST",
+            url: "<?php echo base_url('user_profile/delete_account_email'); ?>",
+			data: {'delete_account_val': delete_account_val},
+            cache: false,
+            success: function (data) {
+				var res = JSON.parse(data);
+                if(res.action == 'info'){
+                   swal("Info!", res.msg, "info");
+                }else{
+					 swal("Success!", res.msg, "success");
 				}
-			}else{
-				$('#confirm_new_password').parent().parent('.div-input-group').append('<p id="confirm_password_error_msg" class="" style="color:red">new password Length should be Greater then or Equal to 8</p>');
-					is_valid = false;
-			}			
-		}
-		if(is_valid){
-			$('#sigup_from').submit();
-		}
-	});
+            }
+        });
+        }
+    });	
+	
+	// deactivate account
+    $(document).on('click', '#deactivate_account_btn', function (e) {
+        e.preventDefault();
+		var deactivate_account_val =$('#deactivate_account').val();
+        var req_input = $('#deactivate_account_form input[required]');
+        var is_valid_form = true;
+        var input_types_1 = ['password'];
+
+        $.each(req_input, function (k, input) {
+            var error_msg_id = $(this).attr('id') + '_error_msg';
+            $('#' + error_msg_id).remove();
+            if (input_types_1.indexOf($(this).attr('type')) != -1 && $(this).val() == '') {
+                $(this).parent().after('<p id="' + error_msg_id + '" class="" style="color:red">This Field is required</p>');
+                is_valid_form = false;
+            }
+        });
+        //confirm password
+
+
+        if (is_valid_form) {
+				 $.ajax({
+				type: "POST",
+				url: "<?php echo base_url('user_profile/deactivate_account'); ?>",
+				data: {'deactivate_account_val': deactivate_account_val},
+				cache: false,
+				success: function (data) {
+					var res = JSON.parse(data);
+					 if(res.action == 'info'){
+						   swal("Info!", res.msg, "info");
+						}else{
+							swal({
+							  title: "Disabled?",
+							  text: res.msg,
+							  icon: "warning",
+							  buttons: false,
+							  dangerMode: true,
+							})
+							.then((willDelete) => {
+								window.location.reload();
+							});
+						}	
+				}
+			});
+        }
+    });
 </script>

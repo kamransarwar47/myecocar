@@ -32,6 +32,7 @@ class User_profile extends CI_Controller
             $user_data         = $this->common_model->get('users', ['user_id' => $this->session->userdata('User_LoginId')]);
             $data['user_data'] = $user_data;
             // route details
+			$this->db->order_by('route_id', 'desc');
             $route_data         = $this->common_model->get('route', ['user_id' => $this->session->userdata('User_LoginId')]);
             $data['route_data'] = $route_data;
             // reservation details
@@ -218,5 +219,90 @@ class User_profile extends CI_Controller
 		$image_name = $result['file_name'];
 		$this->common_model->update('users', ['user_profile_img' => $image_name], ['user_id' => $this->session->userdata('User_LoginId')]);
 		redirect('user_profile');
+	}
+	
+	//Account delete
+	function delete_account(){	
+		$del_token = '';
+		$user_id = $this->input->get('u_id');
+		$get_res = $this->common_model->get('users', ['user_id' => $user_id], 'del_token');
+		if($get_res->num_rows() > 0){
+			$get_res = $get_res->row();	
+			$del_token = $get_res->del_token;		
+		}
+		if($del_token != '' && $this->input->get('del_code') != '' && $del_token == $this->input->get('del_code')){		
+		$this->db->trans_start();
+		
+			$this->db->where('user_id', $user_id);
+			$this->db->delete('users');
+			
+			$this->db->where('user_id', $user_id);
+			$this->db->delete('route');
+			
+			$this->db->where('user_id', $user_id);
+			$this->db->delete('bookings');
+			
+			if($this->db->trans_complete()){
+				$this->session->unset_userdata('User_LoginId');
+				$this->session->unset_userdata('User_UserName');
+				set_heading_message('Your Account has been successfully Deleted');
+			}else{
+				set_heading_message('There is some problem');
+			}
+		}else{
+			set_heading_message('Sorry you can not delete your profile please try again');
+		}
+	}
+	
+	//Account delete email send
+	function delete_account_email(){
+		 if ($this->input->is_ajax_request()) {
+			 if($this->input->post('delete_account_val') == 'SUPPRIMER' || $this->input->post('delete_account_val') == 'DELETE' ){
+				$secrete_del_code = md5(md5(time()));
+				$user_id = $this->session->userdata('User_LoginId');
+				$email = '';
+				$get_res = $this->common_model->get('users', ['user_id' => $user_id], 'email, first_name');
+				if($get_res->num_rows() > 0){
+					$get_res = $get_res->row();	
+					$email = $get_res->email;	
+					$name = $get_res->first_name;	
+				}
+				//send email
+				if($email != ''){	
+					$arrgs = [
+						'to' => $email,
+						'subject' => 'Myecocar Registeration Email Verification',
+						'txt' => 'Hi '.$name.',<br>'.'You can delete your Myecocar profile completly by clicking on the link below<br><a href="'.base_url("user_profile/delete_account?del_code=".$secrete_del_code.'&u_id='.$user_id).'">Click Here</a>'
+					];
+					$res = send_email($arrgs);
+					
+					if($res){
+						$token_update['del_token'] = $secrete_del_code;
+						$this->common_model->update('users', $token_update, ['user_id' => $user_id]);
+						echo json_encode(['action' => 'success', 'msg' => 'Email Has been send to you please verify that this is you. then you can delete your profile']);
+					}
+				}
+				
+			}else{
+				echo json_encode(['action' => 'info', 'msg' => 'Please Write DELETE OR SUPPRIMER To Delete Your Complete Profile in Capital words']);
+			}
+		 }
+	}	
+	
+	//Account Deactivate
+	function deactivate_account(){
+		if ($this->input->is_ajax_request()) {
+
+			if($this->input->post('deactivate_account_val') == 'DESACTIVER' || $this->input->post('deactivate_account_val') == 'DISABLE'){
+				$user_id = $this->session->userdata('User_LoginId');
+				$user_status['user_status'] = 0;
+				$this->common_model->update('users', $user_status, ['user_id' => $user_id]);
+				 $this->session->unset_userdata('User_LoginId');
+				$this->session->unset_userdata('User_UserName');
+				echo json_encode(['action' => 'success', 'msg' => 'You have successfully Deactivate your profile till you can not login']);
+			}else{
+				echo json_encode(['action' => 'info', 'msg' => 'Please Write DESACTIVER OR DISABLE To Disable Your Profile in Capital words']);
+			}
+		 }
 	}
 }
