@@ -243,7 +243,7 @@
                                                 <td><?php echo $route['origin_input']; ?></td>
                                                 <td class="hidden-sm"><?php echo $route['destination_input']; ?></td>
                                                 <td><?php echo $route['free_spaces']; ?></td>
-												<?php 
+												<?php
 												$this->db->select('count(places_booked) as total_reserved_seats');
 												$this->db->where('route_id', $route['route_id']);
 												$this->db->group_by('route_id');
@@ -259,7 +259,7 @@
                                                 <td>
                                                     <span class="u-label g-bg-cyan g-rounded-20 g-px-10">&euro; <?php echo $route['travel_charges']; ?></span>
                                                 </td>
-												<?php 
+												<?php
 												$datepickerFrom_informate = date('d-m-Y', strtotime($route['datepickerFrom'])) . ' ' . date('H:i', strtotime($route['depart_time_input']));
 												$status = 'Expired';
 												$color = 'red';
@@ -273,11 +273,11 @@
 												</td>
                                                 <td>
 													<?php if($status == 'Active' && $total_reserve == $route['free_spaces']){ ?>
-														<button type="button" data-id="<?php echo $route['route_id']; ?>" class="btn btn-primary btn-xs trip_edit">Edit</button>
+														<a href="<?php echo base_url('propose_route/index/edit/'.$route['route_id']); ?>" class="btn btn-primary btn-xs">Edit</a>
 														<button type="button" data-id="<?php echo $route['route_id']; ?>" class="btn btn-danger btn-xs trip_del">Del</button>
 													<?php } ?>
-													
-													<span data-toggle="collapse" data-target="#accordion_<?php echo $n; ?>" 
+
+													<span data-toggle="collapse" data-target="#accordion_<?php echo $n; ?>"
 													class="u-label u-label-warning g-color-white clickable"
 													style="cursor: pointer;">Cliquez ici</span>
 												</td>
@@ -623,9 +623,9 @@
                 }
             }
         });
-    });   
+    });
 
-	// Confirmation for delete 
+	// Confirmation for delete
     $(document).on('click', '.trip_del', function () {
 		 swal({
 		  title: "Are you sure?",
@@ -655,12 +655,12 @@
 					   }
 					}
 				});
-				
+
 		  } else {
 			swal("Your Record is safe!");
 		  }
 		});
-    });   
+    });
 
 	//send verfication message
 	$(document).on('click', '#send_verification_code', function(){
@@ -684,8 +684,8 @@
 					}
                 }
             });
-	});	
-	
+	});
+
 	// send mobile verification code
 	$(document).on('keyup', '#mobile', function(){
 		var mobile_number = $('#mobile').val();
@@ -697,15 +697,15 @@
 			}else{
 				$('#mobile').css('width', '57%');
 			}
-			
+
 			 var btn = '<button type="button" class="btn send_verification_code u-btn-primary rounded-0" id="send_verification_code" class="form-control">Verification</button>';
 			 if($('#verification_code').length > 0){
 				 $('#verification_code').after(btn);
 			 }else{
 				 $(this).after(btn);
 			 }
-			 
-			 
+
+
 		}else if(mobile_number ===  verify_mobile){
 			$('#verification_code').remove();
 			$('.send_verification_code').remove();
@@ -717,7 +717,7 @@
 			$('#mobile').css('width', '70%');
 		}
 	});
-	
+
 	//send verifying email to verified email
 	$(document).on('click', '#send_verifying_email', function(){
 		var user_id = $(this).data('id');

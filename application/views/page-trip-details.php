@@ -163,6 +163,10 @@
                                 <i class="icon-check d-block g-color-primary g-mr-8"></i>
                                 <span class="d-block">Acceptation : <?php echo $search_data['acceptance']; ?></span>
                             </li>
+                            <li class="d-flex align-items-center g-mb-12">
+                                <i class="icon-check d-block g-color-primary g-mr-8"></i>
+                                <span class="d-block">Mode de paiement : <?php echo ($search_data['payment_method'] == 'cash') ? ucwords($search_data['payment_method']) . ' ' . '<i class="fa fa-money g-font-size-20 align-self-center mx-auto g-color-darkblue"></i>' : ucwords($search_data['payment_method']) . ' ' . '<i class="fa fa-paypal g-font-size-20 align-self-center mx-auto g-color-darkblue"></i>'; ?></span>
+                            </li>
                         </ul>
                         <h3 class="h5 g-color-gray-dark-v1 g-mb-10 g-mt-30">Description du trajet</h3>
                         <p><?php echo $search_data['travel_description']; ?></p>

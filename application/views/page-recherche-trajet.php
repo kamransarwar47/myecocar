@@ -88,7 +88,7 @@
                                         <ul class="list-inline d-flex justify-content-between g-mb-20">
                                             <li class="list-inline-item g-mr-10">
                                                 <img class="g-height-25 g-width-25 rounded-circle g-mr-5"
-                                                     src="<?php echo base_url(); ?>assets/img/bg/img7.jpg"
+                                                     src="<?php echo base_url(); ?>assets/uploads/<?php echo userimage_by_id($record['user_id']); ?>"
                                                      alt="Image Description"><?php echo username_by_id($record['user_id']); ?>
                                             </li>
                                         </ul>
@@ -138,6 +138,12 @@
                                             <li class="list-inline-item">
                         <span class="d-block g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer">
                             <i class="icon-check g-pos-rel g-top-1"></i> Acceptation : <?php echo $record['acceptance']; ?>
+                          </span>
+                                            </li>
+                                            <li class="list-inline-item">
+                        <span class="d-block g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer">
+                            <i class="icon-check g-pos-rel g-top-1"></i> Mode de paiement : <?php echo ($record['payment_method'] == 'cash') ? ucwords($record['payment_method']) . ' ' . '<i class="fa fa-money g-font-size-20 align-self-center mx-auto g-color-darkblue"></i>' : ucwords($record['payment_method']) . ' ' . '<i class="fa fa-paypal g-font-size-20 align-self-center mx-auto g-color-darkblue"></i>'; ?>
+
                           </span>
                                             </li>
                                         </ul>

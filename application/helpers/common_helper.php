@@ -66,6 +66,23 @@ function username_by_id($id)
 }
 
 /**
+ * get user name by id
+ */
+function userimage_by_id($id)
+{
+    $CI = &get_instance();
+    $CI->db->select('user_profile_img');
+    $CI->db->where('user_id', $id);
+    $result = $CI->db->get('users');
+    $result = $result->row_array();
+    if($result['user_profile_img'] != ''){
+        return $result['user_profile_img'];
+    } else {
+        return 'no-image.jpg';
+    }
+}
+
+/**
  * get remaining places by route id
  */
 function remaining_places_by_route_id($id)
