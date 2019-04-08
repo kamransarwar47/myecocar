@@ -39,6 +39,8 @@ class Login extends CI_Controller {
                 $user_data = $result->row();
                     $this->session->set_userdata('User_LoginId', $user_data->user_id);
                     $this->session->set_userdata('User_UserName', $user_data->first_name.' '.$user_data->second_name);
+					//Activate the Account
+					$this->common_model->update('users', ['user_status' => 1], ['user_id' => $this->session->userdata('User_LoginId')]);
                     return true;
             }else{
 				$this->form_validation->set_message('ValidateLogin', 'User name or password is invalid.');

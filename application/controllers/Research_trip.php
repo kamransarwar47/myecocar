@@ -25,7 +25,10 @@ class Research_trip extends CI_Controller
             if (isset($_GET['dt']) && $_GET['dt'] != '') {
                 $search_query['datepickerFrom'] = date('Y-m-d', strtotime($this->input->get('dt')));
             }
-
+			// user must b active
+			$this->db->join('users', 'users.user_id = route.user_id', 'LEFT');
+			$search_query['user_status'] = 1;
+			
             $search_data            = $this->common_model->get('route', $search_query);
             $data['total_records']  = $search_data->num_rows();
             $data['search_records'] = $search_data->result_array();
