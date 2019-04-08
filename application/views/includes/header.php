@@ -57,7 +57,7 @@ window.cookieconsent.initialise({
 
                 <div class="col-auto">
                     <i class="fa fa-phone g-font-size-18 g-valign-middle g-color-primary g-mr-10 g-mt-minus-2"></i>
-                    8 800 1234 4321
+                    x xxx xxxx xxxx
                 </div>
 
                 <div class="col-auto">
@@ -115,7 +115,7 @@ window.cookieconsent.initialise({
                 <!-- End Responsive Toggle Button -->
 
                 <!-- Logo -->
-                <a href="index.php" class="navbar-brand">
+                <a href="<?php echo base_url(); ?>" class="navbar-brand">
                     <img src="<?php echo base_url('assets/img/bg/logo-new.png'); ?>" alt="Image Description">
                 </a>
                 <!-- End Logo -->

@@ -108,7 +108,7 @@
                     <div class="u-check-icon-checkbox-v6 g-absolute-centered--y g-left-0">
                       <i class="fa" data-check-icon="&#xf00c"></i>
                     </div>
-                     J'accepte les <a href="#">Termes et les Conditions</a>
+                     J'accepte les <a href="<?php echo base_url('terms_services'); ?>">Termes et les Conditions</a>
                   </label>
                 </div>
 

@@ -19,7 +19,7 @@
 				echo $this->session->flashdata('message'); 
 			?>
               <!-- Form -->
-              <form class="g-py-15" method="post" id="login_form" action="<?php echo base_url('login'); ?>">
+              <form autocomplete="off" class="g-py-15" method="post" id="login_form" action="<?php echo base_url('login'); ?>">
                 <h2 class="h3 g-color-white mb-4">Se connecter</h2>
                 <div class="mb-4 div-input-group">
                   <div class="input-group">
@@ -44,7 +44,18 @@
                 <div class="g-mb-60">
                   <button id="login_btn" class="btn btn-md btn-block u-btn-primary rounded text-uppercase g-py-13" type="button">Connexion</button>
                 </div>
-
+				<a href="https://web.facebook.com/myecocar.fr/" class="btn btn-block u-btn-facebook rounded text-uppercase g-py-13 g-mb-15" type="button">
+                  <i class="mr-3 fa fa-facebook"></i>
+                  <span class="g-hidden-xs-down">Se connecter avec</span> Facebook
+                </a>
+                <a href="https://twitter.com/MyecocarC" class="btn btn-block u-btn-twitter rounded text-uppercase rounded text-uppercase g-py-13 g-mb-15" type="button">
+                  <i class="mr-3 fa fa-twitter"></i>
+                  <span class="g-hidden-xs-down">Se connecter avec</span> Twitter
+                </a>
+				<a href="https://www.instagram.com/myecocar_covoiturage/" class="btn btn-block u-btn-instagram rounded text-uppercase g-py-13 g-mb-15" type="button">
+                  <i class="mr-3 fa fa-instagram"></i>
+                  <span class="g-hidden-xs-down">Se connecter avec</span> Instagram
+                </a>
               </form>
               <!-- End Form -->
             </div>

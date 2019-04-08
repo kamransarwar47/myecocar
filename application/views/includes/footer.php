@@ -25,20 +25,20 @@
                         <li class="g-pos-rel g-brd-bottom g-brd-white-opacity-0_1 g-py-10">
                             <h4 class="h6 g-pr-20 mb-0">
                                 <a class="g-color-white-opacity-0_8 g-color-white--hover"
-                                   href="page-comment-camache.php">Comment ça marche</a>
+                                   href="<?php echo base_url('how_its_work'); ?>">Comment ça marche</a>
                                 <i class="fa fa-angle-right g-absolute-centered--y g-right-0"></i>
                             </h4>
                         </li>
                         <li class="g-pos-rel g-brd-bottom g-brd-white-opacity-0_1 g-py-10">
                             <h4 class="h6 g-pr-20 mb-0">
-                                <a class="g-color-white-opacity-0_8 g-color-white--hover" href="#">Application
+                                <a class="g-color-white-opacity-0_8 g-color-white--hover" href="javascript:void(0)">Application
                                     Mobile</a>
                                 <i class="fa fa-angle-right g-absolute-centered--y g-right-0"></i>
                             </h4>
                         </li>
                         <li class="g-pos-rel g-brd-bottom g-brd-white-opacity-0_1 g-py-10">
                             <h4 class="h6 g-pr-20 mb-0">
-                                <a class="g-color-white-opacity-0_8 g-color-white--hover" href="page-avis.php">Lire tous
+                                <a class="g-color-white-opacity-0_8 g-color-white--hover" href="<?php echo base_url('reviews'); ?>">Lire tous
                                     les avis</a>
                                 <i class="fa fa-angle-right g-absolute-centered--y g-right-0"></i>
                             </h4>
@@ -46,13 +46,13 @@
                         <li class="g-pos-rel g-brd-bottom g-brd-white-opacity-0_1 g-py-10">
                             <h4 class="h6 g-pr-20 mb-0">
                                 <a class="g-color-white-opacity-0_8 g-color-white--hover"
-                                   href="page-conditions-dutilisations.php#price">Prix du covoiturage</a>
+                                   href="<?php echo base_url('terms_services'); ?>#price">Prix du covoiturage</a>
                                 <i class="fa fa-angle-right g-absolute-centered--y g-right-0"></i>
                             </h4>
                         </li>
                         <li class="g-pos-rel g-py-10">
                             <h4 class="h6 g-pr-20 mb-0">
-                                <a class="g-color-white-opacity-0_8 g-color-white--hover" href="page-contacts.php">Contact</a>
+                                <a class="g-color-white-opacity-0_8 g-color-white--hover" href="<?php echo base_url('contact_us'); ?>">Contact</a>
                                 <i class="fa fa-angle-right g-absolute-centered--y g-right-0"></i>
                             </h4>
                         </li>
@@ -78,14 +78,14 @@
                         </li>
                         <li class="g-pos-rel g-brd-bottom g-brd-white-opacity-0_1 g-py-10">
                             <h4 class="h6 g-pr-20 mb-0">
-                                <a class="g-color-white-opacity-0_8 g-color-white--hover" href="page-cookies.php">Utilisation
-                                    des cookies</a>
+                                <a class="g-color-white-opacity-0_8 g-color-white--hover" href="<?php echo base_url('cookies'); ?>">Utilisation
+                                    des cookies</a> 
                                 <i class="fa fa-angle-right g-absolute-centered--y g-right-0"></i>
                             </h4>
                         </li>
                         <li class="g-pos-rel g-brd-bottom g-brd-white-opacity-0_1 g-py-10">
                             <h4 class="h6 g-pr-20 mb-0">
-                                <a class="g-color-white-opacity-0_8 g-color-white--hover" href="page-charte.php">Charte
+                                <a class="g-color-white-opacity-0_8 g-color-white--hover" href="<?php echo base_url('Charter'); ?>">Charte
                                     de bonne conduite</a>
                                 <i class="fa fa-angle-right g-absolute-centered--y g-right-0"></i>
                             </h4>
@@ -93,8 +93,8 @@
                         <li class="g-pos-rel g-brd-bottom g-brd-white-opacity-0_1 g-py-10">
                             <h4 class="h6 g-pr-20 mb-0">
                                 <a class="g-color-white-opacity-0_8 g-color-white--hover"
-                                   href="page-conditions-dutilisations.php">Conditions Générales d'Utilisation</a>
-                                <i class="fa fa-angle-right g-absolute-centered--y g-right-0"></i>
+                                   href="<?php echo base_url('terms_services'); ?>">Conditions Générales d'Utilisation</a>
+                                <i class="fa fa-angle-right g-absolute-centered--y g-right-0"></i> 
                             </h4>
                     </ul>
                 </nav>
@@ -116,7 +116,7 @@
                 <i class="fa fa-map-marker"></i>
               </span>
                         </div>
-                        <p class="mb-0">795 xxx xxx, xxxxx 600, <br> xxx xxxxxxxxx, xx xxxxxxx 795</p>
+                        <p class="mb-0">xxx xxx xxx, xxxxx xxx, <br> xxx xxxxxxxxx, xx xxxxxxx xxx</p>
                     </div>
                     <!-- End Location -->
 
@@ -127,7 +127,7 @@
                 <i class="fa fa-phone"></i>
               </span>
                         </div>
-                        <p class="mb-0">(+123) 456 7890 <br> (+123) 456 7891</p>
+                        <p class="mb-0">(+xxx) xxx xxxx <br> (+xxx) xxx xxxx</p>
                     </div>
                     <!-- End Phone -->
 
@@ -139,7 +139,7 @@
               </span>
                         </div>
                         <p class="mb-0">
-                            <a class="g-color-white-opacity-0_8 g-color-white--hover" href="mailto:info@htmlstream.com">info@myecocar.org</a>
+                            <a class="g-color-white-opacity-0_8 g-color-white--hover" href="mailto:info@htmlstream.com">contact@myecocar.org</a>
                             <br>
                             <a class="g-color-white-opacity-0_8 g-color-white--hover" href="#">www.myecocar.org</a>
                         </p>

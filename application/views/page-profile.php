@@ -21,6 +21,10 @@
 
             <!-- Profle Content -->
             <div class="col-lg-10">
+			<?php
+				echo $this->session->flashdata('message');
+				echo validation_errors();
+			?>
                 <!-- Nav tabs -->
                 <ul class="nav nav-justified u-nav-v1-1 u-nav-primary g-brd-bottom--md g-brd-bottom-2 g-brd-primary g-mb-20"
                     role="tablist" data-target="nav-1-1-default-hor-left-underline"
@@ -52,11 +56,7 @@
                         <h2 class="h4 g-font-weight-300">Gérez votre nom, votre identifiant et vos adresses email</h2>
                         <p>Vous trouverez ci-dessous le nom, l’adresse e-mail, les contacts, etc., enregistrés pour
                             votre compte.</p>
-							<?php
-								echo $this->session->flashdata('message');
-								echo validation_errors();
-							?>
-							<form id="edit_sigup_from" enctype="multipart/form-data" action="<?php echo base_url('user_profile/img_upload_user_profile'); ?>" method="post">
+							<form enctype="multipart/form-data" action="<?php echo base_url('user_profile/img_upload_user_profile'); ?>" method="post">
 								<input type="file" name="user_profile_img" id="user_profile_img form-control profile_fields" >
 								<button type="submit" class="btn btn-sm u-btn-primary rounded-0">Submit</button>
 							</form>
@@ -485,12 +485,67 @@
                             </div>
                             <!-- End Verify Password -->
                             <div class="text-sm-right">
-                                <button id="change_password" class="btn u-btn-primary rounded-0 g-py-12 g-px-25"
+                                <button id="deactivate_account_btn" class="btn u-btn-primary rounded-0 g-py-12 g-px-25"
                                         href="#">Enregistrer
                                 </button>
                             </div>
                             <!-- End Verify Password -->
+						</form>
+						
+						<!--Deactivate Account -->
+						<form id="deactivate_account_form" method="post"
+                              action="<?php echo base_url('user_profile/deactivate'); ?>">
+							<hr class="g-brd-gray-light-v4 g-my-25">
+
+							   <h2 class="h4 g-font-weight-300">Désactivation</h2>
+							   <p class="g-mb-25">Pour désactiver votre compte, veuillez renseigner le mot DESACTIVER dans le champ ci-dessous et cliquer sur le bouton Enregistrer.</p>
+
+								<!-- Verify Password -->
+							  <div class="form-group row g-mb-25">
+								<label class="col-sm-3 col-form-label g-color-gray-dark-v2 g-font-weight-700 text-sm-right g-mb-10">Que voulez-vous faire ?</label>
+								<div class="col-sm-9">
+								  <div class="input-group g-brd-primary--focus">
+									<input name="deactivate_account" id="deactivate_account" class="form-control form-control-md border-right-0 rounded-0 g-py-13 pr-0" type="password" placeholder="">
+									<div class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-light-v1 rounded-0">
+									  <i class="icon-lock"></i>
+									</div>
+								  </div>
+								</div>
+							  </div>
+							  
+							  <div class="text-sm-right">
+								   <button id="deactivate_account_btn" class="btn u-btn-primary rounded-0 g-py-12 g-px-25" >Enregistrer</button>
+							  </div>
+						 </form>
+						  <!-- End Deactivate Account -->
+						 
+						<!-- Delete Account -->						 
+						 <form id="delete_account_form" method="post"
+                              action="<?php echo base_url('user_profile/delete_account'); ?>">
+							  
+							  <hr class="g-brd-gray-light-v4 g-my-25">
+
+							   <h2 class="h4 g-font-weight-300">Suppression </h2>
+							   <p class="g-mb-25">Pour supprimer votre compte, veuillez renseigner le mot SUPPRIMER dans le champ ci-dessous et cliquer sur le bouton Enregistrer.</p>
+
+							  <div class="form-group row g-mb-25">
+								<label class="col-sm-3 col-form-label g-color-gray-dark-v2 g-font-weight-700 text-sm-right g-mb-10">Que voulez-vous faire ?</label>
+								<div class="col-sm-9">
+								  <div class="input-group g-brd-primary--focus">
+									<input class="form-control form-control-md border-right-0 rounded-0 g-py-13 pr-0" name="delete_account" id="delete_account" type="password" placeholder="">
+									<div class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-light-v1 rounded-0">
+									  <i class="icon-lock"></i>
+									</div>
+								  </div>
+								</div>
+							  </div>
+							  
+							  <div class="text-sm-right">
+								   <button id="delete_account_btn"  class="btn u-btn-primary rounded-0 g-py-12 g-px-25">Enregistrer</button>
+							  </div>
                         </form>
+						<!-- End Delete Account -->
+						
                     </div>
                     <!-- End Notification Settings -->
                 </div>
@@ -738,5 +793,38 @@
 			   }
 			}
 		});
+	});
+	
+	// validation of form forget password
+	$(document).on('click', '#sigup_save_btn', function(e){
+		var req_input = $('#sigup_from input[required]');
+		var is_valid = true;
+		var input_types_1 = ['password']; 
+	 
+		$.each(req_input, function(k, input){
+			var error_msg_id = $(this).attr('id')+'_error_msg';
+			$('#'+error_msg_id).remove();
+			if(input_types_1.indexOf($(this).attr('type')) != -1 && $(this).val() == ''){
+				$(this).parent().parent('.div-input-group').append('<p id="'+error_msg_id+'" class="" style="color:red">This Field is required</p>');
+				is_valid = false;
+			}
+		});	
+		//confirm new_password
+		var new_password = $('#new_password').val();
+		var confirm_new_password = $('#confirm_new_password').val();
+		if( new_password !== '' && confirm_new_password !== ''){
+			if(new_password.length >= 8 ){
+				if(new_password !== confirm_new_password){
+					$('#confirm_new_password').parent().parent('.div-input-group').append('<p id="confirm_password_error_msg" class="" style="color:red">Your Confirm new password does not Match</p>');
+					is_valid = false;
+				}
+			}else{
+				$('#confirm_new_password').parent().parent('.div-input-group').append('<p id="confirm_password_error_msg" class="" style="color:red">new password Length should be Greater then or Equal to 8</p>');
+					is_valid = false;
+			}			
+		}
+		if(is_valid){
+			$('#sigup_from').submit();
+		}
 	});
 </script>

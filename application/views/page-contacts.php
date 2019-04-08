@@ -24,7 +24,7 @@
                 <i class="icon-real-estate-027 u-line-icon-pro"></i>
               </span>
             <h4 class="h5 g-font-weight-600 g-mb-5">adresse</h4>
-            <span class="d-block">61 xxxxxx xxx., xxxxxx, 3xxxxG</span>
+            <span class="d-block">xx xxxxxx xxx., xxxxxx, 3xxxxG</span>
           </div>
           <!-- End Icon Blocks -->
         </div>
@@ -36,7 +36,7 @@
                 <i class="icon-communication-062 u-line-icon-pro"></i>
               </span>
             <h4 class="h5 g-font-weight-600 g-mb-5">Numéro de téléphone</h4>
-            <span class="d-block">1-000-000-0000</span>
+            <span class="d-block">x-xxx-xxx-xxxx</span>
           </div>
           <!-- End Icon Blocks -->
         </div>
@@ -48,7 +48,7 @@
                 <i class="icon-electronics-005 u-line-icon-pro"></i>
               </span>
             <h4 class="h5 g-font-weight-600 g-mb-5">Email</h4>
-            <span class="d-block">mail@myecocar.com</span>
+            <span class="d-block">contact@myecocar.org</span>
           </div>
           <!-- End Icon Blocks -->
         </div>

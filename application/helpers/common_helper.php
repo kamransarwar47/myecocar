@@ -115,7 +115,7 @@ function boooking_by_route_id($id)
 /**
  * get booking by route id
  */
-function send_email($arrgs = [])
+function send_email($arrgs = [], $form = 'contact@myecocar.org')
 {	
 	if(!empty($arrgs)){
 		$to = $arrgs['to'];
@@ -127,7 +127,7 @@ function send_email($arrgs = [])
 		$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 		
 		// More headers
-		$headers .=  "From: <info@myecocar.org>";
+		$headers .=  "From: <".$form.">";
 
 		$res = mail($to,$subject,$txt,$headers);
 		if($res){

@@ -40,11 +40,11 @@ class Contact_us extends CI_Controller
 			
 			if($email != ''){	
 					$arrgs = [
-						'to' => $email,
+						'to' => 'contact@myecocar.org',
 						'subject' => $subject,
 						'txt' => 'Hi '.$name.',<br>'.$descriptions,
 					];
-					$res = send_email($arrgs);
+					$res = send_email($arrgs, $email);
 					
 					if($res){
 						set_message('Your Message has been send successfully', 'success');
