@@ -271,7 +271,7 @@ class User_profile extends CI_Controller
 				if($email != ''){	
 					$arrgs = [
 						'to' => $email,
-						'subject' => 'Myecocar Registeration Email Verification',
+						'subject' => 'Myecocar Delete Account Verification',
 						'txt' => 'Hi '.$name.',<br>'.'You can delete your Myecocar profile completly by clicking on the link below<br><a href="'.base_url("user_profile/delete_account?del_code=".$secrete_del_code.'&u_id='.$user_id).'">Click Here</a>'
 					];
 					$res = send_email($arrgs);

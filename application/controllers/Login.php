@@ -41,6 +41,13 @@ class Login extends CI_Controller {
                     $this->session->set_userdata('User_UserName', $user_data->first_name.' '.$user_data->second_name);
 					//Activate the Account
 					$this->common_model->update('users', ['user_status' => 1], ['user_id' => $this->session->userdata('User_LoginId')]);
+					// check email is verified or not
+					$is_verified = $user_data->is_verified;
+					if($is_verified != 1){
+						$email_verification_link = ' <a href="javascript:void(0)" data-id="'.$user_data->user_id.'" data-email="'.$user_data->email.'" data-name="'.$user_data->first_name.'" id="send_verifying_email"> Click Here</a>';
+						$this->form_validation->set_message('ValidateLogin', _l('msg_verified_email_address').$email_verification_link);
+						return false;
+					}
                     return true;
             }else{
 				$this->form_validation->set_message('ValidateLogin', _l('username_pass_inv_msg'));

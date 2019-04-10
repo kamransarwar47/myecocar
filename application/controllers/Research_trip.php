@@ -59,22 +59,34 @@ class Research_trip extends CI_Controller
 			
 			//send email
 			$user_id = $this->session->userdata('User_LoginId');
-			$res = $this->db->get('users', ['user_id' => $user_id], 'email, first_name');
-			if($res->num_rows() > 0){
-				$res =$res->row();
-				$email = $res->email;
-				$name = $res->first_name;
+			$res_user_info = $this->db->get('users', ['user_id' => $user_id]);
+			if($res_user_info->num_rows() > 0){
+				$res_user_info =$res_user_info->row_array();
+				$email = $res_user_info['email'];
+				$name = $res_user_info['first_name'];
 				if($email){	
+				
 				// route To From
-				 $search_data        = $this->common_model->get('route', ['route_id' => $this->input->get('id')], 'origin_city, origin_country, dest_city, dest_country');
+				$this->db->join('users', 'users.user_id = route.user_id', 'LEFT');
+				 $search_data        = $this->common_model->get('route', ['route_id' => $this->input->get('id')]);
+				
 				 if($search_data->num_rows() > 0){
 					$search_data = $search_data->row_array();
 					$arrgs = [
 						'to' => $email,
 						'subject' => 'Myecocar Reservation of Seat',
-						'txt' => 'Hi '.$name.',<br>'.'You have successfully reserved your seat against booking Number '.$id. ' From '.$search_data['dest_city'].', '.$search_data['dest_country'].' To '.$search_data['origin_city'].', '.$search_data['origin_country'].' Data & Time: '.date('d-m-Y H:i:s'),
+						'txt' => 'Hi '.$name.',<br>'.'You have successfully reserved your seat against booking Number '.$id. ' From '.$search_data['dest_city'].', '.$search_data['dest_country'].' To '.$search_data['origin_city'].', '.$search_data['origin_country'].' Data & Time of Travelling: '.date('d-m-Y', strtotime($search_data['datepickerFrom'])).' '.$search_data['depart_time_input'],
 					];
 					$res = send_email($arrgs);
+					
+					// send email to driver
+					$arrgs = [
+						'to' => 'contact@myecocar.org',
+						'subject' => 'Myecocar Reservation of Seat',
+						'txt' => 'Hi '.$search_data['first_name'].',<br>'.$name.' has book your seat against your trip From '.$search_data['dest_city'].', '.$search_data['dest_country'].' To '.$search_data['origin_city'].', '.$search_data['origin_country'].' Data & Time of Travelling: '.date('d-m-Y', strtotime($search_data['datepickerFrom'])).' '.$search_data['depart_time_input'].'</br>'.'Please Confirm there status by login your Dashboard </br> Passenger Info </br>Name: '.$res_user_info['first_name'].' '.$res_user_info['second_name'].'</br>Mobile: '.$res_user_info['mobile'].'</br>Email: '.$email.'</br>Thankyour for your time and consideration',
+					];
+					$res = send_email($arrgs, $arrgs);
+					
 					}					
 				}
 			}

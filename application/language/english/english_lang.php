@@ -172,5 +172,9 @@ $lang['price_text']              = 'Price';
 $lang['per_seat_text']           = 'Per Seat';
 $lang['accept_btn']              = 'Accept';
 
+// validation error
+$lang['msg_verified_email_address']              = 'Please verified your email address first or resend verification email to your email please';
+
+
 
 ?>

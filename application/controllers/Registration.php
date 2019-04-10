@@ -50,7 +50,7 @@ class Registration extends CI_Controller {
 				}
 			}
 			
-			set_message('You Have Register Successfully', 'success');
+			set_message('You Have Register Successfully Please verify your Email address first to login', 'success');
 			redirect('registration');
 			
         }

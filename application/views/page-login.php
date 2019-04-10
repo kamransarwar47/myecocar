@@ -14,10 +14,15 @@
         <div class="row justify-content-center align-items-center no-gutters">
           <div class="col-lg-5 g-bg-teal g-rounded-left-5--lg-up">
             <div class="g-pa-50">
-			<?php 
-				echo validation_errors();
-				echo $this->session->flashdata('message'); 
-			?>
+			
+			<!--validation messages -->
+			<?php if(validation_errors()) { ?>
+			<div class="alert alert-warning alert-dismissable">
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+				<?php echo validation_errors(); ?>
+			</div>
+			<?php } echo $this->session->flashdata('message'); ?>
+			
               <!-- Form -->
               <form autocomplete="off" class="g-py-15" method="post" id="login_form" action="<?php echo base_url('login'); ?>">
                 <h2 class="h3 g-color-white mb-4">Se connecter</h2>
@@ -96,5 +101,27 @@
 		if(is_valid){
 			$('#login_form').submit();
 		}
+	});
+	
+	//send verifying email to verified email
+	$(document).on('click', '#send_verifying_email', function(){
+		var user_id = $(this).data('id');
+		var email = $(this).data('email');
+		var name = $(this).data('name');
+		$.ajax({
+			type: "POST",
+			url: "<?php echo base_url('user_profile/verifying_email'); ?>",
+			data: {'user_id': user_id, 'email': email, 'name': name},
+			cache: false,
+			success: function (data) {
+			   if(data){
+				   swal("Email has been send to your email address successfully please verified.", {
+					  icon: "success",
+					});
+			   }else{
+				  swal ( "Oops" ,  "Something went wrong!" ,  "error" );
+			   }
+			}
+		});
 	});
 </script>
