@@ -171,10 +171,23 @@ $lang['date_time_text']          = 'Date - Time';
 $lang['price_text']              = 'Price';
 $lang['per_seat_text']           = 'Per Seat';
 $lang['accept_btn']              = 'Accept';
+$lang['driver_text']             = 'Driver';
 
 // validation error
-$lang['msg_verified_email_address']              = 'Please verified your email address first or resend verification email to your email please';
+$lang['msg_verified_email_address'] = 'Please verified your email address first or resend verification email to your email please';
 
-
-
+// driver details page
+$lang['driver_page_title']         = 'Driver Details';
+$lang['profile_of_text']           = 'Profile of';
+$lang['passenger_and_driver_text'] = 'Passenger and driver';
+$lang['member_description']        = 'Description of member';
+$lang['member_information']        = 'Information';
+$lang['years_old_text']            = 'years old';
+$lang['gender_text']               = 'Gender';
+$lang['verifications_text']        = 'Verifications';
+$lang['verified_phone_text']       = 'Verified phone';
+$lang['verified_email_text']       = 'Verified email';
+$lang['activity_text']             = 'Activity';
+$lang['posted_ads_text']           = 'Posted Ads';
+$lang['registration_date_text']    = 'Registration date';
 ?>

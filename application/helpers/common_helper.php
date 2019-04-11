@@ -136,3 +136,22 @@ function send_email($arrgs = [], $form = 'contact@myecocar.org')
 	}
 	return false;
 }
+
+/**
+ * @param $dob yyyy-mm-dd format
+ */
+function calc_age_from_dob($dob){
+    $today = new DateTime();
+    $birthdate = new DateTime($dob);
+    $interval = $today->diff($birthdate);
+    return $interval->format('%y');
+}
+
+function get_ads_post_by_user_id($id){
+    $CI = &get_instance();
+    $CI->db->select('COUNT(route_id) AS total_ads');
+    $CI->db->where('user_id', $id);
+    $result = $CI->db->get('route');
+    $result = $result->row_array();
+    return $result['total_ads'];
+}

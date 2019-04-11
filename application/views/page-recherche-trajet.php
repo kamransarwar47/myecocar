@@ -89,7 +89,7 @@
                                             <li class="list-inline-item g-mr-10">
                                                 <img class="g-height-25 g-width-25 rounded-circle g-mr-5"
                                                      src="<?php echo base_url(); ?>assets/uploads/<?php echo userimage_by_id($record['user_id']); ?>"
-                                                     alt="Image Description"><?php echo username_by_id($record['user_id']); ?>
+                                                     alt="Image Description"><a href="<?php echo base_url('driver_detail/index/' . $record['user_id']); ?>" class="u-link-v5 g-color-gray-dark-v1 g-color-primary--hover"><?php echo username_by_id($record['user_id']); ?></a>
                                             </li>
                                         </ul>
                                         <!-- End Search Info -->

@@ -84,7 +84,7 @@
                                                 <?php
                                                 for ($i = 1; $i <= $remaining_place; $i++) {
                                                     ?>
-                                                    <option value="<?php echo $i; ?>"><?php echo $i; ?> <?php echo _l('seat_text'); ?></option>
+                                                    <option value="<?php echo $i; ?>"><?php echo $i; ?><?php echo _l('seat_text'); ?></option>
                                                     <?php
                                                 }
                                                 ?>
@@ -116,60 +116,147 @@
 
                     <hr class="g-brd-gray-light-v4">
 
-                    <div class="col-lg g-mb-30 g-mb-0--lg">
-                        <h3 class="h5 g-color-gray-dark-v1 g-mb-10"><?php echo _l('offer_detail_text'); ?></h3>
-                        <ul class="list-unstyled mb-0">
-                            <li class="media g-mb-10">
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <div class="col-lg g-mb-30 g-mb-0--lg">
+                                <h3 class="h5 g-color-gray-dark-v1 g-mb-10"><?php echo _l('offer_detail_text'); ?></h3>
+                                <ul class="list-unstyled mb-0">
+                                    <li class="media g-mb-10">
                       <span class="d-block g-color-gray-dark-v5 g-width-110">
                           <i class="icon-calendar g-pos-rel g-top-1 g-mr-5"></i> <?php echo _l('date_time_text'); ?>:
                         </span>
-                                <span class="media-body"><?php echo date('d M, Y', strtotime($search_data['datepickerFrom'])); ?>
-                                    - <?php echo date('H:i', strtotime($search_data['depart_time_input'])); ?></span>
-                            </li>
-                            <li class="media">
+                                        <span class="media-body"><?php echo date('d M, Y', strtotime($search_data['datepickerFrom'])); ?>
+                                            - <?php echo date('H:i', strtotime($search_data['depart_time_input'])); ?></span>
+                                    </li>
+                                    <li class="media">
                       <span class="d-block g-color-gray-dark-v5 g-width-110">
                           <i class="icon-wallet g-pos-rel g-top-1 g-mr-5"></i> <?php echo _l('price_text'); ?>:
                         </span>
-                                <span class="u-label g-bg-cyan g-rounded-20 g-px-10">&euro; <?php echo $search_data['travel_charges']; ?>
-                                    <?php echo _l('per_seat_text'); ?></span>
-                            </li>
-                        </ul>
-                    </div>
+                                        <span class="u-label g-bg-cyan g-rounded-20 g-px-10">&euro; <?php echo $search_data['travel_charges']; ?>
+                                            <?php echo _l('per_seat_text'); ?></span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-lg g-mb-30 g-mt-30 g-mb-0--lg">
+                                <h3 class="h5 g-color-gray-dark-v1 g-mb-10"><?php echo _l('post_ad_veh_info'); ?></h3>
+                                <ul class="list-unstyled g-mb-12 g-mb-0--md">
+                                    <li class="d-flex align-items-center g-mb-12">
+                                        <i class="icon-check d-block g-color-primary g-mr-8"></i>
+                                        <span class="d-block"><?php echo _l('vehicle_text'); ?>
+                                            : <?php echo $search_data['vehicle_model_make']; ?></span>
+                                    </li>
+                                    <li class="d-flex align-items-center g-mb-12">
+                                        <i class="icon-check d-block g-color-primary g-mr-8"></i>
+                                        <span class="d-block"><?php echo _l('post_ad_fuel'); ?>
+                                            : <?php echo $search_data['fuel_type']; ?></span>
+                                    </li>
+                                    <li class="d-flex align-items-center g-mb-12">
+                                        <i class="icon-check d-block g-color-primary g-mr-8"></i>
+                                        <span class="d-block"><?php echo _l('post_ad_baggage'); ?>
+                                            : <?php echo $search_data['baggages']; ?></span>
+                                    </li>
+                                    <li class="d-flex align-items-center g-mb-12">
+                                        <i class="icon-check d-block g-color-primary g-mr-8"></i>
+                                        <span class="d-block"><?php echo _l('post_ad_max_detour'); ?>
+                                            : <?php echo $search_data['max_detour']; ?></span>
+                                    </li>
+                                    <li class="d-flex align-items-center g-mb-12">
+                                        <i class="icon-check d-block g-color-primary g-mr-8"></i>
+                                        <span class="d-block"><?php echo _l('post_ad_sch_flex'); ?>
+                                            : <?php echo $search_data['sch_flex']; ?></span>
+                                    </li>
+                                    <li class="d-flex align-items-center g-mb-12">
+                                        <i class="icon-check d-block g-color-primary g-mr-8"></i>
+                                        <span class="d-block"><?php echo _l('post_ad_acceptance'); ?>
+                                            : <?php echo $search_data['acceptance']; ?></span>
+                                    </li>
+                                    <li class="d-flex align-items-center g-mb-12">
+                                        <i class="icon-check d-block g-color-primary g-mr-8"></i>
+                                        <span class="d-block"><?php echo _l('pay_mtd_text'); ?>
+                                            : <?php echo ($search_data['payment_method'] == 'cash') ? ucwords($search_data['payment_method']) . ' ' . '<i class="fa fa-money g-font-size-20 align-self-center mx-auto g-color-darkblue"></i>' : ucwords($search_data['payment_method']) . ' ' . '<i class="fa fa-paypal g-font-size-20 align-self-center mx-auto g-color-darkblue"></i>'; ?></span>
+                                    </li>
+                                </ul>
+                                <h3 class="h5 g-color-gray-dark-v1 g-mb-10 g-mt-30"><?php echo _l('post_ad_travel_desc'); ?></h3>
+                                <p><?php echo $search_data['travel_description']; ?></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <!-- Default Outline Panel-->
+                            <div class="card rounded-0">
+                                <h3 class="card-header h5 rounded-0">
+                                    <i class="fa fa-car g-font-size-default g-mr-5"></i>
+                                    <?php echo _l('driver_text'); ?>
+                                </h3>
 
-                    <div class="col-lg g-mb-30 g-mt-30 g-mb-0--lg">
-                        <h3 class="h5 g-color-gray-dark-v1 g-mb-10"><?php echo _l('post_ad_veh_info'); ?></h3>
-                        <ul class="list-unstyled g-mb-12 g-mb-0--md">
-                            <li class="d-flex align-items-center g-mb-12">
-                                <i class="icon-check d-block g-color-primary g-mr-8"></i>
-                                <span class="d-block"><?php echo _l('vehicle_text'); ?>: <?php echo $search_data['vehicle_model_make']; ?></span>
-                            </li>
-                            <li class="d-flex align-items-center g-mb-12">
-                                <i class="icon-check d-block g-color-primary g-mr-8"></i>
-                                <span class="d-block"><?php echo _l('post_ad_fuel'); ?>: <?php echo $search_data['fuel_type']; ?></span>
-                            </li>
-                            <li class="d-flex align-items-center g-mb-12">
-                                <i class="icon-check d-block g-color-primary g-mr-8"></i>
-                                <span class="d-block"><?php echo _l('post_ad_baggage'); ?>: <?php echo $search_data['baggages']; ?></span>
-                            </li>
-                            <li class="d-flex align-items-center g-mb-12">
-                                <i class="icon-check d-block g-color-primary g-mr-8"></i>
-                                <span class="d-block"><?php echo _l('post_ad_max_detour'); ?>: <?php echo $search_data['max_detour']; ?></span>
-                            </li>
-                            <li class="d-flex align-items-center g-mb-12">
-                                <i class="icon-check d-block g-color-primary g-mr-8"></i>
-                                <span class="d-block"><?php echo _l('post_ad_sch_flex'); ?>: <?php echo $search_data['sch_flex']; ?></span>
-                            </li>
-                            <li class="d-flex align-items-center g-mb-12">
-                                <i class="icon-check d-block g-color-primary g-mr-8"></i>
-                                <span class="d-block"><?php echo _l('post_ad_acceptance'); ?> : <?php echo $search_data['acceptance']; ?></span>
-                            </li>
-                            <li class="d-flex align-items-center g-mb-12">
-                                <i class="icon-check d-block g-color-primary g-mr-8"></i>
-                                <span class="d-block"><?php echo _l('pay_mtd_text'); ?> : <?php echo ($search_data['payment_method'] == 'cash') ? ucwords($search_data['payment_method']) . ' ' . '<i class="fa fa-money g-font-size-20 align-self-center mx-auto g-color-darkblue"></i>' : ucwords($search_data['payment_method']) . ' ' . '<i class="fa fa-paypal g-font-size-20 align-self-center mx-auto g-color-darkblue"></i>'; ?></span>
-                            </li>
-                        </ul>
-                        <h3 class="h5 g-color-gray-dark-v1 g-mb-10 g-mt-30"><?php echo _l('post_ad_travel_desc'); ?></h3>
-                        <p><?php echo $search_data['travel_description']; ?></p>
+                                <div class="card-block">
+                                    <div class="row">
+                                        <div class="col-lg-4 g-mb-30 g-mb-0--lg">
+                                            <div class="u-block-hover g-pos-rel">
+                                                <figure>
+                                                    <a href="<?php echo base_url('driver_detail/index/' . $user_details['user_id']); ?>"><img class="img-fluid w-100 u-block-hover__main--zoom-v1"
+                                                                    src="<?php echo base_url(); ?>assets/uploads/<?php echo userimage_by_id($user_details['user_id']); ?>"
+                                                                    alt="Image Description"></a>
+                                                </figure>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8 g-mb-30 g-mb-0--lg">
+                                            <h4 class="h5"><?php echo $user_details['first_name'] . ' ' . $user_details['second_name']; ?>
+                                            </h4>
+                                            <h4 class="h6">
+                                            <?php echo calc_age_from_dob(date('Y-m-d', strtotime($user_details['date_of_birth']))); ?>
+                                                <?php echo _l('years_old_text'); ?>
+                                            </h4>
+                                            <h4 class="h6"><?php echo $user_details['gender']; ?></h4>
+                                        </div>
+                                    </div>
+                                    <hr class="g-brd-gray-light-v4">
+                                    <div class="row">
+                                        <div class="col-lg-12 g-mb-30 g-mb-0--lg">
+                                            <span class="h5 mb-30"><?php echo _l('verifications_text'); ?></span>
+                                            <div class="row">
+                                                <div class="col-lg-2">
+                                                    <i class="fa fa-mobile fa-2x"></i>
+                                                </div>
+                                                <div class="col-lg-8">
+                                                    <?php echo _l('verified_phone_text'); ?>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <i class="fa fa-check-circle g-color-green"></i>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-2">
+                                                    <i class="fa fa-envelope-o fa-2x"></i>
+                                                </div>
+                                                <div class="col-lg-8">
+                                                    <?php echo _l('verified_email_text'); ?>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <?php echo ($user_details['is_verified'] == '1') ? '<i class="fa fa-check-circle g-color-green"></i>' : '<i class="fa fa-times-circle g-color-red"></i>'; ?>
+                                                </div>
+                                            </div>
+
+                                            <hr class="g-brd-gray-light-v4">
+
+                                            <span class="h5 mb-30"><?php echo _l('activity_text'); ?></span>
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <?php echo _l('posted_ads_text'); ?>
+                                                    : <?php echo get_ads_post_by_user_id($user_details['user_id']); ?>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <?php echo _l('registration_date_text'); ?>
+                                                    : <?php echo date('l, F d, Y', strtotime($user_details['register_datetime'])); ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Default Outline Panel-->
+                        </div>
                     </div>
 
                 </article>

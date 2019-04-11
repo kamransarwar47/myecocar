@@ -44,6 +44,7 @@ class Research_trip extends CI_Controller
         $this->form_validation->set_rules('places_booked', 'Siège de livre', 'trim|required');
         if ($this->form_validation->run() == false) {
             $data['search_data']        = $this->common_model->get('route', ['route_id' => $this->input->get('id')])->row_array();
+            $data['user_details']       = $this->common_model->get('users', ['user_id' => $data['search_data']['user_id']])->row_array();
             $data['header_link_active'] = 'search_route';
             $data['title']              = _l('trip_detail_page_title');
             $data['route_id']           = $this->input->get('id');
