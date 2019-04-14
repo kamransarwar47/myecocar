@@ -40,6 +40,7 @@ $lang['my_res_heading']         = "My Reservations";
 $lang['my_res_heading_details'] = "You will find below the bookings made for your account.";
 $lang['my_res_seats']           = "Seats Reserved";
 $lang['my_res_status']          = "Approved status";
+$lang['payment_Status']         = "Payment Status";
 //-------------------
 $lang['my_settings_heading']         = "My Settings";
 $lang['my_settings_heading_details'] = "To change your password, please fill in the three fields below.";
@@ -191,4 +192,5 @@ $lang['activity_text']             = 'Activity';
 $lang['posted_ads_text']           = 'Posted Ads';
 $lang['registration_date_text']    = 'Registration date';
 $lang['cancellation_reason']       = 'Trip Cancellation Reason';
+$lang['action']       			   = 'Action';
 ?>

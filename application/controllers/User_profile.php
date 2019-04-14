@@ -190,6 +190,21 @@ class User_profile extends CI_Controller
             exit('No direct script access allowed');
         }
     }
+
+	// cancelling booking
+    public function cancel_booking()
+    {
+        if ($this->input->is_ajax_request()) {
+            $result = $this->common_model->delete('bookings', ['booking_id' => $this->input->post('book_id')]);
+            if ($result) {
+                echo 'TRUE';
+            } else {
+                echo 'FALSE';
+            }
+        } else {
+            exit('No direct script access allowed');
+        }
+    }
 	
 	//verifying email address
 	public function verifying_email(){

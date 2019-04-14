@@ -89,6 +89,7 @@
                                    href="<?php echo base_url('terms_services'); ?>"><?php echo _l('footer_support_tab4'); ?></a>
                                 <i class="fa fa-angle-right g-absolute-centered--y g-right-0"></i> 
                             </h4>
+						</li>
                     </ul>
                 </nav>
             </div>

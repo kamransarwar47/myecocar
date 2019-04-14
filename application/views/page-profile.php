@@ -400,6 +400,8 @@
                                         <th><?php echo _l('my_res_seats'); ?></th>
                                         <th><?php echo _l('price_text'); ?></th>
                                         <th><?php echo _l('my_res_status'); ?></th>
+                                        <th><?php echo _l('payment_Status'); ?></th>
+                                        <th><?php echo _l('action'); ?></th>
                                     </tr>
                                     </thead>
 
@@ -420,7 +422,19 @@
                                                 </td>
                                                 <td>
                                                     <span class="u-label <?php echo ($booking['booking_status'] == 'pending') ? 'g-bg-blue' : 'g-bg-green'; ?> g-rounded-20 g-px-10"><?php echo ucwords($booking['booking_status']); ?></span>
+                                                </td> 
+												<td>
+                                                    <span class="u-label <?php echo ($booking['amount_status'] == 'pending') ? 'g-bg-blue' : 'g-bg-green'; ?> g-rounded-20 g-px-10"><?php echo ucwords($booking['amount_status']); ?></span>
                                                 </td>
+												<td>
+												<?php if($booking['route_status'] != 'Cancel' && $booking['is_route_end'] != 1){ ?>
+												<button  id="cancel_booking" data-book_id="<?php echo $booking['booking_id']; ?>" class="cancel_booking btn btn-danger btn-xs">Cancel</button>
+												<?php }else if($booking['route_status'] == 'Cancel'){ ?>
+													<span class="u-label g-rounded-20 g-px-10 g-bg-blue">Cancel</span>
+												<?php }else if($booking['is_route_end'] == 1){ ?>
+													<span class="u-label g-rounded-20 g-px-10 g-bg-green">Completed</span>
+												<?php } ?>
+												</td>
                                             </tr>
                                             <?php
                                         }
@@ -994,4 +1008,43 @@
 			$('#route_id').val('');
 			$('#cancel_trip_reason').val('');
 		});
+		
+		
+	// Confirmation for cancel booking
+    $(document).on('click', '.cancel_booking', function () {
+		 swal({
+		  title: "Are you sure?",
+		  text: "Once Cancel, This booking will be deleted.",
+		  icon: "warning",
+		  buttons: true,
+		  dangerMode: true,
+		})
+		.then((willDelete) => {
+		  if (willDelete) {
+			  // Del trip if no user booked
+			   var thisObj = $(this);
+				var book_id = thisObj.data('book_id');
+				$.ajax({
+					type: "POST",
+					url: "<?php echo base_url('user_profile/cancel_booking'); ?>",
+					data: {'book_id': book_id},
+					cache: false,
+					success: function (data) {
+					   if(data == 'TRUE'){
+						   thisObj.closest('tr').remove();
+						   swal("Your booking Has been cancelled!", {
+							  icon: "success",
+							});
+					   }else{
+						  swal ( "Oops" ,  "Something went wrong!" ,  "error" );
+					   }
+					}
+				});
+
+		  } else {
+			swal("Your Record is safe!");
+		  }
+		});
+    });
+
 </script>

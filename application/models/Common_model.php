@@ -89,7 +89,7 @@ class Common_model extends CI_Model
 
     // get user_reservations
     function get_reservations_by_user_id($id){
-        $this->db->select('route.origin_input as start, route.destination_input as end, route.datepickerFrom as date, route.depart_time_input as time, bookings.places_booked as places, bookings.booking_status as booking_status, bookings.total_amount as total_amount');
+        $this->db->select('route.origin_input as start, route.destination_input as end, route.datepickerFrom as date, route.depart_time_input as time, bookings.places_booked as places, bookings.booking_status as booking_status, bookings.total_amount as total_amount, amount_status, booking_id, route_status, is_route_end');
         $this->db->where('bookings.user_id', $id);
         $this->db->join('route', 'bookings.route_id = route.route_id');
         return $this->db->get('bookings');
