@@ -178,19 +178,27 @@ $lang['driver_text']             = 'Driver';
 $lang['msg_verified_email_address'] = 'Please verified your email address first or resend verification email to your email please';
 
 // driver details page
-$lang['driver_page_title']         = 'Driver Details';
-$lang['profile_of_text']           = 'Profile of';
-$lang['passenger_and_driver_text'] = 'Passenger and driver';
-$lang['member_description']        = 'Description of member';
-$lang['member_information']        = 'Information';
-$lang['years_old_text']            = 'years old';
-$lang['gender_text']               = 'Gender';
-$lang['verifications_text']        = 'Verifications';
-$lang['verified_phone_text']       = 'Verified phone';
-$lang['verified_email_text']       = 'Verified email';
-$lang['activity_text']             = 'Activity';
-$lang['posted_ads_text']           = 'Posted Ads';
-$lang['registration_date_text']    = 'Registration date';
-$lang['cancellation_reason']       = 'Trip Cancellation Reason';
-$lang['action']       			   = 'Action';
+$lang['driver_page_title']              = 'Driver Details';
+$lang['profile_of_text']                = 'Profile of';
+$lang['passenger_and_driver_text']      = 'Passenger and driver';
+$lang['member_description']             = 'Description of member';
+$lang['member_information']             = 'Information';
+$lang['years_old_text']                 = 'years old';
+$lang['gender_text']                    = 'Gender';
+$lang['verifications_text']             = 'Verifications';
+$lang['verified_phone_text']            = 'Verified phone';
+$lang['verified_email_text']            = 'Verified email';
+$lang['activity_text']                  = 'Activity';
+$lang['posted_ads_text']                = 'Posted Ads';
+$lang['registration_date_text']         = 'Registration date';
+$lang['cancellation_reason']            = 'Trip Cancellation Reason';
+$lang['action']                         = 'Action';
+$lang['chat_with_driver_text']          = 'Chat with Driver';
+$lang['login_to_chat_with_driver_text'] = 'Login to Chat with Driver';
+
+// chat page
+$lang['chat_page_title'] = 'Chat';
+$lang['no_convo_text']   = 'Click on a user to start Chat';
+$lang['back_text']       = 'Go Back';
+$lang['users_text']      = 'Users';
 ?>

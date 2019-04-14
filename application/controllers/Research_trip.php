@@ -12,8 +12,8 @@ class Research_trip extends CI_Controller
         $data['total_records']  = 0;
         $data['search_records'] = [];
         if (isset($_GET['dc'])) {
-            $search_query = [];
-			$search_query['datepickerFrom >='] = date('Y-m-d');
+            $search_query                      = [];
+            $search_query['datepickerFrom >='] = date('Y-m-d');
             if (isset($_GET['dc']) && $_GET['dc'] != '') {
                 $search_query['origin_city']    = $this->input->get('sdcty');
                 $search_query['origin_country'] = $this->input->get('sdcnt');
@@ -25,14 +25,15 @@ class Research_trip extends CI_Controller
             if (isset($_GET['dt']) && $_GET['dt'] != '') {
                 $search_query['datepickerFrom'] = date('Y-m-d', strtotime($this->input->get('dt')));
             }
-			// user must b active
-			$this->db->join('users', 'users.user_id = route.user_id', 'LEFT');
-			$search_query['user_status'] = 1;
-			$search_query['is_route_end'] = 0;
-			$search_query['route_status !='] = 'Cancel';
-			
-            $search_data            = $this->common_model->get('route', $search_query);
-		
+            // user must b active
+            $this->db->join('users', 'users.user_id = route.user_id', 'LEFT');
+            $search_query['user_status']      = 1;
+            $search_query['is_route_end']     = 0;
+            $search_query['route_status !=']  = 'Cancel';
+            $search_query['route.user_id !='] = $_SESSION['User_LoginId'];
+
+            $search_data = $this->common_model->get('route', $search_query);
+
             $data['total_records']  = $search_data->num_rows();
             $data['search_records'] = $search_data->result_array();
         }
@@ -59,41 +60,41 @@ class Research_trip extends CI_Controller
             $data['places_booked']    = $this->input->post('places_booked');
             $data['booking_datetime'] = date("Y-m-d H:i:s", time());
             $data['total_amount']     = ($this->input->post('amount_per_seat') * $this->input->post('places_booked'));
-            $id = $this->common_model->insert('bookings', $data);
-			
-			//send email
-			$user_id = $this->session->userdata('User_LoginId');
-			$res_user_info = $this->db->get('users', ['user_id' => $user_id]);
-			if($res_user_info->num_rows() > 0){
-				$res_user_info =$res_user_info->row_array();
-				$email = $res_user_info['email'];
-				$name = $res_user_info['first_name'];
-				if($email){	
-				
-				// route To From
-				$this->db->join('users', 'users.user_id = route.user_id', 'LEFT');
-				 $search_data        = $this->common_model->get('route', ['route_id' => $this->input->get('id')]);
-				
-				 if($search_data->num_rows() > 0){
-					$search_data = $search_data->row_array();
-					$arrgs = [
-						'to' => $email,
-						'subject' => 'Myecocar Reservation of Seat',
-						'txt' => 'Hi '.$name.',<br>'.'You have successfully reserved your seat against booking Number '.$id. ' From '.$search_data['dest_city'].', '.$search_data['dest_country'].' To '.$search_data['origin_city'].', '.$search_data['origin_country'].' Data & Time of Travelling: '.date('d-m-Y', strtotime($search_data['datepickerFrom'])).' '.$search_data['depart_time_input'],
-					];
-					$res = send_email($arrgs);
-					
-					// send email to driver
-					$arrgs = [
-						'to' => 'contact@myecocar.org',
-						'subject' => 'Myecocar Reservation of Seat',
-						'txt' => 'Hi '.$search_data['first_name'].',<br>'.$name.' has book your seat against your trip From '.$search_data['dest_city'].', '.$search_data['dest_country'].' To '.$search_data['origin_city'].', '.$search_data['origin_country'].' Data & Time of Travelling: '.date('d-m-Y', strtotime($search_data['datepickerFrom'])).' '.$search_data['depart_time_input'].'</br>'.'Please Confirm there status by login your Dashboard </br> Passenger Info </br>Name: '.$res_user_info['first_name'].' '.$res_user_info['second_name'].'</br>Mobile: '.$res_user_info['mobile'].'</br>Email: '.$email.'</br>Thankyour for your time and consideration',
-					];
-					$res = send_email($arrgs, $arrgs);
-					
-					}					
-				}
-			}
+            $id                       = $this->common_model->insert('bookings', $data);
+
+            //send email
+            $user_id       = $this->session->userdata('User_LoginId');
+            $res_user_info = $this->db->get('users', ['user_id' => $user_id]);
+            if ($res_user_info->num_rows() > 0) {
+                $res_user_info = $res_user_info->row_array();
+                $email         = $res_user_info['email'];
+                $name          = $res_user_info['first_name'];
+                if ($email) {
+
+                    // route To From
+                    $this->db->join('users', 'users.user_id = route.user_id', 'LEFT');
+                    $search_data = $this->common_model->get('route', ['route_id' => $this->input->get('id')]);
+
+                    if ($search_data->num_rows() > 0) {
+                        $search_data = $search_data->row_array();
+                        $arrgs       = [
+                            'to' => $email,
+                            'subject' => 'Myecocar Reservation of Seat',
+                            'txt' => 'Hi ' . $name . ',<br>' . 'You have successfully reserved your seat against booking Number ' . $id . ' From ' . $search_data['dest_city'] . ', ' . $search_data['dest_country'] . ' To ' . $search_data['origin_city'] . ', ' . $search_data['origin_country'] . ' Data & Time of Travelling: ' . date('d-m-Y', strtotime($search_data['datepickerFrom'])) . ' ' . $search_data['depart_time_input'],
+                        ];
+                        $res         = send_email($arrgs);
+
+                        // send email to driver
+                        $arrgs = [
+                            'to' => 'contact@myecocar.org',
+                            'subject' => 'Myecocar Reservation of Seat',
+                            'txt' => 'Hi ' . $search_data['first_name'] . ',<br>' . $name . ' has book your seat against your trip From ' . $search_data['dest_city'] . ', ' . $search_data['dest_country'] . ' To ' . $search_data['origin_city'] . ', ' . $search_data['origin_country'] . ' Data & Time of Travelling: ' . date('d-m-Y', strtotime($search_data['datepickerFrom'])) . ' ' . $search_data['depart_time_input'] . '</br>' . 'Please Confirm there status by login your Dashboard </br> Passenger Info </br>Name: ' . $res_user_info['first_name'] . ' ' . $res_user_info['second_name'] . '</br>Mobile: ' . $res_user_info['mobile'] . '</br>Email: ' . $email . '</br>Thankyour for your time and consideration',
+                        ];
+                        $res   = send_email($arrgs, $arrgs);
+
+                    }
+                }
+            }
             set_message('You Have Accepted Offer & Reservation email has been send to your registered email address Successfully please check', 'success');
             redirect('research_trip/trip_details?id=' . $this->input->get('id'));
         }

@@ -29,7 +29,7 @@
                                         <?php echo _l('member_description'); ?>
                                     </h3>
 
-                                    <div class="card-block">
+                                    <div class="card-block mb-10">
                                         <h4 class="h5"><?php echo $user_details['first_name'] . ' ' . $user_details['second_name']; ?>
                                             <small>
                                                 , <?php echo calc_age_from_dob(date('Y-m-d', strtotime($user_details['date_of_birth']))); ?>
@@ -40,6 +40,24 @@
                                             : <?php echo $user_details['gender']; ?></h4>
                                     </div>
                                 </div>
+                                <?php
+                                // check if user logged in
+                                if (check_user_login()) {
+                                    ?>
+                                    <a class="mt-4 btn btn-xl btn-block u-btn-outline-bluegray text-uppercase g-font-weight-600 g-font-size-12"
+                                       href="<?php echo base_url('chat/index/user/' . $route_id); ?>"><i
+                                                class="fa fa-comments"></i> <?php echo _l('chat_with_driver_text') ?>
+                                    </a>
+                                    <?php
+                                } else {
+                                    ?>
+                                    <button class="mt-4 btn btn-xl btn-block u-btn-primary text-uppercase g-font-weight-600 g-font-size-12"
+                                            type="button"><i
+                                                class="fa fa-comments"></i> <?php echo _l('login_to_chat_with_driver_text') ?>
+                                    </button>
+                                    <?php
+                                }
+                                ?>
                                 <!-- End Default Outline Panel-->
                             </div>
                         </div>

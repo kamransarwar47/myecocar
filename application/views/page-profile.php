@@ -286,6 +286,10 @@
 													<button data-toggle="collapse" data-target="#accordion_<?php echo $n; ?>"
 													class="btn btn-xs btn-warning"
 													style="cursor: pointer;"><i class="icon-eye u-line-icon-pro g-color-white-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i></button>
+
+                                                    <a class="btn btn-xs btn-primary"
+                                                       href="<?php echo base_url('chat/index/driver/' . $route['route_id']); ?>"><i
+                                                                class="fa fa-comments"></i> <?php echo _l('chat_page_title'); ?></a>
 												</td>
                                             </tr>
                                             <tr>
@@ -434,6 +438,9 @@
 												<?php }else if($booking['is_route_end'] == 1){ ?>
 													<span class="u-label g-rounded-20 g-px-10 g-bg-green">Completed</span>
 												<?php } ?>
+                                                    <a class="btn btn-xs btn-primary"
+                                                       href="<?php echo base_url('chat/index/user/' . $booking['route_id']); ?>"><i
+                                                                class="fa fa-comments"></i> <?php echo _l('chat_page_title'); ?></a>
 												</td>
                                             </tr>
                                             <?php

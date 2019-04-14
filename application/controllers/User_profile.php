@@ -14,7 +14,7 @@ class User_profile extends CI_Controller
      * Home Page
      */
     public function index()
-    { 
+    {
 		if($this->input->post('verification_code') != ''){
 			$this->form_validation->set_rules('verification_code', 'Mobile Verified Code', 'trim|required');
 		}
