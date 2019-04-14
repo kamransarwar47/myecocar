@@ -279,7 +279,7 @@
 														<a href="<?php echo base_url('propose_route/index/edit/'.$route['route_id']); ?>" class="btn btn-primary btn-xs">Edit</a>
 														<button type="button" data-id="<?php echo $route['route_id']; ?>" class="btn btn-danger btn-xs trip_del">Del</button>
 													<?php }else{ 
-													if($route['route_status'] = 'Cancel'){
+													if($route['route_status'] != 'Cancel'){
 													?>
 <button  id="cancel_trip" data-route_id="<?php echo $route['route_id']; ?>" class="cancel_trip btn btn-info btn-xs">Cancel</button>
 													<?php } } ?>
