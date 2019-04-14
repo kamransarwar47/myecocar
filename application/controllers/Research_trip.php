@@ -28,8 +28,11 @@ class Research_trip extends CI_Controller
 			// user must b active
 			$this->db->join('users', 'users.user_id = route.user_id', 'LEFT');
 			$search_query['user_status'] = 1;
+			$search_query['is_route_end'] = 0;
+			$search_query['route_status !='] = 'Cancel';
 			
             $search_data            = $this->common_model->get('route', $search_query);
+		
             $data['total_records']  = $search_data->num_rows();
             $data['search_records'] = $search_data->result_array();
         }

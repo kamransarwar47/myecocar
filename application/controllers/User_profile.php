@@ -125,6 +125,19 @@ class User_profile extends CI_Controller
     {
         if ($this->input->is_ajax_request()) {
             $result = $this->common_model->update('bookings', ['booking_status' => 'approved'], ['booking_id' => $this->input->post('booking_id')]);
+			$email = $this->input->post('booking_email');
+			$from = $this->input->post('from');
+			$to = $this->input->post('to');
+			$name = $this->input->post('name');
+			//send email
+			if($email != ''){	
+				$arrgs = [
+					'to' => $email,
+					'subject' => 'Myecocar Payment Collection Confirmation',
+					'txt' => "Hi $name, <br>Your have Approved for the trip  From $from To $to please contact with Driver for futher confirmation."
+				];
+				send_email($arrgs);
+			}
             if ($result) {
                 echo 'TRUE';
             } else {
@@ -140,6 +153,19 @@ class User_profile extends CI_Controller
     {
         if ($this->input->is_ajax_request()) {
             $result = $this->common_model->update('bookings', ['amount_status' => 'collected'], ['booking_id' => $this->input->post('booking_id')]);
+			 $email = $this->input->post('booking_email');
+			 $from = $this->input->post('from');
+			 $to = $this->input->post('to');
+			 $name = $this->input->post('name');
+			//send email
+			if($email != ''){	
+				$arrgs = [
+					'to' => $email,
+					'subject' => 'Myecocar Payment Collection Confirmation',
+					'txt' => "Hi $name, <br>Your Payment against trip From $from To $to has been confirmed."
+				];
+				send_email($arrgs);
+			}
             if ($result) {
                 echo 'TRUE';
             } else {

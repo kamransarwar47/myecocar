@@ -327,7 +327,8 @@
                                                                             if ($book['booking_status'] == 'pending') {
                                                                                 ?>
                                                                                 <br>
-                                                                                <span class="block u-label u-label-success g-color-white u-label-with-icon g-mt-5 g-cursor-pointer approve_reservation"
+                                                                                <span class="block u-label u-label-success g-color-white u-label-with-icon g-mt-5 g-cursor-pointer approve_reservation" data-booking_email="<?php echo $book['email']; ?>" data-from="<?php echo $route['origin_input']; ?>" 
+																				data-to="<?php echo $route['destination_input']; ?>" data-name="<?php echo $book['first_name']; ?>"
                                                                                       data-booking_id="<?php echo $book['booking_id']; ?>"><i
                                                                                             class="fa fa-check"></i>Approuver</span>
                                                                                 <?php
@@ -344,7 +345,8 @@
                                                                             if ($book['amount_status'] == 'pending') {
                                                                                 ?>
                                                                                 <br>
-                                                                                <span class="block u-label u-label-success g-color-white u-label-with-icon g-mt-5 g-cursor-pointer collect_payment"
+                                                                                <span class="block u-label u-label-success g-color-white u-label-with-icon g-mt-5 g-cursor-pointer collect_payment" data-booking_email="<?php echo $book['email']; ?>" 
+																				data-from="<?php echo $route['origin_input']; ?>" data-to="<?php echo $route['destination_input']; ?>" data-name="<?php echo $book['first_name']; ?>"
                                                                                       data-booking_id="<?php echo $book['booking_id']; ?>"><i
                                                                                             class="fa fa-check"></i>collecte</span>
                                                                                 <?php
@@ -683,15 +685,21 @@
     $(document).on('click', '.approve_reservation', function () {
         var thisObj = $(this);
         var booking_id = $(thisObj).data('booking_id');
+		var booking_email = $(thisObj).data('booking_email');
+        var name = $(thisObj).data('name');
+        var from = $(thisObj).data('from');
+        var to = $(thisObj).data('to');
+		
         $.ajax({
             type: "POST",
             url: "<?php echo base_url('user_profile/approve_boooking'); ?>",
-            data: {booking_id: booking_id},
+            data: {'booking_id': booking_id, 'booking_email': booking_email, 'from': from, 'to': to, 'name': name},
             cache: false,
             success: function (data) {
                 if(data == 'TRUE'){
                     $(thisObj).closest('td').find('span#booking_text').html('Approved');
                     $(thisObj).remove();
+					swal ( "Succcess" ,  "Approved Reservation Successfully!" ,  "success" );
                 }
             }
         });
@@ -700,16 +708,21 @@
     // collect payment
     $(document).on('click', '.collect_payment', function () {
         var thisObj = $(this);
+        var booking_email = $(thisObj).data('booking_email');
         var booking_id = $(thisObj).data('booking_id');
+        var name = $(thisObj).data('name');
+        var from = $(thisObj).data('from');
+        var to = $(thisObj).data('to');
         $.ajax({
             type: "POST",
             url: "<?php echo base_url('user_profile/collect_payment'); ?>",
-            data: {booking_id: booking_id},
+            data: {'booking_id': booking_id, 'booking_email': booking_email, 'from': from, 'to': to, 'name': name},
             cache: false,
             success: function (data) {
                 if(data == 'TRUE'){
                     $(thisObj).closest('td').find('span#amount_text').html('Collected');
                     $(thisObj).remove();
+					swal ( "Succcess" ,  "Collect Payment Successfully!" ,  "success" );
                 }
             }
         });
