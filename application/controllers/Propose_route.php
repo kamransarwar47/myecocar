@@ -58,7 +58,8 @@ class Propose_route extends CI_Controller
             $data['travel_description'] = $this->input->post('travel_description');
             $data['travel_charges']     = $this->input->post('travel_charges');
             $data['payment_method']     = $this->input->post('payment_method');
-
+			$data['route_start_datetime'] 		   = date('Y-m-d H:i:s');
+			
             if ($this->common_model->insert('route', $data) != false) {
                 if (isset($_POST['edit_check']) && $_POST['edit_check'] == '1') {
                     $this->common_model->delete('route', ['route_id' => $_POST['edit_check_id']]);
@@ -73,6 +74,8 @@ class Propose_route extends CI_Controller
                     $data['dest_country']      = $this->input->post('origin_country');
                     $data['datepickerFrom']    = date('Y-m-d', strtotime($this->input->post('datepickerTo')));
                     $data['depart_time_input'] = date('H:i:s', strtotime($this->input->post('arrival_time_input')));
+					$data['route_start_datetime'] 		   = date('Y-m-d H:i:s');
+					
                     $this->common_model->insert('route', $data);
                 }
             }
@@ -87,4 +90,65 @@ class Propose_route extends CI_Controller
         }
     }
 
+  /**
+	* Cancel the trip by driver 
+	*/
+	public function cancel_trip(){
+		 if ($this->input->is_ajax_request()) {
+			if($this->input->post('cancel_trip_reason') != ''){
+				$cancel_trip['cancel_trip_reason'] = $this->input->post('cancel_trip_reason');
+				$cancel_trip['route_status'] = 'Cancel';
+				
+				$result = $this->common_model->update('route', $cancel_trip, ['route_id' => $this->input->post('route_id')]);
+				if ($result) {
+					//send mobile sms and email
+					$this->load->model('routes');
+					$res = $this->routes->get_route_passengers($this->input->post('route_id'));
+					
+					if($res){
+						$details = $res->result_array();
+						foreach($details as $row){
+							$first_name = $row['first_name'];
+							$second_name = $row['second_name'];
+							$driver_mobile = $row['driver_mobile'];
+							$email = $row['email'];
+							$mobile = $row['mobile'];
+							$origin_city = $row['origin_city'];
+							$origin_country = $row['origin_country'];
+							$dest_city = $row['dest_city'];
+							$dest_country = $row['dest_country'];
+							$rout_start_data = date('d-m-Y', strtotime($row['datepickerFrom']));
+							$rout_start_time = date('H:i:s', strtotime($row['depart_time_input']));
+							$driver_name = $row['driver_name'];
+							$cancel_trip_reason = $row['cancel_trip_reason'];
+							$booking_id = $row['booking_id'];
+							$booking_datetime = $row['booking_datetime'];
+							$booking_status = ucfirst($row['booking_status']);
+							$amount_status = ucfirst($row['amount_status']);
+							$message = "Hi $first_name,</br>Your trip of booking id $booking_id which has book From $origin_country, $origin_city TO $dest_country, $dest_city on Date & Time: $rout_start_data $rout_start_time has been cancelled by Driver: $driver_name</br>Your Trip Approval status <stromg>$booking_status</stromg></br>Your Trip Payment Status <stromg>$amount_status</stromg></br><stromg>Reason of Cancellation</strong>: $cancel_trip_reason.</br>Please Again Reserve your seats against available route in Myecocar</br>For Futher Confirmation please contact with Driver</br>Driver Mobile is Number: $driver_mobile";
+							//send email
+							if($email != ''){	
+								$arrgs = [
+									'to' => $email,
+									'subject' => 'Myecocar Cancellation of Trip',
+									'txt' => $message
+								];
+								send_email($arrgs);
+								
+							}
+							 $this->routes->send_mobile_message($mobile, strip_tags($message));
+						}
+						
+					}
+					echo json_encode(['action' => 'success', 'msg' => 'You Have successfully Cancelled Your trip. Email and Mobile Message for cancellation of trip has been sended to your reserved passenger.']);
+				} else {
+					echo json_encode(['action' => 'warning', 'msg' => 'There is some problem']);
+				}
+			}else{
+				echo json_encode(['action' => 'info', 'msg' => 'Please enter the reason for cancellation of trip']);
+			}
+        } else {
+            exit('No direct script access allowed');
+        }
+	}
 }

@@ -190,4 +190,5 @@ $lang['verified_email_text']       = 'Verified email';
 $lang['activity_text']             = 'Activity';
 $lang['posted_ads_text']           = 'Posted Ads';
 $lang['registration_date_text']    = 'Registration date';
+$lang['cancellation_reason']       = 'Trip Cancellation Reason';
 ?>

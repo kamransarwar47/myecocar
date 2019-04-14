@@ -266,6 +266,10 @@
 													$status = "Active";
 													$color = 'blue';
 												}
+												if($route['route_status'] == 'Cancel'){
+													$status = "Cancel";
+													$color = 'pink';
+												}
 												?>
 												<td>
 												<span class="u-label g-bg-<?php echo $color; ?> g-rounded-20 g-px-10"><?php echo $status; ?></span>
@@ -274,11 +278,14 @@
 													<?php if($status == 'Active' && $total_reserve == $route['free_spaces']){ ?>
 														<a href="<?php echo base_url('propose_route/index/edit/'.$route['route_id']); ?>" class="btn btn-primary btn-xs">Edit</a>
 														<button type="button" data-id="<?php echo $route['route_id']; ?>" class="btn btn-danger btn-xs trip_del">Del</button>
-													<?php } ?>
-
-													<span data-toggle="collapse" data-target="#accordion_<?php echo $n; ?>"
-													class="u-label u-label-warning g-color-white clickable"
-													style="cursor: pointer;"><?php echo _l('click_here'); ?></span>
+													<?php }else{ 
+													if($route['route_status'] = 'Cancel'){
+													?>
+<button  id="cancel_trip" data-route_id="<?php echo $route['route_id']; ?>" class="cancel_trip btn btn-info btn-xs">Cancel</button>
+													<?php } } ?>
+													<button data-toggle="collapse" data-target="#accordion_<?php echo $n; ?>"
+													class="btn btn-xs btn-warning"
+													style="cursor: pointer;"><i class="icon-eye u-line-icon-pro g-color-white-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i></button>
 												</td>
                                             </tr>
                                             <tr>
@@ -549,6 +556,38 @@
             </div>
             <!-- End Profle Content -->
         </div>
+		
+
+		<!-- Modal -->
+		<div data-backdrop="static" data-keyboard="false" id="cancellation_reason" class="modal fade" role="dialog">
+		  <div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+			  <div class="modal-header">
+				<h4 class="modal-title">Cancellation Reason</h4>
+			  </div>
+			  <div class="modal-body">
+				<form method="post" id="cancel_trip_reason_form">
+					 <div class="form-group mb-0">
+						<div class="u-input-group-v2 div-input-group">
+						<input type="hidden" name="route_id" id="route_id" />
+						<textarea id="cancel_trip_reason" class="form-control rounded-0 u-form-control g-resize-none div-input-group"
+								  name="cancel_trip_reason" rows="4" required></textarea>
+							<label for="message"><?php echo _l('cancellation_reason'); ?></label>
+						</div>
+					</div>
+				</form>
+			  </div>
+			  <div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" id="cancel_trip_confirm" class="btn btn-success" >Submit</button>
+			  </div>
+			</div>
+
+		  </div>
+		</div>
+		
     </div>
 </section>
 <script>
@@ -844,8 +883,6 @@
                 is_valid_form = false;
             }
         });
-        //confirm password
-
 
         if (is_valid_form) {
 				 $.ajax({
@@ -873,4 +910,75 @@
 			});
         }
     });
+	
+		
+	// Confirmation for Cancellation of trip
+    $(document).on('click', '#cancel_trip', function () {
+		var route_id = $(this).data('route_id');	
+		 swal({
+		  title: "Are you sure?",
+		  text: "Once Cancel your trip you will not be able to Reactive your this trip!",
+		  icon: "warning",
+		  buttons: true,
+		  dangerMode: true,
+		})
+		.then((willDelete) => {
+		  if (willDelete) {
+			  // open modal box for cancellation reason
+			  $('#route_id').val(route_id);
+			  $('#cancellation_reason').modal('show');	
+		  } else {
+			swal("Your have choosen a better option!");
+		  }
+		});
+    });
+	
+	// Cancellation of trip
+	 $(document).on('click', '#cancel_trip_confirm', function (e) {
+		 e.preventDefault();
+		var route_id = $('#route_id').val();		
+		var cancel_trip_reason = $('#cancel_trip_reason').val();		
+        var req_textarea = $('#cancel_trip_reason_form textarea[required]');
+        var is_valid_cancel_trip_form = true;
+
+		$.each(req_textarea, function(k, input){
+			var error_msg_id = $(this).attr('id')+'_error_msg';
+			$('#'+error_msg_id).remove();
+			if($(this).val() == ''){
+				$(this).parent('.div-input-group').append('<p id="'+error_msg_id+'" class="" style="color:red">This Field is required</p>');
+				is_valid_cancel_trip_form = false;
+			}
+		});
+		
+			if (is_valid_cancel_trip_form == true) {
+				jQuery.ajax({
+					type: "POST",
+					url: "<?php echo base_url('propose_route/cancel_trip'); ?>",
+					data: {'route_id': route_id, 'cancel_trip_reason': cancel_trip_reason},
+					cache: false,
+					success: function (data) {
+						var res = JSON.parse(data);
+						if(res.action == 'info'){
+						   swal(res.msg, {
+							  icon: "info",
+							});
+						}else if (res.action == 'warning') {
+							swal(res.msg, {
+							  icon: "warning",
+							});
+						}else{
+							$('#cancellation_reason').modal('hide');
+						 swal(res.msg, {
+							  icon: "success",
+							});
+						}
+					}
+				});
+			}
+		});
+		
+		$("#cancellation_reason").on("hidden.bs.modal", function () {
+			$('#route_id').val('');
+			$('#cancel_trip_reason').val('');
+		});
 </script>
