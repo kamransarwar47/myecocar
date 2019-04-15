@@ -30,8 +30,11 @@ class Research_trip extends CI_Controller
             $search_query['user_status']      = 1;
             $search_query['is_route_end']     = 0;
             $search_query['route_status !=']  = 'Cancel';
-            $search_query['route.user_id !='] = $_SESSION['User_LoginId'];
-
+			
+			/* drive can not see there own Trips
+			if(isset($_SESSION['User_LoginId'])){
+				$search_query['route.user_id !='] = $_SESSION['User_LoginId'];
+			}*/
             $search_data = $this->common_model->get('route', $search_query);
 
             $data['total_records']  = $search_data->num_rows();

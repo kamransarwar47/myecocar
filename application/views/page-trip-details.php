@@ -193,14 +193,14 @@
                                         <div class="col-lg-4 g-mb-30 g-mb-0--lg">
                                             <div class="u-block-hover g-pos-rel">
                                                 <figure>
-                                                    <a href="<?php echo base_url('driver_detail/index/' . $user_details['user_id']); ?>"><img class="img-fluid w-100 u-block-hover__main--zoom-v1"
+                                                    <a href="<?php echo base_url('driver_detail/index/' . $user_details['user_id'].'/'.$_GET['id']); ?>"><img class="img-fluid w-100 u-block-hover__main--zoom-v1"
                                                                     src="<?php echo base_url(); ?>assets/uploads/<?php echo userimage_by_id($user_details['user_id']); ?>"
                                                                     alt="Image Description"></a>
                                                 </figure>
                                             </div>
                                         </div>
                                         <div class="col-lg-8 g-mb-30 g-mb-0--lg">
-                                            <h4 class="h5"><?php echo $user_details['first_name'] . ' ' . $user_details['second_name']; ?>
+                                            <h4 class="h5"><a href="<?php echo base_url('driver_detail/index/' . $user_details['user_id'].'/'.$_GET['id']); ?>"><?php echo $user_details['first_name'] . ' ' . $user_details['second_name']; ?></a>
                                             </h4>
                                             <h4 class="h6">
                                             <?php echo calc_age_from_dob(date('Y-m-d', strtotime($user_details['date_of_birth']))); ?>

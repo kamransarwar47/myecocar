@@ -70,6 +70,7 @@
                         $user_id           = $user_data['user_id'];
                         $email             = $user_data['email'];
                         $is_verified       = $user_data['is_verified'];
+                        $user_description  = $user_data['user_description'];
                         $register_datetime = date('d-m-Y H:i:s', strtotime($user_data['register_datetime']));
 
                         ?>
@@ -151,7 +152,7 @@
                                 </li>
                                 <!-- End Phone Number -->
 
-                                <!-- Position -->
+                                <!-- gender -->
                                 <li class="d-flex align-items-center justify-content-between g-brd-bottom g-brd-gray-light-v4 g-py-15">
                                     <div class="g-pr-10">
                                         <strong class="d-block d-md-inline-block g-color-gray-dark-v2 g-width-200 g-pr-10"><?php echo _l('user_profile_gender'); ?></strong>
@@ -165,7 +166,7 @@
                                         <div class="u-check-icon-checkbox-v6 g-absolute-centered--y g-left-0">
                                             <i class="fa" data-check-icon="&#xf00c"></i>
                                         </div>
-                                        Male
+                                        <?php echo _l('male'); ?>
                                     </label>
 
                                     <label class="form-check-inline u-check g-color-gray-dark-v5 g-font-size-12 g-pl-25 mb-2 profile_fields">
@@ -176,13 +177,167 @@
                                         <div class="u-check-icon-checkbox-v6 g-absolute-centered--y g-left-0">
                                             <i class="fa" data-check-icon="&#xf00c"></i>
                                         </div>
-                                        Female
+                                        <?php echo _l('female'); ?>
                                     </label>
                                     <span>
                         <i class="icon-finance-067 u-line-icon-pro g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i>
                       </span>
                                 </li>
-                                <!-- End Position -->
+								<!-- end gender -->
+								<?php 
+								 $self_like_smooking = '';
+								 $self_like_music = '';
+								 $self_like_talk = '';
+								 $user_like_smooking = '';
+								 $user_like_music = '';
+								 $user_like_talk = '';
+								if (isset($favourite) && $favourite->num_rows() > 0){
+									 $favourite         = $favourite->row_array();
+									 $self_like_smooking = $favourite['self_like_smooking'];
+									 $self_like_music = $favourite['self_like_music'];
+									 $self_like_talk = $favourite['self_like_talk'];
+									 $user_like_smooking = $favourite['user_like_smooking'];
+									 $user_like_music = $favourite['user_like_music'];
+									 $user_like_talk = $favourite['user_like_talk'];
+								}
+								
+								?>
+                                <!-- i love -->
+								<li class="d-flex align-items-center justify-content-between g-brd-bottom g-brd-gray-light-v4 g-py-15">
+                                    <div class="g-pr-10">
+                                        <strong class="d-block d-md-inline-block g-color-gray-dark-v2 g-width-200 g-pr-10"><?php echo _l('i_love'); ?></strong>
+                                        <span class="align-top profile_values">
+										<?php
+											$smoke = '';
+											$music = '';
+											$notalk = '';
+											if ($self_like_smooking == 0) {
+												$smoke = 'no';
+											}
+											if ($self_like_music == 0) {
+												$music = 'no';
+											}
+											if ($self_like_talk == 0) {
+												$notalk = 'no';
+											}
+										?>
+											<img src="<?php echo base_url(); ?>/assets/img/icon-images/<?php echo $smoke; ?>smoke.png"> 
+											<img src="<?php echo base_url(); ?>/assets/img/icon-images/<?php echo $music; ?>music.png"> 
+											<img src="<?php echo base_url(); ?>/assets/img/icon-images/<?php echo $notalk; ?>talk.png">
+										</span>
+                                    </div>
+                                    <label class="form-check-inline u-check g-color-gray-dark-v5 g-font-size-12 g-pl-25 mb-2 profile_fields">
+                                        <input <?php if ($self_like_smooking == 1) { ?>  checked="checked" <?php } ?>
+                                                value="1" id="smooking" name="smooking"
+                                                class="g-hidden-xs-up g-pos-abs g-top-0 g-left-0 reg_gender"
+                                                type="checkbox">
+                                        <div class="u-check-icon-checkbox-v6 g-absolute-centered--y g-left-0">
+                                            <i class="fa" data-check-icon="&#xf00c"></i>
+                                        </div>
+                                        <?php echo _l('smooking'); ?>
+                                    </label>
+
+                                    <label class="form-check-inline u-check g-color-gray-dark-v5 g-font-size-12 g-pl-25 mb-2 profile_fields">
+                                        <input <?php if ($self_like_music == 1) { ?>  checked="checked" <?php } ?>
+                                                value="1" id="music" name="music"
+                                                class="g-hidden-xs-up g-pos-abs g-top-0 g-left-0 reg_gender"
+                                                type="checkbox">
+                                        <div class="u-check-icon-checkbox-v6 g-absolute-centered--y g-left-0">
+                                            <i class="fa" data-check-icon="&#xf00c"></i>
+                                        </div>
+                                        <?php echo _l('music'); ?>
+                                    </label> 
+
+									<label class="form-check-inline u-check g-color-gray-dark-v5 g-font-size-12 g-pl-25 mb-2 profile_fields">
+                                        <input <?php if ($self_like_talk == 1) { ?>  checked="checked" <?php } ?>
+                                                value="1" id="speak" name="speak"
+                                                class="g-hidden-xs-up g-pos-abs g-top-0 g-left-0 reg_gender"
+                                                type="checkbox">
+                                        <div class="u-check-icon-checkbox-v6 g-absolute-centered--y g-left-0">
+                                            <i class="fa" data-check-icon="&#xf00c"></i>
+                                        </div>
+                                        <?php echo _l('Speak'); ?>
+                                    </label>
+                                    <span>
+                        <i class="icon-finance-067 u-line-icon-pro g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i>
+                      </span>
+                                </li>
+								<!-- end i love --> 
+								<!-- preferences -->
+								<li class="d-flex align-items-center justify-content-between g-brd-bottom g-brd-gray-light-v4 g-py-15">
+                                    <div class="g-pr-10">
+                                        <strong class="d-block d-md-inline-block g-color-gray-dark-v2 g-width-200 g-pr-10"><?php echo _l('preferences'); ?></strong>
+                                        <span class="align-top profile_values">
+										<?php
+											$user_smoke = '';
+											$user_music = '';
+											$user_notalk = '';
+											if ($user_like_smooking == 0) {
+												$user_smoke = 'no';
+											}
+											if ($user_like_music == 0) {
+												$user_music = 'no';
+											}
+											if ($user_like_talk == 0) {
+												$user_notalk = 'no';
+											}
+										?>
+											<img src="<?php echo base_url(); ?>/assets/img/icon-images/<?php echo $user_smoke; ?>smoke.png"> 
+											<img src="<?php echo base_url(); ?>/assets/img/icon-images/<?php echo $user_music; ?>music.png"> 
+											<img src="<?php echo base_url(); ?>/assets/img/icon-images/<?php echo $user_notalk; ?>talk.png">
+										</span>
+                                    </div>
+                                    <label class="form-check-inline u-check g-color-gray-dark-v5 g-font-size-12 g-pl-25 mb-2 profile_fields">
+                                        <input <?php if ($user_like_smooking == 1) { ?>  checked="checked" <?php } ?>
+                                                value="1" id="user_smoke" name="user_smoke"
+                                                class="g-hidden-xs-up g-pos-abs g-top-0 g-left-0 reg_gender"
+                                                type="checkbox">
+                                        <div class="u-check-icon-checkbox-v6 g-absolute-centered--y g-left-0">
+                                            <i class="fa" data-check-icon="&#xf00c"></i>
+                                        </div>
+                                        <?php echo _l('user_smoke'); ?>
+                                    </label>
+
+                                    <label class="form-check-inline u-check g-color-gray-dark-v5 g-font-size-12 g-pl-25 mb-2 profile_fields">
+                                        <input <?php if ($user_like_music == 1) { ?>  checked="checked" <?php } ?>
+                                                value="1" id="user_music" name="user_music"
+                                                class="g-hidden-xs-up g-pos-abs g-top-0 g-left-0 reg_gender"
+                                                type="checkbox">
+                                        <div class="u-check-icon-checkbox-v6 g-absolute-centered--y g-left-0">
+                                            <i class="fa" data-check-icon="&#xf00c"></i>
+                                        </div>
+                                         <?php echo _l('user_music'); ?>
+                                    </label>
+									
+                                    <label class="form-check-inline u-check g-color-gray-dark-v5 g-font-size-12 g-pl-25 mb-2 profile_fields">
+                                        <input <?php if ($user_like_talk == 1) { ?>  checked="checked" <?php } ?>
+                                                value="1" id="user_speak" name="user_speak"
+                                                class="g-hidden-xs-up g-pos-abs g-top-0 g-left-0 reg_gender"
+                                                type="checkbox">
+                                        <div class="u-check-icon-checkbox-v6 g-absolute-centered--y g-left-0">
+                                            <i class="fa" data-check-icon="&#xf00c"></i>
+                                        </div>
+                                        <?php echo _l('user_music'); ?>
+                                    </label>
+                                    <span>
+                        <i class="icon-finance-067 u-line-icon-pro g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i>
+                      </span>
+                                </li>
+								<!-- end preferences -->
+								<!-- description -->
+                                <li class="d-flex align-items-center justify-content-between g-brd-bottom g-brd-gray-light-v4 g-py-15">
+                                    <div class="g-pr-10">
+                                        <strong class="d-block d-md-inline-block g-color-gray-dark-v2 g-width-200 g-pr-10"><?php echo _l('user_description'); ?></strong>
+                                        <span class="align-top profile_values"><?php echo ($user_description != '') ? $user_description :  _l('drive_nodescription'); ?></span>
+                                    </div>
+                                    <textarea style="width:70%" name="user_description" id="user_description"
+                                           class="form-control profile_fields"><?php echo $user_description; ?></textarea>
+                                    <span>
+						
+						<i class="icon-file u-line-icon-pro g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i>
+                      </span>
+                                </li>
+                                <!-- End description -->
                             </ul>
                             <?php } ?>
                             <div class="text-sm-right">

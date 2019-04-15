@@ -197,8 +197,21 @@ $lang['chat_with_driver_text']          = 'Chat with Driver';
 $lang['login_to_chat_with_driver_text'] = 'Login to Chat with Driver';
 
 // chat page
-$lang['chat_page_title'] = 'Chat';
-$lang['no_convo_text']   = 'Click on a user to start Chat';
-$lang['back_text']       = 'Go Back';
-$lang['users_text']      = 'Users';
+$lang['chat_page_title'] 		  = 'Chat';
+$lang['no_convo_text']   		  = 'Click on a user to start Chat';
+$lang['back_text']       		  = 'Go Back';
+$lang['users_text']      		  = 'Users';
+$lang['preferences']      		  = 'Preferences';
+$lang['my_description']      	  = 'My description';
+$lang['drive_nodescription']      = 'I have not yet informed about me ...';
+$lang['i_love']      			  = 'I love';
+$lang['user_description']      	  = 'Description';
+$lang['male']      	  			  = 'Male';
+$lang['female']      	  		  = 'Female';
+$lang['smooking']      	  		  = 'Smooking';
+$lang['music']      	  		  = 'The Music';
+$lang['speak']      	  		  = 'Speak';
+$lang['user_smoke']      	  	  = 'Who likes to Smoke';
+$lang['user_music']      	  	  = 'Who loves Music';
+$lang['user_speak']      	  	  = 'Who like to Speak';
 ?>

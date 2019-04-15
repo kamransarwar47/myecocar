@@ -28,6 +28,9 @@ class User_profile extends CI_Controller
 
         if ($this->form_validation->run() == false) {
             $data['title'] = 'Profile';
+			//  favourite
+			$favourite_data         = $this->common_model->get('favourite', ['user_id' => $this->session->userdata('User_LoginId')]);
+            $data['favourite'] = $favourite_data;
             // profile details
             $user_data         = $this->common_model->get('users', ['user_id' => $this->session->userdata('User_LoginId')]);
             $data['user_data'] = $user_data;
@@ -41,13 +44,35 @@ class User_profile extends CI_Controller
             $data['content']      = $this->load->view('page-profile', $data, true);
             $this->load->view('templates/template', $data);
         } else {
-
+			// check if already exist
+			$favourite_data         = $this->common_model->get('favourite', ['user_id' => $this->session->userdata('User_LoginId')]);
+			if (isset($favourite_data) && $favourite_data->num_rows() > 0){
+				$where['user_id']    = $this->session->userdata('User_LoginId');
+				$favourite['self_like_smooking']    = $this->input->post('smooking');
+				$favourite['self_like_music']    = $this->input->post('music');
+				$favourite['self_like_talk']    = $this->input->post('speak');
+				$favourite['user_like_smooking']    = $this->input->post('user_smoke');
+				$favourite['user_like_music']    = $this->input->post('user_music');
+				$favourite['user_like_talk']    = $this->input->post('user_speak');
+				$this->common_model->update('favourite', $favourite, $where);
+			}else{
+				$favourite['user_id']    = $this->session->userdata('User_LoginId');
+				$favourite['self_like_smooking']    = $this->input->post('smooking');
+				$favourite['self_like_music']    = $this->input->post('music');
+				$favourite['self_like_talk']    = $this->input->post('speak');
+				$favourite['user_like_smooking']    = $this->input->post('user_smoke');
+				$favourite['user_like_music']    = $this->input->post('user_music');
+				$favourite['user_like_talk']    = $this->input->post('user_speak');
+				$this->common_model->insert('favourite', $favourite);
+			}
+			 
             $data['first_name']    = $this->input->post('first_name');
             $data['second_name']   = $this->input->post('second_name');
             $data['gender']        = $this->input->post('reg_gender');
             $data['mobile']        = $this->input->post('mobile');
             $data['date_of_birth'] = date('Y-m-d', strtotime($this->input->post('date_of_birth')));
             $data['email']         = $this->input->post('reg_email');
+            $data['user_description']         = $this->input->post('user_description');
 			
 			//For new number verification must
 			$result = $this->common_model->get('users', ['user_id' => $this->session->userdata('User_LoginId')], 'mobile, email');
