@@ -158,7 +158,7 @@ class User_profile extends CI_Controller
 			if($email != ''){	
 				$arrgs = [
 					'to' => $email,
-					'subject' => 'Myecocar Payment Collection Confirmation',
+					'subject' => 'Myecocar Approved Booking Confirmation',
 					'txt' => "Hi $name, <br>Your have Approved for the trip  From $from To $to please contact with Driver for futher confirmation."
 				];
 				send_email($arrgs);
@@ -288,15 +288,15 @@ class User_profile extends CI_Controller
 	}
 	
 	//Account delete
-	function delete_account(){	
+	function delete_account($del_code, $u_id){	
 		$del_token = '';
-		$user_id = $this->input->get('u_id');
+		$user_id = $u_id;
 		$get_res = $this->common_model->get('users', ['user_id' => $user_id], 'del_token');
 		if($get_res->num_rows() > 0){
 			$get_res = $get_res->row();	
 			$del_token = $get_res->del_token;		
 		}
-		if($del_token != '' && $this->input->get('del_code') != '' && $del_token == $this->input->get('del_code')){		
+		if($del_token != '' && $del_code != '' && $del_token == $del_code){		
 		$this->db->trans_start();
 		
 			$this->db->where('user_id', $user_id);
@@ -338,7 +338,7 @@ class User_profile extends CI_Controller
 					$arrgs = [
 						'to' => $email,
 						'subject' => 'Myecocar Delete Account Verification',
-						'txt' => 'Hi '.$name.',<br>'.'You can delete your Myecocar profile completly by clicking on the link below<br><a href="'.base_url("user_profile/delete_account?del_code=".$secrete_del_code.'&u_id='.$user_id).'">Click Here</a>'
+						'txt' => 'Hi '.$name.',<br>'.'You can delete your Myecocar profile completly by clicking on the link below<br><a href="'.base_url("user_profile/delete_account/".$secrete_del_code.'/'.$user_id).'">Click Here</a>'
 					];
 					$res = send_email($arrgs);
 					

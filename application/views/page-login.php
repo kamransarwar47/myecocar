@@ -49,7 +49,7 @@
                 <div class="g-mb-60">
                   <button id="login_btn" class="btn btn-md btn-block u-btn-primary rounded text-uppercase g-py-13" type="button">Connexion</button>
                 </div>
-				<a href="https://web.facebook.com/myecocar.fr/" class="btn btn-block u-btn-facebook rounded text-uppercase g-py-13 g-mb-15" type="button">
+				<!--<a href="https://web.facebook.com/myecocar.fr/" class="btn btn-block u-btn-facebook rounded text-uppercase g-py-13 g-mb-15" type="button">
                   <i class="mr-3 fa fa-facebook"></i>
                   <span class="g-hidden-xs-down">Se connecter avec</span> Facebook
                 </a>
@@ -60,7 +60,7 @@
 				<a href="https://www.instagram.com/myecocar_covoiturage/" class="btn btn-block u-btn-instagram rounded text-uppercase g-py-13 g-mb-15" type="button">
                   <i class="mr-3 fa fa-instagram"></i>
                   <span class="g-hidden-xs-down">Se connecter avec</span> Instagram
-                </a>
+                </a>-->
               </form>
               <!-- End Form -->
             </div>
