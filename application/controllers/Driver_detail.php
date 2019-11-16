@@ -8,6 +8,7 @@ class Driver_detail extends CI_Controller
      */
     public function index($id, $route_id)
     {
+		$data['favourite']         = $this->common_model->get('favourite', ['user_id' => $id]);
         $data['header_link_active'] = 'search_route';
         $data['title']              = _l('driver_page_title');
         $data['user_details']       = $this->common_model->get('users', ['user_id' => $id])->row_array();

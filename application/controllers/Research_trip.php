@@ -30,8 +30,11 @@ class Research_trip extends CI_Controller
             $search_query['user_status']      = 1;
             $search_query['is_route_end']     = 0;
             $search_query['route_status !=']  = 'Cancel';
-            $search_query['route.user_id !='] = $_SESSION['User_LoginId'];
-
+			
+			/* drive can not see there own Trips
+			if(isset($_SESSION['User_LoginId'])){
+				$search_query['route.user_id !='] = $_SESSION['User_LoginId'];
+			}*/
             $search_data = $this->common_model->get('route', $search_query);
 
             $data['total_records']  = $search_data->num_rows();
@@ -82,15 +85,15 @@ class Research_trip extends CI_Controller
                             'subject' => 'Myecocar Reservation of Seat',
                             'txt' => 'Hi ' . $name . ',<br>' . 'You have successfully reserved your seat against booking Number ' . $id . ' From ' . $search_data['dest_city'] . ', ' . $search_data['dest_country'] . ' To ' . $search_data['origin_city'] . ', ' . $search_data['origin_country'] . ' Data & Time of Travelling: ' . date('d-m-Y', strtotime($search_data['datepickerFrom'])) . ' ' . $search_data['depart_time_input'],
                         ];
-                        $res         = send_email($arrgs);
+                        send_email($arrgs);
 
                         // send email to driver
                         $arrgs = [
-                            'to' => 'contact@myecocar.org',
+                            'to' => $search_data['email'],
                             'subject' => 'Myecocar Reservation of Seat',
                             'txt' => 'Hi ' . $search_data['first_name'] . ',<br>' . $name . ' has book your seat against your trip From ' . $search_data['dest_city'] . ', ' . $search_data['dest_country'] . ' To ' . $search_data['origin_city'] . ', ' . $search_data['origin_country'] . ' Data & Time of Travelling: ' . date('d-m-Y', strtotime($search_data['datepickerFrom'])) . ' ' . $search_data['depart_time_input'] . '</br>' . 'Please Confirm there status by login your Dashboard </br> Passenger Info </br>Name: ' . $res_user_info['first_name'] . ' ' . $res_user_info['second_name'] . '</br>Mobile: ' . $res_user_info['mobile'] . '</br>Email: ' . $email . '</br>Thankyour for your time and consideration',
                         ];
-                        $res   = send_email($arrgs, $arrgs);
+                        send_email($arrgs);
 
                     }
                 }

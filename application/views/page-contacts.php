@@ -84,27 +84,21 @@
                   <label class="g-color-gray-dark-v2 g-font-size-13">Message</label>
                   <textarea name="descriptions" id="descriptions" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover g-resize-none rounded-3 g-py-13 g-px-15" rows="7" placeholder="Salut, je voudrais ..." required></textarea>
                 </div>
-              </div>          
 
 			  <div class="col-md-12 form-group g-mb-40 div-input-group">
                   <label class="g-color-gray-dark-v2 g-font-size-13">Captcha</label>
-                  <?php 
-				  
-					  $options = array();
-					  $options['input_name']             = 'ct_captcha'; // change name of input element for form post
-					  $options['disable_flash_fallback'] = false; // allow flash fallback
-
-					  if (!empty($_SESSION['ctform']['captcha_error'])) {
-						// error html to show in captcha output
-						$options['error_html'] = $_SESSION['ctform']['captcha_error'];
-					  }
-
-					  echo "<div id='captcha_container_1'>\n";
-					  echo Securimage::getCaptchaHtml($options);
-					  echo "\n</div>\n";
-				  ?>
+				<br/>
+                 <img src="<?php echo base_url('Contact_us/load_captcha'); ?>" id="captcha" />
+				 <br/>
+				 <!-- CHANGE TEXT LINK -->
+				<a href="#" onclick="
+					document.getElementById('captcha').src='<?php echo base_url('Contact_us/load_captcha'); ?>?'+Math.random();
+					document.getElementById('captcha-form').focus();"
+					id="change-image">Not readable? Change text.</a>
+					<br/>
+				<input type="text" name="captcha" id="captcha-form" autocomplete="off" />
                 </div>
-             
+              </div>       
               <div class="text-center">
                 <button id="send_contactus_email" class="btn u-btn-primary g-font-weight-600 g-font-size-13 text-uppercase g-rounded-25 g-py-15 g-px-30" type="button" role="button">Envoyer une demande</button>
               </div>
@@ -126,7 +120,7 @@
   </main>
   <script> 
   $(function(){
-	  $('#captcha_code').attr('required', 'required');
+	  $('#captcha-form').attr('required', 'required');
   });
 	//Validation of Form
 	$(document).on('click', '#send_contactus_email', function(e){
@@ -140,11 +134,11 @@
 			var error_msg_id = $(this).attr('id')+'_error_msg';
 			$('#'+error_msg_id).remove();
 			if(input_types_1.indexOf($(this).attr('type')) != -1 && $(this).val() == ''){
-				console.log($(this).attr('id'));
-				if($(this).attr('id') != 'captcha_code'){
+
+				if($(this).attr('id') != 'captcha-form'){
 					$(this).parent('.div-input-group').append('<p id="'+error_msg_id+'" class="" style="color:red">This Field is required</p>');
 				}else{
-					$(this).parent().parent('.div-input-group').append('<p id="'+error_msg_id+'" class="" style="color:red">This Field is required</p>');
+					$(this).after('<p id="'+error_msg_id+'" class="" style="color:red">This Field is required</p>');
 				}
 				is_valid = false;
 			}else if(input_types_4.indexOf($(this).attr('type')) != -1){

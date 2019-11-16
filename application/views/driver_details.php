@@ -36,8 +36,72 @@
                                                 <?php echo _l('years_old_text'); ?>
                                             </small>
                                         </h4>
+										<h4>
+								<p>
+									<span class="text-muted" style="font-size:32px;">
+									<?php 
+								 $self_like_smooking = '';
+								 $self_like_music = '';
+								 $self_like_talk = '';
+								 $user_like_smooking = '';
+								 $user_like_music = '';
+								 $user_like_talk = '';
+								if (isset($favourite) && $favourite->num_rows() > 0){
+									 $favourite         = $favourite->row_array();
+									 $self_like_smooking = $favourite['self_like_smooking'];
+									 $self_like_music = $favourite['self_like_music'];
+									 $self_like_talk = $favourite['self_like_talk'];
+									 $user_like_smooking = $favourite['user_like_smooking'];
+									 $user_like_music = $favourite['user_like_music'];
+									 $user_like_talk = $favourite['user_like_talk'];
+								}
+								
+								
+											$smoke = '';
+											$music = '';
+											$notalk = '';
+											if ($self_like_smooking == 0) {
+												$smoke = 'no';
+											}
+											if ($self_like_music == 0) {
+												$music = 'no';
+											}
+											if ($self_like_talk == 0) {
+												$notalk = 'no';
+											}
+										?>
+									<img src="<?php echo base_url(); ?>/assets/img/icon-images/<?php echo $smoke; ?>smoke.png"> 
+											<img src="<?php echo base_url(); ?>/assets/img/icon-images/<?php echo $music; ?>music.png"> 
+											<img src="<?php echo base_url(); ?>/assets/img/icon-images/<?php echo $notalk; ?>talk.png">
+									</span>
+									<br>
+								</p>
+								<p><h4 class="h5"><?php echo _l('preferences'); ?> : <span class="text-muted" style="font-size:32px;">
+								
+								<?php
+											$user_smoke = '';
+											$user_music = '';
+											$user_notalk = '';
+											if ($user_like_smooking == 0) {
+												$user_smoke = 'no';
+											}
+											if ($user_like_music == 0) {
+												$user_music = 'no';
+											}
+											if ($user_like_talk == 0) {
+												$user_notalk = 'no';
+											}
+										?>
+											<img src="<?php echo base_url(); ?>/assets/img/icon-images/<?php echo $user_smoke; ?>smoke.png"> 
+											<img src="<?php echo base_url(); ?>/assets/img/icon-images/<?php echo $user_music; ?>music.png"> 
+											<img src="<?php echo base_url(); ?>/assets/img/icon-images/<?php echo $user_notalk; ?>talk.png">
+									</span>
+									</h4>
+									</p>
+								</h4>
                                         <h4 class="h5"><?php echo _l('gender_text'); ?>
                                             : <?php echo $user_details['gender']; ?></h4>
+											<h4 class="h5"><?php echo _l('my_description'); ?>: </h4><i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><?php echo ($user_details['user_description'] != '') ? $user_details['user_description'] :  _l('drive_nodescription'); ?></font></font></i>
                                     </div>
                                 </div>
                                 <?php
@@ -59,6 +123,7 @@
                                 }
                                 ?>
                                 <!-- End Default Outline Panel-->
+								
                             </div>
                         </div>
                         <div class="col-lg-5 g-mb-30 g-mb-0--lg">
